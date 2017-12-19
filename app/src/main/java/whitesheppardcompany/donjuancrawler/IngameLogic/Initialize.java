@@ -3,6 +3,7 @@ package whitesheppardcompany.donjuancrawler.IngameLogic;
 import java.util.List;
 import java.util.Vector;
 
+import whitesheppardcompany.donjuancrawler.Beans.Effect;
 import whitesheppardcompany.donjuancrawler.Beans.Player;
 import whitesheppardcompany.donjuancrawler.Beans.Weapon;
 
@@ -11,11 +12,14 @@ import whitesheppardcompany.donjuancrawler.Beans.Weapon;
  */
 
 public class Initialize {
+    private boolean newGame = true;
 
 
-    Player player = ChooseAvatar();
+        Player player = ChooseAvatar();
+        loadlvl(1);
 
-
+    private void loadlvl(int i) {
+    }
 
     // le joueur choisi son avatar
     private Player ChooseAvatar() {
@@ -27,8 +31,22 @@ public class Initialize {
         List<Weapon>weaponsThomas = new Vector<>();
         List<Weapon>weaponsCamille = new Vector<>();
 
+        //on crée une arme pour coco
+        Effect effet   = new Effect(0,5,0);
+        Weapon joyeuse = new Weapon(6,effet, 98); //position 1 ||position2 si position 2 >15, alors arme à une main
+        weaponsCorentin.add(1,joyeuse);
 
-        Weapon joyeuse = new Weapon();
+        //on crée une arme pour bibi
+        Effect effet2  = new Effect(0,30,10);
+        Weapon alastor = new Weapon(6,effet2, 7); //position 1 ||position2 si position 2 >15, alors arme à une main
+        weaponsThomas.add(1,alastor);
+
+        //on crée une arme pour la miss
+        Effect effet3  = new Effect(0,1,0);
+        Weapon baton = new Weapon(6,effet3, 98); //position 1 ||position2 si position 2 >15, alors arme à une main
+        weaponsCamille.add(1,baton);
+
+
 
         player1.setAttk(10);
         player1.setDef(10);
@@ -51,7 +69,9 @@ public class Initialize {
         player3.setWallet(100000*100000);
         player3.setWeapons(weaponsCamille);
 
-
+        // on choisi pas pour le moment
         return player1;
+
+
     }
 }

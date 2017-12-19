@@ -1,6 +1,4 @@
-package whitesheppardcompany.donjuancrawler.subclass;
-
-import android.media.effect.Effect;
+package whitesheppardcompany.donjuancrawler.Beans;
 
 /**
  * Created by saw on 19/12/17.

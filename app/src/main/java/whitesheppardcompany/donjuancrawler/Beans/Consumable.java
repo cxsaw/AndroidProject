@@ -1,33 +1,32 @@
-package whitesheppardcompany.donjuancrawler.subclass;
-
-import whitesheppardcompany.donjuancrawler.subclass.Item;
+package whitesheppardcompany.donjuancrawler.Beans;
 
 /**
  * Created by saw on 19/12/17.
  */
 
 /*
-    le stuff désigne la partie vétements/accessoires des items
- */
+    Les consommables ont cette particularité d'être à usage unique
+    une fois consommé, elles sont détruite!
+    elles implementes obligatoirement un effet!
+*/
 
-public class Stuff extends Item {
+public class Consumable extends Item {
 
-
-    private int position; // la position réfere à la position future sur le GUI
     private Effect effet;
 
 
-    /*Getter and setters*/
+    /*
+    *
+    * Setters & Getters
+    *
+    */
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
+    public Consumable(Effect effet) {
+        this.effet = effet;
     }
 
     public Effect getEffet() {
+
         return effet;
     }
 
@@ -35,7 +34,13 @@ public class Stuff extends Item {
         this.effet = effet;
     }
 
-    /* méthodes héritée de la classe mère*/
+    /*
+    *
+    *
+    *   Overide depuis la classe mère
+    *
+    */
+
     @Override
     public int getId() {
         return super.getId();

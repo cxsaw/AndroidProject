@@ -1,4 +1,4 @@
-package whitesheppardcompany.donjuancrawler.subclass;
+package whitesheppardcompany.donjuancrawler.Beans;
 
 /**
  * Created by saw on 18/12/17.

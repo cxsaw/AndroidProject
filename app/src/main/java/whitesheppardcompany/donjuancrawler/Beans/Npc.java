@@ -1,16 +1,22 @@
-package whitesheppardcompany.donjuancrawler.subclass;
+package whitesheppardcompany.donjuancrawler.Beans;
 
 /**
- * Created by saw on 18/12/17.
+ * Created by saw on 19/12/17.
  */
 
-public class Foe extends Entity {
+/*
+*   je suis sur que vous en rêviez! vous êtes en présence de divinité ici!
+*   En effet le Npc(Non playable caracther) possèdera un attribut GodLike
+ */
+public class Npc extends Entity {
+
+    private boolean hasQuest;
 
 
+    /*override depuis la classe mère*/
 
-    public Foe() {
-    }
-
+    //je laisse les set attk etc.. car sait on jamais peut être qu'il sera
+    //possible d'avoir des compagnons enbarqué dans la galère de notre héros
     @Override
     public String getName() {
         return super.getName();
@@ -50,5 +56,4 @@ public class Foe extends Entity {
     public void setAttk(int attk) {
         super.setAttk(attk);
     }
-
 }

@@ -1,4 +1,4 @@
-package whitesheppardcompany.donjuancrawler.subclass;
+package whitesheppardcompany.donjuancrawler.Beans;
 
 import java.util.List;
 import java.util.Vector;

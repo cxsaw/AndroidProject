@@ -9,9 +9,15 @@ import java.util.Vector;
 
 public class Player extends Entity {
 
-    List <Item> items = new Vector<Item>();
-    List <Weapon> weapons = new Vector<Weapon>();
-    int wallet ; //représente la somme en Or que le joueur possède
+    private List <Item> items = new Vector<Item>();
+    private List <Weapon> weapons = new Vector<Weapon>();
+    private int wallet ; //représente la somme en Or que le joueur possède
+
+    /*
+    *
+    *Setters & Getters
+    *
+    */
 
     public List<Item> getItems() {
         return items;

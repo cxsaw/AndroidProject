@@ -17,6 +17,17 @@ public class Weapon extends Item {
     private Effect effet;
 
 
+    public Weapon(int position, Effect effet) {
+        this.position = position;
+        this.effet = effet;
+    }
+
+    public Weapon(int position, Effect effet,int position2) {
+        this.position = position;
+        this.effet = effet;
+    }
+
+
     /*Getters & Setters*/
 
     public int getPosition() {

@@ -18,6 +18,7 @@ import com.hitomi.cmlibrary.OnMenuSelectedListener;
 public class MainActivity extends AppCompatActivity {
     Handler setDelay;
     Runnable startDelay;
+    //array pour le circle menu
     String btnMenu[]={  "New Game",
                         "Quitter",
                         "Option",

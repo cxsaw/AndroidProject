@@ -16,7 +16,7 @@ public class Initialize {
 
 
         Player player = ChooseAvatar();
-        loadlvl(1);
+        //loadlvl(1);
 
     private void loadlvl(int i) {
     }

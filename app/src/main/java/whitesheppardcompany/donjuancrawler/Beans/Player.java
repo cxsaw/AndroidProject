@@ -1,5 +1,6 @@
 package whitesheppardcompany.donjuancrawler.Beans;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
 
@@ -7,7 +8,7 @@ import java.util.Vector;
  * Created by saw on 18/12/17.
  */
 
-public class Player extends Entity {
+public class Player extends Entity implements Serializable {
 
     private List <Item> items = new Vector<Item>();
     private List <Weapon> weapons = new Vector<Weapon>();

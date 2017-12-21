@@ -9,12 +9,69 @@
 
     <ImageView
         android:id="@+id/bann"
-        android:layout_width="293dp"
-        android:layout_height="86dp"
+        android:layout_width="472dp"
+        android:layout_height="171dp"
         android:layout_marginTop="4dp"
         android:src="@mipmap/banner"
         android:visibility="visible"
+        app:layout_constraintHorizontal_bias="0.608"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/coco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cam"
+        app:layout_constraintTop_toBottomOf="@+id/bann"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ava" />
+
+    <ImageButton
+        android:id="@+id/cam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.539"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bann"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ava3" />
+
+    <ImageButton
+        android:id="@+id/toto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cam"
+        app:layout_constraintTop_toBottomOf="@+id/bann"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ava2" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="187dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Choose Your Character"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/bann"
+        app:layout_constraintEnd_toEndOf="@+id/bann"
+        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintStart_toStartOf="@+id/bann"
+        app:layout_constraintTop_toTopOf="@+id/bann"
+        app:layout_constraintVertical_bias="0.433" />
+
 </android.support.constraint.ConstraintLayout>

@@ -10,16 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".Splash">
+        <activity android:screenOrientation="landscape" android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LvlActivity" />
-        <activity android:name=".CreditActivity" />
-        <activity android:name=".OptionActivity"></activity>
+        <activity android:screenOrientation="landscape" android:name=".LvlActivity" />
+        <activity android:screenOrientation="landscape" android:name=".CreditActivity" />
+        <activity android:screenOrientation="landscape" android:name=".OptionActivity" />
+        <activity android:screenOrientation="landscape" android:name=".ChoosePlayerActivity"></activity>
     </application>
 
 </manifest>

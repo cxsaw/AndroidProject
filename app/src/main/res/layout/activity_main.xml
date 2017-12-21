@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:drawable/button_onoff_indicator_on"
     tools:context="whitesheppardcompany.donjuancrawler.MainActivity">
 
 

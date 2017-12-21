@@ -1,6 +1,8 @@
 package whitesheppardcompany.donjuancrawler;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +32,11 @@ public class Splash extends AppCompatActivity {
         Log.i("DEBUG","On débute");
         try {
             sleep(1000 * SLEEP_TIMER);
+            MediaPlayer mMediaPlayer = new MediaPlayer();
+            mMediaPlayer = MediaPlayer.create(this, R.raw.sf_chien);
+            mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mMediaPlayer.setLooping(true);
+            mMediaPlayer.start();
         } catch (InterruptedException e){
             e.printStackTrace();
         }

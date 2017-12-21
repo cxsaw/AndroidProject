@@ -35,19 +35,22 @@ public class LvlActivity extends AppCompatActivity {
         Toast.makeText(LvlActivity.this, "Oh crap! Finally you awake! It was close, those damned orcs almost kill you!",Toast.LENGTH_LONG).show();
         Toast.makeText(LvlActivity.this, "Tell me, what's your name?",Toast.LENGTH_SHORT).show();
 
+        ImageButton btn1 = (ImageButton) findViewById(R.id.btn1);
 
             //petit délai pour afficher l'input où le joueur va entre son pseudo
             setDelay.postDelayed(new Runnable() {
 
                 @Override
                 public void run() {
+                    ImageButton btn1 = (ImageButton) findViewById(R.id.btn1);
                     EditText et = (EditText) findViewById(R.id.name);
                     et.setVisibility(View.VISIBLE);
+                    btn1.setVisibility(View.VISIBLE);
                 }
 
             }, 13000);
 
-        ImageButton btn1 = (ImageButton) findViewById(R.id.btn1);
+
         btn1.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -55,9 +58,13 @@ public class LvlActivity extends AppCompatActivity {
                 String avatarName;
                 EditText et = (EditText) findViewById(R.id.name);
                 avatarName = et.getEditableText().toString();
+
+
                 Log.i("DEBUG", ":" + avatarName);
                 Intent i = new Intent(getApplicationContext(),ChoosePlayerActivity.class);
                 i.putExtra(avatarName, avatarName);
+                LvlActivity.this.startActivity(i);
+                finish();
             }
         });
     }

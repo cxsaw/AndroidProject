@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 };
 
-                                setDelay.postDelayed(startDelay, 1200);
+                                setDelay.postDelayed(startDelay, 500);
                                 Toast.makeText(MainActivity.this, "C'est parti!",Toast.LENGTH_SHORT).show();
                                 break;
 

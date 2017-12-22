@@ -56,7 +56,7 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
                 playerCoco.setAttk(10);
                 Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu" );
                 Intent intentCoco = new Intent(getApplicationContext(),StartGameActivity.class);
-                intentCoco.putExtra("playercoco", playerCoco);
+                intentCoco.putExtra("player",(Serializable) playerCoco);
                 context.startActivity(intentCoco);
                 finish();
             }
@@ -79,7 +79,7 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
 
                 Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu" );
                 Intent intentCam = new Intent(getApplicationContext(),StartGameActivity.class);
-                intentCam.putExtra("playercam", playerCam);
+                intentCam.putExtra("player", (Serializable) playerCam);
                 context.startActivity(intentCam);
                 finish();
             }
@@ -101,7 +101,7 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
 
                 Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu" );
                 Intent intentToto = new Intent(getApplicationContext(),StartGameActivity.class);
-                intentToto.putExtra("playertoto", playerToto);
+                intentToto.putExtra("player",(Serializable) playerToto);
                 context.startActivity(intentToto);
                 finish();
             }

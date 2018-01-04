@@ -1,5 +1,7 @@
 package whitesheppardcompany.donjuancrawler.Beans;
 
+import java.io.Serializable;
+
 /**
  * Created by saw on 18/12/17.
  */
@@ -9,8 +11,9 @@ package whitesheppardcompany.donjuancrawler.Beans;
 * que j'implémenterais après.
 */
 
-public class Foe extends Entity {
+public class Foe extends Entity implements Serializable {
 
+    private static long serialVersionUID = 5524L;
 
 
     public Foe() {

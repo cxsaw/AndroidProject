@@ -1,12 +1,14 @@
 package whitesheppardcompany.donjuancrawler;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.media.MediaPlayer.OnVideoSizeChangedListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -28,6 +30,10 @@ import android.widget.VideoView;
 
 public class CreditActivity extends AppCompatActivity {
     Context context = CreditActivity.this;
+
+    private VideoView myVideoView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,12 +44,10 @@ public class CreditActivity extends AppCompatActivity {
 
         String mUrl = "/home/saw/AndroidStudioProjects/DonJuanCrawler/app/src/main/res/raw/sw.mp4";
 
-        //VideoView mVideoView  = (VideoView)findViewById(R.id.sw);
-        //videoMediaController = new MediaController(this);
-       // mVideoView.setVideoPath(mUrl);
-       // videoMediaController.setMediaPlayer(mVideoView);
-       // mVideoView.setMediaController(videoMediaController);
-        //mVideoView.requestFocus();
-       // mVideoView.start();
+        myVideoView = (VideoView)findViewById(R.id.sw);
+        myVideoView.setVideoPath(mUrl);
+        myVideoView.setMediaController(new MediaController(this));
+        myVideoView.requestFocus();
+        myVideoView.start();
     }
 }

@@ -4,20 +4,127 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gui"
+    android:background="@drawable/rocky"
     tools:context="whitesheppardcompany.donjuancrawler.StartGameActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/locateView"
         android:layout_width="0dp"
         android:layout_height="170dp"
-        android:background="@android:color/black"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorAccent"
         android:cropToPadding="true"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.304"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bg" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/hud" />
+
+    <ImageButton
+        android:id="@+id/goUp"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/locateView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/locateView"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@android:drawable/arrow_up_float" />
+
+    <ImageView
+        android:id="@+id/foe"
+        android:layout_width="wrap_content"
+        android:layout_height="172dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="372dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/goUp"
+        app:layout_constraintVertical_bias="0.944"
+        app:srcCompat="@drawable/foe" />
+
+    <ImageButton
+        android:id="@+id/swo"
+        android:layout_width="38dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="88dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/swo" />
+
+    <TextView
+        android:id="@+id/playerLife"
+        android:layout_width="wrap_content"
+        android:layout_height="39dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="28dp"
+        android:textColor="@android:color/black"
+        android:textColorHighlight="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/foeLife"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@+id/locateView"
+        app:layout_constraintHorizontal_bias="0.997"
+        app:layout_constraintStart_toStartOf="@+id/locateView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.913" />
+
+    <ImageView
+        android:id="@+id/bim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="212dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.495"
+        app:srcCompat="@drawable/bim" />
+
 </android.support.constraint.ConstraintLayout>

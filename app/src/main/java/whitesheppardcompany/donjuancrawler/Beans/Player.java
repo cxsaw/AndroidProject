@@ -1,5 +1,8 @@
 package whitesheppardcompany.donjuancrawler.Beans;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
@@ -9,6 +12,8 @@ import java.util.Vector;
  */
 
 public class Player extends Entity implements Serializable {
+
+    private static long serialVersionUID = 54641465524L;
 
     private List <Item> items = new Vector<Item>();
     private List <Weapon> weapons = new Vector<Weapon>();

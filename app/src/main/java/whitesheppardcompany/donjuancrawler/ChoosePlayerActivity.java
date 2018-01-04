@@ -19,7 +19,10 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
 
 
     Context context = ChoosePlayerActivity.this;
-
+    String name;
+    Player player = new Player();
+    Player playerToto = new Player();
+    Player playerCam = new Player();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +33,10 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
         setContentView(R.layout.activity_choose_player);
 
         //on reçoit l'intent
-        Intent i = getIntent();
-        String name=i.getStringExtra("avatarName");
+        Bundle bundle = getIntent().getExtras();
+        name= bundle.getString("avatarName");
 
+        Log.i("DEBUG","gggg "+name);
 
 
         //coco = corentin cam = camille toto = moi, et oui je serais complètement pété as fu*k
@@ -47,18 +51,19 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
             @Override
             public void onClick(View view) {
 
-                Intent i = getIntent();
-                String name=i.getStringExtra("avatarName");
-                Player playerCoco = new Player();
-                playerCoco.setName(name);
-                playerCoco.setHp(100);
-                playerCoco.setDef(50);
-                playerCoco.setAttk(10);
-                Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu" );
-                Intent intentCoco = new Intent(getApplicationContext(),StartGameActivity.class);
-                intentCoco.putExtra("player",(Serializable) playerCoco);
+
+
+                Log.i("DEBUG","gggg "+name);
+
+                player.setName(name);
+                player.setHp(100);
+                player.setDef(50);
+                player.setAttk(10);
+                Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu coco" );
+                Intent intentCoco = new Intent(ChoosePlayerActivity.this , StartGameActivity.class);
+                intentCoco.putExtra("player", (Serializable) player);
                 context.startActivity(intentCoco);
-                finish();
+                //finish();
             }
         });
 
@@ -68,20 +73,18 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
             @Override
             public void onClick(View view) {
 
-                Intent i = getIntent();
-                String name=i.getStringExtra("avatarName");
-                Player playerCam = new Player();
-                playerCam.setName(name);
-                playerCam.setHp(10);
-                playerCam.setDef(0);
-                playerCam.setAttk(1);
-                playerCam.setWallet(100000*100000);
+                Log.i("DEBUG","gggg "+name);
+                player.setName(name);
+                player.setHp(10);
+                player.setDef(0);
+                player.setAttk(1);
+                player.setWallet(100000*100000);
 
-                Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu" );
-                Intent intentCam = new Intent(getApplicationContext(),StartGameActivity.class);
-                intentCam.putExtra("player", (Serializable) playerCam);
+                Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu cam" );
+                Intent intentCam = new Intent(ChoosePlayerActivity.this , StartGameActivity.class);
+                intentCam.putExtra("player", (Serializable) player);
                 context.startActivity(intentCam);
-                finish();
+                //finish();
             }
         });
 
@@ -90,20 +93,19 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
 
             @Override
             public void onClick(View view) {
-                Intent i = getIntent();
-                String name=i.getStringExtra("avatarName");
-                Player playerToto = new Player();
-                playerToto.setName(name);
-                playerToto.setHp(10000);
-                playerToto.setDef(5000);
-                playerToto.setAttk(1000);
+
+                Log.i("DEBUG","gggg "+name);
+                player.setName(name);
+                player.setHp(10000);
+                player.setDef(5000);
+                player.setAttk(1000);
 
 
-                Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu" );
+                Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu toto" );
                 Intent intentToto = new Intent(getApplicationContext(),StartGameActivity.class);
-                intentToto.putExtra("player",(Serializable) playerToto);
+                intentToto.putExtra("player",(Serializable) player);
                 context.startActivity(intentToto);
-                finish();
+                //finish();
             }
         });
     }

@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class LvlActivity extends AppCompatActivity {
     Handler setDelay;
     Runnable startDelay;
+    String avatarName = null;
 
 
 
@@ -25,8 +26,6 @@ public class LvlActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_level);
-
-        String avatarName = null;
 
         setDelay= new Handler();
 
@@ -55,15 +54,16 @@ public class LvlActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                String avatarName;
+
                 EditText et = (EditText) findViewById(R.id.name);
                 avatarName = et.getEditableText().toString();
 
 
                 Log.i("DEBUG", ":" + avatarName);
-                Intent i = new Intent(getApplicationContext(),ChoosePlayerActivity.class);
-                i.putExtra(avatarName, avatarName);
-                LvlActivity.this.startActivity(i);
+                Intent i = new Intent(LvlActivity.this, ChoosePlayerActivity.class);
+                i.putExtra("avatarName", avatarName);
+                startActivity(i);
+                Log.i("DEBUG", ":" + avatarName);
                 finish();
             }
         });

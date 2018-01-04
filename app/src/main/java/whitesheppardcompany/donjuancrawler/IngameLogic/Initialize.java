@@ -11,6 +11,10 @@ import whitesheppardcompany.donjuancrawler.Beans.Weapon;
  * Created by saw on 19/12/17.
  */
 
+/*
+*
+* il y a de fortes chance que tout ça ne soit jamais utilisé!
+*/
 public class Initialize {
     private boolean newGame = true;
 

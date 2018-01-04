@@ -1,12 +1,14 @@
 package whitesheppardcompany.donjuancrawler.Beans;
 
+import java.io.Serializable;
+
 /**
  * Created by saw on 18/12/17.
  */
 
-public class Entity {
+public class Entity implements Serializable {
 
-
+    private static long serialVersionUID = 5524L;
     private String name;
 
     /*   Stats */

@@ -15,6 +15,15 @@ public class Foe extends Entity implements Serializable {
 
     private static long serialVersionUID = 5524L;
 
+    boolean alive;
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
 
     public Foe() {
     }

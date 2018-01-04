@@ -37,7 +37,7 @@ public class Splash extends AppCompatActivity {
         public void run() {
         Log.i("DEBUG","On débute");
         try {
-            sleep(800 * SLEEP_TIMER);
+            sleep(550 * SLEEP_TIMER);
             MediaPlayer mMediaPlayer = MediaPlayer.create(context, R.raw.sf_chien);
             mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mMediaPlayer.setLooping(false);

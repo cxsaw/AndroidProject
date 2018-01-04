@@ -18,6 +18,7 @@ public class Player extends Entity implements Serializable {
     private List <Item> items = new Vector<Item>();
     private List <Weapon> weapons = new Vector<Weapon>();
     private int wallet ; //représente la somme en Or que le joueur possède
+    private boolean alive;
 
     /*
     *
@@ -25,6 +26,13 @@ public class Player extends Entity implements Serializable {
     *
     */
 
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
     public List<Item> getItems() {
         return items;
     }

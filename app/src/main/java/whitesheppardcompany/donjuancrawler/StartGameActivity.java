@@ -31,17 +31,21 @@ public class StartGameActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_start_game);
-
+        TextView hpPlayerText = (TextView) findViewById(R.id.playerLife);
+        TextView hpFoeText = (TextView) findViewById(R.id.foeLife);
         player = (Player)getIntent().getSerializableExtra("player");
-        String sdfjs = player.getName();
-        Log.i("DEBUG","mmmmm "+sdfjs);
+        player.setAlive(true);
+        Log.i("DEBUG","mmmmm "+player.getName());
         Log.i("DEBUG","wwwww "+player.getHp());
         firstFoe.setAttk(10);
         firstFoe.setHp(100);
         firstFoe.setDef(10);
         firstFoe.setName("Random Bonasse");
+        firstFoe.setAlive(true);
         Log.i("DEBUG","wwwww "+firstFoe.getName());
         fight(player,firstFoe);
+        hpFoeText.setVisibility(View.VISIBLE);
+        hpPlayerText.setVisibility(View.VISIBLE);
 
         //quand l'ennemi meurt, on affiche le boutton
         if (firstFoe.getHp() == 0){
@@ -57,12 +61,6 @@ public class StartGameActivity extends AppCompatActivity {
 
         this.player     = player;
         this.firstFoe   = firstFoe;
-        int hpPlayer    = player.getHp();
-        int hpFoe       = firstFoe.getHp();
-        int attckPlayer = player.getAttk();
-        int attckFoe    = firstFoe.getAttk();
-        int defPlayer   = player.getDef();
-        int defFoe      = firstFoe.getDef();
 
 
         Log.i("DEBUG"," kiké plus fort?");
@@ -78,55 +76,82 @@ public class StartGameActivity extends AppCompatActivity {
                     int viePlayer = player.getHp();
                     int vieFoe    = firstFoe.getHp();
 
-                    Log.e("DEBUG", ">>>>"+viePlayer);
-                    Log.e("DEBUG", ">>>>"+vieFoe);
+                    Log.e("DEBUG", "vie joueur>>>>"+viePlayer);
+                    Log.e("DEBUG", "vie mechant>>>>"+vieFoe);
 
+                    //hpFoeText.setVisibility(View.VISIBLE);
+                    //hpPlayerText.setVisibility(View.VISIBLE);
                     //set les var dans le textView
-                    hpFoeText.setText(firstFoe.getHp());
-                    hpPlayerText.setText(player.getHp());
+                   // hpFoeText.setText(vieFoe);
+                    //hpPlayerText.setText(viePlayer);
+                    Log.i("DEBUG", "Non le prob n'est oas là");
 
-                    firstFoe.setHp(initAttck());
-                    Log.e("DEBUG", "<<<<"+vieFoe);
-                    if(firstFoe.getHp()>0){
-                    player.setHp(retribution());
-                    Log.e("DEBUG", "<<<<"+vieFoe);
+                    int hp = initAttck(firstFoe, player);
+                    firstFoe.setHp(hp);
+                    Log.e("DEBUG", "vie mechant apres combat<<<<"+firstFoe.getHp());
+
+                    if (player.isAlive() == false){
+                        Log.i("DEBUG","GameOver");
+                        ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
+                        gameOver.setVisibility(View.VISIBLE);
+
+
+                    }
+
+                    if(firstFoe.isAlive() == true){
+                        player.setHp(retribution(firstFoe, player));
+                        Log.e("DEBUG", "vie joueur apres combat<<<<"+viePlayer);
 
                     //image de griffure pour visuellement verifier si il y a dégât
-                    ImageView bim =(ImageView) findViewById(R.id.bim);
-                    bim.setVisibility(View.VISIBLE);}
+                        ImageView bim =(ImageView) findViewById(R.id.bim);
+                        bim.setVisibility(View.VISIBLE);
+                        } else {
+                        firstFoe.setAlive(false);
+                        Log.i("DEBUG", "tu as vaincu pitit coquin");
 
-                    finish();
+                        loot();
+
+                    }
+
 
                 }
             });
 
 
         }
+    //phase de loot
+    private void loot() {
+    }
 
     //représaille de l'ennemi
-    private int retribution() {
+    private int retribution(Foe foe, Player player) {
 
         int hpPlayer    = player.getHp();
-        int attckFoe    = firstFoe.getAttk();
+        int attckFoe    = foe.getAttk();
         int defPlayer   = player.getDef();
         if(defPlayer < attckFoe ) {
-            return hpPlayer = hpPlayer - (attckFoe - defPlayer);
+            return hpPlayer - (attckFoe - defPlayer);
         }else{
-            return hpPlayer =- 1;
+            return hpPlayer - 1;
         }
 
     }
 
     //le joueur initie l'attaque
-    private int initAttck() {
+    private int initAttck(Foe foe, Player player) {
 
-        int hpFoe       = firstFoe.getHp();
+        Log.i("DEBUG", "je lui casse la machoire");
+
+        int hpFoe       = foe.getHp();
         int attckPlayer = player.getAttk();
-        int defFoe      = firstFoe.getDef();
+        int defFoe      = foe.getDef();
         if(defFoe < attckPlayer ) {
-            return hpFoe = hpFoe - (attckPlayer - defFoe);
+
+            Log.i("DEBUG", "il est en mousse");
+            return hpFoe - (attckPlayer - defFoe);
         }else{
-            return hpFoe =- 1;
+            Log.i("DEBUG", "il est keuss l'autre tarba");
+            return hpFoe - 1;
         }
 
     }

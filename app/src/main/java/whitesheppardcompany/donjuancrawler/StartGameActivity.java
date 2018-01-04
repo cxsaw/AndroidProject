@@ -21,6 +21,8 @@ public class StartGameActivity extends AppCompatActivity {
 
     private Player player;
     private Foe firstFoe = new Foe();
+    // je mets 9999 pour ne pas que le jeu declare le mob mort des le debut de la phase
+    private int hpFoe = 9999;
 
 
     @Override
@@ -73,11 +75,8 @@ public class StartGameActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     TextView hpPlayerText = (TextView) findViewById(R.id.playerLife);
                     TextView hpFoeText = (TextView) findViewById(R.id.foeLife);
-                    int viePlayer = player.getHp();
-                    int vieFoe    = firstFoe.getHp();
+                    hpFoe    = firstFoe.getHp();
 
-                    Log.e("DEBUG", "vie joueur>>>>"+viePlayer);
-                    Log.e("DEBUG", "vie mechant>>>>"+vieFoe);
 
                     //hpFoeText.setVisibility(View.VISIBLE);
                     //hpPlayerText.setVisibility(View.VISIBLE);
@@ -86,30 +85,38 @@ public class StartGameActivity extends AppCompatActivity {
                     //hpPlayerText.setText(viePlayer);
                     Log.i("DEBUG", "Non le prob n'est oas là");
 
-                    int hp = initAttck(firstFoe, player);
-                    firstFoe.setHp(hp);
-                    Log.e("DEBUG", "vie mechant apres combat<<<<"+firstFoe.getHp());
-
-                    if (player.isAlive() == false){
-                        Log.i("DEBUG","GameOver");
-                        ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
-                        gameOver.setVisibility(View.VISIBLE);
-
+                    //phase attaque joueur
+                    //initie l'attaque
+                    if (hpFoe <= 0){
+                        firstFoe.setAlive(false);
 
                     }
+                    hpFoe = initAttck(firstFoe, player);
 
+
+                    firstFoe.setHp(hpFoe);
+                    Log.e("DEBUG", "vie mechant apres combat<<<<"+firstFoe.getHp());
+
+                    //si le mechant est vivant, il riposte
                     if(firstFoe.isAlive() == true){
                         player.setHp(retribution(firstFoe, player));
-                        Log.e("DEBUG", "vie joueur apres combat<<<<"+viePlayer);
+                        Log.e("DEBUG", "vie joueur apres combat<<<<"+player.getHp());
 
-                    //image de griffure pour visuellement verifier si il y a dégât
+                        //image de griffure pour visuellement verifier si il y a dégât
                         ImageView bim =(ImageView) findViewById(R.id.bim);
                         bim.setVisibility(View.VISIBLE);
                         } else {
-                        firstFoe.setAlive(false);
+
                         Log.i("DEBUG", "tu as vaincu pitit coquin");
 
                         loot();
+
+                    }
+                    //si le joueur est mort on affiche un game over
+                    if(player.getHp() <= 0){
+                        player.setAlive(false);
+                        ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
+                        gameOver.setVisibility(View.VISIBLE);
 
                     }
 
@@ -125,13 +132,16 @@ public class StartGameActivity extends AppCompatActivity {
 
     //représaille de l'ennemi
     private int retribution(Foe foe, Player player) {
-
+        Log.e("DEBUG", "MOI PAS CONTENT");
         int hpPlayer    = player.getHp();
         int attckFoe    = foe.getAttk();
         int defPlayer   = player.getDef();
         if(defPlayer < attckFoe ) {
+            Log.e("DEBUG", "EZ");
             return hpPlayer - (attckFoe - defPlayer);
+
         }else{
+            Log.e("DEBUG", "ouch");
             return hpPlayer - 1;
         }
 

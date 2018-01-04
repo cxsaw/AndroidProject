@@ -58,7 +58,7 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
                 player.setName(name);
                 player.setHp(100);
                 player.setDef(50);
-                player.setAttk(10);
+                player.setAttk(0);
                 Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu coco" );
                 Intent intentCoco = new Intent(ChoosePlayerActivity.this , StartGameActivity.class);
                 intentCoco.putExtra("player", (Serializable) player);

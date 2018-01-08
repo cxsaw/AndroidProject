@@ -27,9 +27,7 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_choose_player);
 
         //on reçoit l'intent

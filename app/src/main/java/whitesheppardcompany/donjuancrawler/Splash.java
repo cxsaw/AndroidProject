@@ -23,9 +23,7 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.i("DEBUG","Ravi de vous voir ici");
         //supprime le taskbar
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_splash);
         LogoLauncher lgLauncher = new LogoLauncher();
         lgLauncher.start();

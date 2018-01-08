@@ -20,6 +20,8 @@ import java.io.Serializable;
 import whitesheppardcompany.donjuancrawler.Beans.Foe;
 import whitesheppardcompany.donjuancrawler.Beans.Player;
 
+import static android.view.View.GONE;
+
 public class StartGameActivity extends AppCompatActivity {
 
     private Player player;
@@ -34,9 +36,7 @@ public class StartGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.i("DEBUG"," Wesh cassos");
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_start_game);
 
         TextView hpPlayerText = (TextView) findViewById(R.id.playerLife);
@@ -55,7 +55,7 @@ public class StartGameActivity extends AppCompatActivity {
 
         //génération du méchant
         firstFoe.setAttk(10);
-        firstFoe.setHp(100);
+        firstFoe.setHp(30);
         firstFoe.setDef(10);
         firstFoe.setName("Random Bonasse"); //référence à "Crossed"
         firstFoe.setAlive(true);
@@ -73,7 +73,7 @@ public class StartGameActivity extends AppCompatActivity {
 
         if (firstFoe.isAlive() == false){
             Log.i("DEBUG","C'est le gg bro");
-            imgFoe.setVisibility(View.GONE);
+            imgFoe.setVisibility(GONE);
             loot();
 
         }
@@ -151,7 +151,7 @@ public class StartGameActivity extends AppCompatActivity {
                         //et il disparait
 
                         fadeOutImg(imgFoe);
-                        bim.setVisibility(View.GONE);
+                        bim.setVisibility(GONE);
                     }
                     //si le joueur est mort on affiche un game over
                     if(player.getHp() <= 0){
@@ -159,6 +159,8 @@ public class StartGameActivity extends AppCompatActivity {
                         //forcément si on meurt on ne peut attaquer
                         attack.setClickable(false);
                         //on lance le GameOver
+                        ImageButton quest = (ImageButton)findViewById(R.id.questShortcut);
+                        quest.setVisibility(GONE);
                         ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
                         gameOver.setVisibility(View.VISIBLE);
 
@@ -212,7 +214,7 @@ public class StartGameActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                bim.setVisibility(View.GONE);
+                bim.setVisibility(GONE);
             }
         }, 200);
         bim.setVisibility(View.VISIBLE);

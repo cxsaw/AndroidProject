@@ -10,24 +10,19 @@
     <ImageView
         android:id="@+id/locateView"
         android:layout_width="0dp"
-        android:layout_height="170dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="209dp"
         android:background="@color/colorAccent"
         android:cropToPadding="true"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="center"
+        app:layout_constraintBottom_toTopOf="@+id/backHud"
+        app:layout_constraintStart_toStartOf="@+id/gameOver"
+        app:layout_constraintTop_toTopOf="@+id/gameOver"
         app:srcCompat="@drawable/bg" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/backHud"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="136dp"
         android:layout_marginEnd="8dp"
         android:scaleType="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,7 +31,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/hud" />
+        app:srcCompat="@drawable/rocky" />
 
     <ImageButton
         android:id="@+id/goUp"
@@ -44,42 +39,113 @@
         android:layout_height="27dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="@+id/locateView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/locateView"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/arrow_up_float" />
+        app:srcCompat="@drawable/up_arrow" />
 
     <ImageView
         android:id="@+id/foe"
         android:layout_width="wrap_content"
-        android:layout_height="172dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="372dp"
+        android:layout_height="162dp"
+        android:layout_marginEnd="20dp"
         android:adjustViewBounds="true"
         android:background="@color/colorAccent"
         android:scaleType="fitCenter"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/goUp"
-        app:layout_constraintVertical_bias="0.944"
+        app:layout_constraintBottom_toTopOf="@+id/hudBar"
+        app:layout_constraintEnd_toStartOf="@+id/goRight"
+        app:layout_constraintTop_toTopOf="@+id/gameOver"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/foe" />
 
     <ImageButton
         android:id="@+id/swo"
-        android:layout_width="38dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="88dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toStartOf="@+id/backHud"
+        app:layout_constraintTop_toTopOf="@+id/backHud"
+        app:srcCompat="@drawable/fight" />
+
+    <ImageButton
+        android:id="@+id/waterSpell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintStart_toEndOf="@+id/lightningSpell"
+        app:layout_constraintTop_toTopOf="@+id/backHud"
+        app:layout_constraintVertical_bias="0.444"
+        app:srcCompat="@drawable/water" />
+
+    <ImageButton
+        android:id="@+id/fireSpell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/swo"
+        app:layout_constraintTop_toTopOf="@+id/backHud"
+        app:srcCompat="@drawable/fire" />
+
+    <ImageButton
+        android:id="@+id/goRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="@+id/gameOver"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toEndOf="@+id/goUp"
+        app:layout_constraintTop_toBottomOf="@+id/goUp"
+        app:srcCompat="@drawable/right_arrow" />
+
+    <ImageButton
+        android:id="@+id/goLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintEnd_toStartOf="@+id/goUp"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/swo" />
+        app:layout_constraintStart_toStartOf="@+id/locateView"
+        app:layout_constraintTop_toBottomOf="@+id/goUp"
+        app:srcCompat="@drawable/left_arrow" />
+
+    <ImageButton
+        android:id="@+id/lightningSpell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/lightning"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fireSpell"
+        app:layout_constraintTop_toTopOf="@+id/backHud"
+        app:srcCompat="@drawable/lightning" />
 
     <TextView
         android:id="@+id/playerLife"
@@ -91,8 +157,8 @@
         android:textColor="@android:color/black"
         android:textColorHighlight="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/backHud"
+        app:layout_constraintTop_toTopOf="@+id/backHud"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -104,7 +170,7 @@
         android:layout_marginStart="8dp"
         android:background="@color/colorPrimary"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintBottom_toTopOf="@+id/backHud"
         app:layout_constraintEnd_toEndOf="@+id/locateView"
         app:layout_constraintHorizontal_bias="0.997"
         app:layout_constraintStart_toStartOf="@+id/locateView"
@@ -136,6 +202,42 @@
         android:cropToPadding="false"
         android:scaleType="fitXY"
         android:visibility="invisible"
-        app:srcCompat="@drawable/gameover" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/gameover"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <ImageButton
+        android:id="@+id/questShortcut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/gameOver"
+        app:layout_constraintEnd_toEndOf="@+id/backHud"
+        app:layout_constraintStart_toEndOf="@+id/waterSpell"
+        app:layout_constraintTop_toTopOf="@+id/backHud"
+        app:srcCompat="@drawable/quest_min" />
+
+    <ImageView
+        android:id="@+id/hudBar"
+        android:layout_width="576dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-16dp"
+        android:layout_marginEnd="-8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="-7dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/gameOver"
+        app:layout_constraintTop_toTopOf="@+id/gameOver"
+        app:layout_constraintVertical_bias="0.593"
+        app:srcCompat="@drawable/expbar" />
 
 </android.support.constraint.ConstraintLayout>

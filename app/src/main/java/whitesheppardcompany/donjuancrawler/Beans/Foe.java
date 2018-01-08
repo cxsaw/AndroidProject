@@ -17,6 +17,8 @@ public class Foe extends Entity implements Serializable {
 
     boolean alive;
 
+    int element;
+
     public boolean isAlive() {
         return alive;
     }
@@ -25,7 +27,25 @@ public class Foe extends Entity implements Serializable {
         this.alive = alive;
     }
 
+    /*
+                    **Tableau Périodique des éléments
+    *Element 1 = feu;
+    *Element 2 = lightning;
+    *Element 3 = water;
+    *Element 5 = neutre
+    *   lightning> water > feu > ligthning
+    *       2       3       1       2
+    */
+
     public Foe() {
+    }
+
+    public int getElement() {
+        return element;
+    }
+
+    public void setElement(int element) {
+        this.element = element;
     }
 
     @Override

@@ -28,10 +28,12 @@ import android.widget.MediaController.MediaPlayerControl;
 import android.widget.Button;
 import android.widget.VideoView;
 
+import java.net.URI;
+
 public class CreditActivity extends AppCompatActivity {
     Context context = CreditActivity.this;
 
-    private VideoView myVideoView;
+    public VideoView myVideoView;
 
 
     @Override
@@ -40,10 +42,10 @@ public class CreditActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_credit);
 
-        String mUrl = "/home/saw/AndroidStudioProjects/DonJuanCrawler/app/src/main/res/raw/sw.mp4";
-
+        String url = "android.resource://"+getPackageName()+"/"+R.raw.sww;
+        Uri uri = Uri.parse(url);
         myVideoView = (VideoView)findViewById(R.id.sw);
-        myVideoView.setVideoPath(mUrl);
+        myVideoView.setVideoURI(uri);
         myVideoView.setMediaController(new MediaController(this));
         myVideoView.requestFocus();
         myVideoView.start();

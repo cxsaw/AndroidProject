@@ -2,7 +2,9 @@ package whitesheppardcompany.donjuancrawler;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,8 +16,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import whitesheppardcompany.donjuancrawler.Beans.Foe;
 import whitesheppardcompany.donjuancrawler.Beans.Player;
@@ -24,10 +28,12 @@ import static android.view.View.GONE;
 
 public class StartGameActivity extends AppCompatActivity {
 
+    Context context = StartGameActivity.this;
     private Player player;
     private Foe firstFoe = new Foe();
     // je mets 9999 pour ne pas que le jeu declare le mob mort des le debut de la phase
     private int hpFoe = 9999;
+    private boolean canPressBackButton = false;
 
 
     @Override
@@ -45,24 +51,36 @@ public class StartGameActivity extends AppCompatActivity {
         ImageButton goUp      = (ImageButton) findViewById(R.id.goUp);
         //je désactive le bouton qui me fait changer d'intent et donc de salle InGame
         goUp.setClickable(false);
+        Toast.makeText(context, "Oh shit a monster appear! The prof says to don't walk into the tall grass!",Toast.LENGTH_SHORT).show();
+
         fadeInImg(imgFoe);
         //on s'assure que le joueur possede le statut 'vivant'
         player = (Player)getIntent().getSerializableExtra("player");
         player.setAlive(true);
+        Log.i("DEBUG"," Wesh cassos");
+
+        MediaPlayer mp= MediaPlayer.create(context,R.raw.main);
+        mp.start();
+        mp.setLooping(true);
 
         Log.i("DEBUG","mmmmm "+player.getName());
         Log.i("DEBUG","wwwww "+player.getHp());
 
+        Toast.makeText(context, "Oh shit a monster appear! The prof says to don't walk into the tall grass!",Toast.LENGTH_SHORT).show();
+
         //génération du méchant
+
         firstFoe.setAttk(10);
         firstFoe.setHp(30);
         firstFoe.setDef(10);
         firstFoe.setName("Random Bonasse"); //référence à "Crossed"
         firstFoe.setAlive(true);
+        firstFoe.setElement(3);//élément eau
+
+
         Log.i("DEBUG","wwwww "+firstFoe.getName()); //vérif de dev
 
         //affichage précaire des HP
-
 
         hpFoeText.setVisibility(View.VISIBLE);
         hpPlayerText.setVisibility(View.VISIBLE);
@@ -75,9 +93,7 @@ public class StartGameActivity extends AppCompatActivity {
             Log.i("DEBUG","C'est le gg bro");
             imgFoe.setVisibility(GONE);
             loot();
-
         }
-
     }
 
 
@@ -85,8 +101,18 @@ public class StartGameActivity extends AppCompatActivity {
     private void fight(final Player player, final Foe firstFoe) {
         Log.i("DEBUG"," !baston!");
 
-        final ImageButton attack = (ImageButton) findViewById(R.id.swo);
+        //on initialise les boutons de l'interfaces
+        final ImageButton attack         = (ImageButton) findViewById(R.id.swo);
+        final ImageButton fireSpell      = (ImageButton) findViewById(R.id.fireSpell);
+        final ImageButton waterSpell     = (ImageButton) findViewById(R.id.waterSpell);
+        final ImageButton lightningSpell = (ImageButton) findViewById(R.id.lightningSpell);
 
+        final MediaPlayer mp= MediaPlayer.create(context,R.raw.main);
+        mp.start();
+        mp.setLooping(true);
+        fireSpell.setClickable(true);
+        waterSpell.setClickable(true);
+        lightningSpell.setClickable(true);
         attack.setClickable(true);
 
         this.player     = player;
@@ -97,6 +123,20 @@ public class StartGameActivity extends AppCompatActivity {
         ImageView bim =(ImageView)findViewById(R.id.bim);
         bim.setVisibility(View.INVISIBLE);
 
+        /**********************************************************************
+         *
+         *
+         *                              attack listener
+         *
+         *
+         *
+         *
+         *
+         *      [O\\\\\[========================-
+         *
+         * ************************************************************************/
+
+        // tout le listener gère la phase d'attaque aux armes lors du clique sur le bouton épée
         attack.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -104,7 +144,7 @@ public class StartGameActivity extends AppCompatActivity {
                     TextView hpPlayerText = (TextView) findViewById(R.id.playerLife);
                     TextView hpFoeText    = (TextView) findViewById(R.id.foeLife);
                     ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
-                    ImageView bim         =(ImageView) findViewById(R.id.bim);
+                    ImageView bim         = (ImageView) findViewById(R.id.bim);
 
 
                     hpFoe    = firstFoe.getHp();
@@ -114,7 +154,7 @@ public class StartGameActivity extends AppCompatActivity {
                     //set les var dans le textView
                     //hpFoeText.setText(vieFoe);
                     //hpPlayerText.setText(viePlayer);
-                    Log.i("DEBUG", "Non le prob n'est oas là");
+                    Log.i("DEBUG", "Non le prob n'est pôas là");
 
                     //phase attaque joueur
                     //initie l'attaque
@@ -155,12 +195,13 @@ public class StartGameActivity extends AppCompatActivity {
                     }
                     //si le joueur est mort on affiche un game over
                     if(player.getHp() <= 0){
+                        mp.stop();
+                        MediaPlayer mpGameover = MediaPlayer.create(context, R.raw.gameover);
+                        mpGameover.start();
                         player.setAlive(false);
                         //forcément si on meurt on ne peut attaquer
                         attack.setClickable(false);
                         //on lance le GameOver
-                        ImageButton quest = (ImageButton)findViewById(R.id.questShortcut);
-                        quest.setVisibility(GONE);
                         ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
                         gameOver.setVisibility(View.VISIBLE);
 
@@ -171,7 +212,111 @@ public class StartGameActivity extends AppCompatActivity {
                     }
                 }
             });
+
+        /****************************************************************************************
+        *
+        *
+        *
+        *
+        *
+        *       Bouton de spell FEU
+        *
+        *
+        *                           (  .      )
+        *                        )           (              )
+        *                            .  '   .   '  .  '  .
+        *                    (    , )       (.   )  (   ',    )
+        *                  .' ) ( . )    ,  ( ,     )   ( .
+        *                 ). , ( .   (  ) ( , ')  .' (  ,    )
+        *                (_,) . ), ) _) _,')  (, ) '. )  ,. (' )
+        *     FUER FREII^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        *
+        *
+        ********************************************************************************************/
+
+
+        fireSpell.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                TextView hpPlayerText = (TextView) findViewById(R.id.playerLife);
+                TextView hpFoeText    = (TextView) findViewById(R.id.foeLife);
+                ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
+                ImageView bim         = (ImageView) findViewById(R.id.bim);
+
+
+                hpFoe    = firstFoe.getHp();
+
+                Log.i("DEBUG", "Non le prob n'est pôas là");
+
+                //phase attaque joueur
+                //initie l'attaque
+
+                hpFoe = initFire(firstFoe, player);
+                firstFoe.setHp(hpFoe);
+                if (firstFoe.getHp() <= 0){
+                    firstFoe.setAlive(false);
+                }
+                Log.e("DEBUG", "vie mechant apres combat<<<<"+firstFoe.getHp());
+
+                //si le mechant est vivant, il riposte
+                if(firstFoe.isAlive() == true){
+
+                    player.setHp(retribution(firstFoe, player));
+                    Log.e("DEBUG", "vie joueur apres combat<<<<"+player.getHp());
+
+                    //image de griffure pour visuellement verifier si il y a dégâts
+                    //le handler sert à timer le coup pour qu'il s'affiche ponctuellement
+
+                }else {
+
+                    ImageButton goUp = (ImageButton) findViewById(R.id.goUp);
+                    goUp.setClickable(true);
+                    goUp.setVisibility(View.VISIBLE);
+                    goUp.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+                            Log.e("DEBUG","room1 over");
+                        }
+                    });
+                    attack.setClickable(false);
+                    //et il disparait
+
+                    fadeOutImg(imgFoe);
+                    bim.setVisibility(GONE);
+                }
+                //si le joueur est mort on affiche un game over
+                if(player.getHp() <= 0){
+                    mp.stop();
+                    MediaPlayer mpGameover = MediaPlayer.create(context, R.raw.gameover);
+                    mpGameover.start();
+                    player.setAlive(false);
+                    //forcément si on meurt on ne peut attaquer
+                    attack.setClickable(false);
+                    //on lance le GameOver
+                    ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
+                    gameOver.setVisibility(View.VISIBLE);
+
+                }
+
+                if (firstFoe.getHp() <= 0){
+                    loot();
+                }
+            }
+        });
+
         }
+
+
+    @Override
+    public void onBackPressed(){
+        if(!canPressBackButton){
+
+        } else {
+            super.onBackPressed();
+        }
+    }
 
 
     private void fadeInImg(ImageView imageView) {
@@ -199,6 +344,32 @@ public class StartGameActivity extends AppCompatActivity {
         Log.i("DEBUG","on loot");
     }
 
+    private int initFire(Foe foe, Player player) {
+        Log.i("DEBUG", "je joue avec le feu");
+
+        int hpFoe = foe.getHp();
+        int attckPlayer = player.getAttk();
+        int defFoe = foe.getDef();
+        int elmt = foe.getElement();
+
+        switch (elmt) {
+            case 1:
+                return hpFoe - 5;    //normale attaque
+            case 2:
+                return hpFoe;       //echec total pas de dégat
+            case 3:
+                return hpFoe - 25; //attaque critique
+            case 5:
+                return initAttck(foe, player); // dans le cas d'un élément neutre on envoie les dégats classique
+            default:
+                return initAttck(foe, player); // sinon il est pas content
+        }
+
+    }
+
+
+
+
     //représaille de l'ennemi
     private int retribution(Foe foe, Player player) {
         Log.e("DEBUG", "MOI PAS CONTENT");
@@ -215,8 +386,11 @@ public class StartGameActivity extends AppCompatActivity {
             public void run() {
 
                 bim.setVisibility(GONE);
+                MediaPlayer mpSound = MediaPlayer.create(context, R.raw.fight1);
+                mpSound.start();
             }
         }, 200);
+
         bim.setVisibility(View.VISIBLE);
 
         if(defPlayer < attckFoe ) {
@@ -229,6 +403,7 @@ public class StartGameActivity extends AppCompatActivity {
         }
 
     }
+
 
     //le joueur initie l'attaque
     private int initAttck(Foe foe, Player player) {

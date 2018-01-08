@@ -60,7 +60,7 @@
         android:adjustViewBounds="true"
         android:background="@color/colorAccent"
         android:scaleType="fitCenter"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

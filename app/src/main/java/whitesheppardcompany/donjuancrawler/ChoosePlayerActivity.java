@@ -54,9 +54,12 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
                 Log.i("DEBUG","gggg "+name);
 
                 player.setName(name);
+                player.setId(1);
                 player.setHp(100);
-                player.setDef(50);
-                player.setAttk(0);
+                player.setDef(20);
+                player.setAttk(13);
+                player.setIntell(15);
+                player.setWallet(100);
                 Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu coco" );
                 Intent intentCoco = new Intent(ChoosePlayerActivity.this , StartGameActivity.class);
                 intentCoco.putExtra("player", (Serializable) player);
@@ -73,10 +76,13 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
 
                 Log.i("DEBUG","gggg "+name);
                 player.setName(name);
+                player.setId(2);
                 player.setHp(10);
                 player.setDef(0);
-                player.setAttk(1);
-                player.setWallet(100000*100000);
+                player.setAttk(9);
+                player.setIntell(25);
+                player.setSagesse(18);
+                player.setWallet(100000*100000); //petit troll ;)
 
                 Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu cam" );
                 Intent intentCam = new Intent(ChoosePlayerActivity.this , StartGameActivity.class);
@@ -94,9 +100,12 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
 
                 Log.i("DEBUG","gggg "+name);
                 player.setName(name);
-                player.setHp(10000);
-                player.setDef(5000);
-                player.setAttk(1000);
+                player.setId(3);
+                player.setHp(300);
+                player.setDef(100);
+                player.setAttk(15);
+                player.setIntell(8);
+                player.setSagesse(19);
 
 
                 Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu toto" );

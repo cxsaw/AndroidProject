@@ -11,6 +11,10 @@ import java.io.Serializable;
 * que j'implémenterais après.
 */
 
+/*
+*   En soit je n'ai pas besoin de sérializer le foe car il ne change pas d'intent
+*
+*/
 public class Foe extends Entity implements Serializable {
 
     private static long serialVersionUID = 5524L;
@@ -88,4 +92,23 @@ public class Foe extends Entity implements Serializable {
         super.setAttk(attk);
     }
 
+    @Override
+    public int getIntell() {
+        return super.getIntell();
+    }
+
+    @Override
+    public void setIntell(int intell) {
+        super.setIntell(intell);
+    }
+
+    @Override
+    public int getSagesse() {
+        return super.getSagesse();
+    }
+
+    @Override
+    public void setSagesse(int sagesse) {
+        super.setSagesse(sagesse);
+    }
 }

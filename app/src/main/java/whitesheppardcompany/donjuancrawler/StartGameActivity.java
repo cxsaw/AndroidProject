@@ -23,8 +23,14 @@ import java.util.ArrayList;
 
 import whitesheppardcompany.donjuancrawler.Beans.Foe;
 import whitesheppardcompany.donjuancrawler.Beans.Player;
+import whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod;
 
 import static android.view.View.GONE;
+import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.fadeInImg;
+import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.fadeOutImg;
+import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initAttck;
+import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initFire;
+import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initWater;
 
 public class StartGameActivity extends AppCompatActivity {
 
@@ -59,10 +65,6 @@ public class StartGameActivity extends AppCompatActivity {
         player.setAlive(true);
         Log.i("DEBUG"," Wesh cassos");
 
-        MediaPlayer mp= MediaPlayer.create(context,R.raw.main);
-        mp.start();
-        mp.setLooping(true);
-
         Log.i("DEBUG","mmmmm "+player.getName());
         Log.i("DEBUG","wwwww "+player.getHp());
 
@@ -75,6 +77,8 @@ public class StartGameActivity extends AppCompatActivity {
         firstFoe.setDef(10);
         firstFoe.setName("Random Bonasse"); //référence à "Crossed"
         firstFoe.setAlive(true);
+        firstFoe.setSagesse(10);
+        firstFoe.setIntell(10);
         firstFoe.setElement(3);//élément eau
 
 
@@ -107,7 +111,7 @@ public class StartGameActivity extends AppCompatActivity {
         final ImageButton waterSpell     = (ImageButton) findViewById(R.id.waterSpell);
         final ImageButton lightningSpell = (ImageButton) findViewById(R.id.lightningSpell);
 
-        final MediaPlayer mp= MediaPlayer.create(context,R.raw.main);
+        final MediaPlayer mp = MediaPlayer.create(context,R.raw.main);
         mp.start();
         mp.setLooping(true);
         fireSpell.setClickable(true);
@@ -127,9 +131,6 @@ public class StartGameActivity extends AppCompatActivity {
          *
          *
          *                              attack listener
-         *
-         *
-         *
          *
          *
          *      [O\\\\\[========================-
@@ -188,6 +189,9 @@ public class StartGameActivity extends AppCompatActivity {
                             }
                         });
                         attack.setClickable(false);
+                        fireSpell.setClickable(false);
+                        waterSpell.setClickable(false);
+                        lightningSpell.setClickable(false);
                         //et il disparait
 
                         fadeOutImg(imgFoe);
@@ -195,12 +199,18 @@ public class StartGameActivity extends AppCompatActivity {
                     }
                     //si le joueur est mort on affiche un game over
                     if(player.getHp() <= 0){
+
                         mp.stop();
+                        mp.release();
+
                         MediaPlayer mpGameover = MediaPlayer.create(context, R.raw.gameover);
                         mpGameover.start();
                         player.setAlive(false);
                         //forcément si on meurt on ne peut attaquer
                         attack.setClickable(false);
+                        fireSpell.setClickable(false);
+                        waterSpell.setClickable(false);
+                        lightningSpell.setClickable(false);
                         //on lance le GameOver
                         ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
                         gameOver.setVisibility(View.VISIBLE);
@@ -215,10 +225,6 @@ public class StartGameActivity extends AppCompatActivity {
 
         /****************************************************************************************
         *
-        *
-        *
-        *
-        *
         *       Bouton de spell FEU
         *
         *
@@ -229,7 +235,7 @@ public class StartGameActivity extends AppCompatActivity {
         *                  .' ) ( . )    ,  ( ,     )   ( .
         *                 ). , ( .   (  ) ( , ')  .' (  ,    )
         *                (_,) . ), ) _) _,')  (, ) '. )  ,. (' )
-        *     FUER FREII^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        *     FUER FREII^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^BANG BANG!
         *
         *
         ********************************************************************************************/
@@ -239,8 +245,7 @@ public class StartGameActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                TextView hpPlayerText = (TextView) findViewById(R.id.playerLife);
-                TextView hpFoeText    = (TextView) findViewById(R.id.foeLife);
+
                 ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
                 ImageView bim         = (ImageView) findViewById(R.id.bim);
 
@@ -253,6 +258,130 @@ public class StartGameActivity extends AppCompatActivity {
                 //initie l'attaque
 
                 hpFoe = initFire(firstFoe, player);
+                firstFoe.setHp(hpFoe);
+
+                if (firstFoe.getHp() <= 0){
+                    firstFoe.setAlive(false);
+                }
+
+                Log.e("DEBUG", "vie mechant apres combat<<<<"+firstFoe.getHp());
+
+                //si le mechant est vivant, il riposte
+                if(firstFoe.isAlive() == true){
+
+                    player.setHp(retribution(firstFoe, player));
+                    Log.e("DEBUG", "vie joueur apres combat<<<<"+player.getHp());
+
+                    //image de griffure pour visuellement verifier si il y a dégâts
+                    //le handler sert à timer le coup pour qu'il s'affiche ponctuellement
+
+                }else {
+
+                    ImageButton goUp = (ImageButton) findViewById(R.id.goUp);
+                    goUp.setClickable(true);
+                    goUp.setVisibility(View.VISIBLE);
+                    goUp.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+                            Log.e("DEBUG","room1 over");
+                        }
+                    });
+                    attack.setClickable(false);
+                    fireSpell.setClickable(false);
+                    waterSpell.setClickable(false);
+                    lightningSpell.setClickable(false);
+                    //et il disparait
+
+                    fadeOutImg(imgFoe);
+                    bim.setVisibility(GONE);
+                }
+                //si le joueur est mort on affiche un game over
+                if(player.getHp() <= 0){
+
+                    mp.stop();
+                    mp.release();
+
+                    MediaPlayer mpGameover = MediaPlayer.create(context, R.raw.gameover);
+                    mpGameover.start();
+                    player.setAlive(false);
+                    //forcément si on meurt on ne peut attaquer
+                    attack.setClickable(false);
+                    fireSpell.setClickable(false);
+                    waterSpell.setClickable(false);
+                    lightningSpell.setClickable(false);
+                    //on lance le GameOver
+                    ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
+                    gameOver.setVisibility(View.VISIBLE);
+
+                }
+
+                if (firstFoe.getHp() <= 0){
+                    loot();
+                }
+            }
+        });
+
+        /************************************************************************************
+         *                           ____________________¶¶
+         *                           ___________________¶¶¶
+         *                           __________________¶¶_¶¶
+         *                           __________________¶¶__¶
+         *                           _________________¶¶¶__¶¶
+         *                           ________________¶¶¶___¶¶
+         *                           ________________¶¶¶___¶¶
+         *                           _______________¶¶¶_____¶¶
+         *                           ______________¶¶¶_______¶¶
+         *                           _____________¶¶¶¶_______¶¶
+         *        Water spell        _____________¶¶¶_________¶¶
+         *                           ____________¶¶¶___________¶¶
+         *                           ___________¶¶¶_____________¶¶
+         *                           __________¶¶¶______________¶¶
+         *                           __________¶¶________________¶¶
+         *                           _________¶¶__________________¶¶
+         *                           ________¶¶____________________¶¶
+         *                           _______¶¶______________________¶¶
+         *                           ______¶¶________________________¶¶
+         *                           _____¶¶_________________________¶¶
+         *                           ____¶¶¶__________________________¶¶
+         *                           ____¶¶____________________________¶¶
+         *                           ___¶¶_____________________________¶¶¶
+         *                           ___¶¶______________________________¶¶
+         *                           __¶¶_______________________________¶¶¶
+         *                           __¶¶________________________________¶¶
+         *                           _¶¶_________________________________¶¶¶
+         *                           _¶¶_________________________________¶¶¶
+         *                           _¶¶_________________________________¶¶¶
+         *                           _¶¶_________________________________¶¶
+         *                           _¶¶_________________________________¶¶
+         *                           _¶¶________________________________¶¶¶
+         *                           __¶¶_______________________________¶¶
+         *                           __¶¶______________________________¶¶
+         *                           __¶¶¶____________________________¶¶¶
+         *                           ___¶¶¶__________________________¶¶¶
+         *                           ____¶¶¶________________________¶¶¶
+         *                           _____¶¶¶¶¶___________________¶¶¶¶
+         *                            ______¶¶¶¶¶¶¶¶____________¶¶¶¶¶
+         *                           _______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+         *                           ____________¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+         *************************************************************************************/
+        waterSpell.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
+                ImageView bim         = (ImageView) findViewById(R.id.bim);
+
+
+                hpFoe    = firstFoe.getHp();
+
+                Log.i("DEBUG", "Non le prob n'est pôas là");
+
+                //phase attaque joueur
+                //initie l'attaque
+
+                hpFoe = initWater(firstFoe, player);
                 firstFoe.setHp(hpFoe);
                 if (firstFoe.getHp() <= 0){
                     firstFoe.setAlive(false);
@@ -281,6 +410,10 @@ public class StartGameActivity extends AppCompatActivity {
                         }
                     });
                     attack.setClickable(false);
+                    attack.setClickable(false);
+                    fireSpell.setClickable(false);
+                    waterSpell.setClickable(false);
+                    lightningSpell.setClickable(false);
                     //et il disparait
 
                     fadeOutImg(imgFoe);
@@ -288,12 +421,115 @@ public class StartGameActivity extends AppCompatActivity {
                 }
                 //si le joueur est mort on affiche un game over
                 if(player.getHp() <= 0){
+
                     mp.stop();
+                    mp.release();
+
                     MediaPlayer mpGameover = MediaPlayer.create(context, R.raw.gameover);
                     mpGameover.start();
                     player.setAlive(false);
                     //forcément si on meurt on ne peut attaquer
                     attack.setClickable(false);
+                    fireSpell.setClickable(false);
+                    waterSpell.setClickable(false);
+                    lightningSpell.setClickable(false);
+
+                    //on lance le GameOver
+                    ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
+                    gameOver.setVisibility(View.VISIBLE);
+
+                }
+
+                if (firstFoe.getHp() <= 0){
+                    loot();
+                }
+            }
+        });
+    /**********************************************************************************
+     *              ___(                        )                                     *
+     *             (                          _)                                      *
+     *            (_                       __))                                       *
+     *              ((                _____)                                          *
+     *                (_________)----'                                                *
+     *                   _/  /                                                        *
+     *                  /  _/                                                         *
+     *                _/  /                                                           *
+     *               / __/                                                            *
+     *             _/ /                                                               *
+     *            /__/                                                                *
+     *           //                                                                   *
+     *          /'    Lightning spell                                                 *
+     *                                                                                *
+     *                                                                                *
+     **********************************************************************************/
+        lightningSpell.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
+                ImageView bim         = (ImageView) findViewById(R.id.bim);
+
+
+                hpFoe    = firstFoe.getHp();
+
+                Log.i("DEBUG", "Non le prob n'est pôas là");
+
+                //phase attaque joueur
+                //initie l'attaque
+
+                hpFoe = GameplayMethod.initLight(firstFoe, player);
+                firstFoe.setHp(hpFoe);
+                if (firstFoe.getHp() <= 0){
+                    firstFoe.setAlive(false);
+                }
+                Log.e("DEBUG", "vie mechant apres combat<<<<"+firstFoe.getHp());
+
+                //si le mechant est vivant, il riposte
+                if(firstFoe.isAlive() == true){
+
+                    player.setHp(retribution(firstFoe, player));
+                    Log.e("DEBUG", "vie joueur apres combat<<<<"+player.getHp());
+
+                    //image de griffure pour visuellement verifier si il y a dégâts
+                    //le handler sert à timer le coup pour qu'il s'affiche ponctuellement
+
+                }else {
+
+                    ImageButton goUp = (ImageButton) findViewById(R.id.goUp);
+                    goUp.setClickable(true);
+                    goUp.setVisibility(View.VISIBLE);
+                    goUp.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+                            Log.e("DEBUG","room1 over");
+                        }
+                    });
+                    attack.setClickable(false);
+                    attack.setClickable(false);
+                    fireSpell.setClickable(false);
+                    waterSpell.setClickable(false);
+                    lightningSpell.setClickable(false);
+                    //et il disparait
+
+                    fadeOutImg(imgFoe);
+                    bim.setVisibility(GONE);
+                }
+                //si le joueur est mort on affiche un game over
+                if(player.getHp() <= 0){
+
+                    mp.stop();
+                    mp.release();
+
+                    MediaPlayer mpGameover = MediaPlayer.create(context, R.raw.gameover);
+                    mpGameover.start();
+                    player.setAlive(false);
+                    //forcément si on meurt on ne peut attaquer
+                    attack.setClickable(false);
+                    fireSpell.setClickable(false);
+                    waterSpell.setClickable(false);
+                    lightningSpell.setClickable(false);
                     //on lance le GameOver
                     ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
                     gameOver.setVisibility(View.VISIBLE);
@@ -306,7 +542,8 @@ public class StartGameActivity extends AppCompatActivity {
             }
         });
 
-        }
+    }
+
 
 
     @Override
@@ -319,53 +556,14 @@ public class StartGameActivity extends AppCompatActivity {
     }
 
 
-    private void fadeInImg(ImageView imageView) {
-        imageView.setVisibility(View.VISIBLE);
-//Animation fade in
-        ObjectAnimator fadeInImageView = ObjectAnimator.ofFloat(imageView, imageView.ALPHA, 0,1);
-        fadeInImageView.setDuration(1200);
-        AnimatorSet fadeInAnimator = new AnimatorSet();
-        fadeInAnimator.play(fadeInImageView);
-        fadeInAnimator.start();
-    }
 
-    private void fadeOutImg(ImageView imageView) {
-
-//Animation fade in
-        ObjectAnimator fadeOutImageView = ObjectAnimator.ofFloat(imageView, imageView.ALPHA, 1,0);
-        fadeOutImageView.setDuration(500);
-        AnimatorSet fadeOutAnimator = new AnimatorSet();
-        fadeOutAnimator.play(fadeOutImageView);
-        fadeOutAnimator.start();
-    }
 
     //phase de loot
     private void loot() {
         Log.i("DEBUG","on loot");
     }
 
-    private int initFire(Foe foe, Player player) {
-        Log.i("DEBUG", "je joue avec le feu");
 
-        int hpFoe = foe.getHp();
-        int attckPlayer = player.getAttk();
-        int defFoe = foe.getDef();
-        int elmt = foe.getElement();
-
-        switch (elmt) {
-            case 1:
-                return hpFoe - 5;    //normale attaque
-            case 2:
-                return hpFoe;       //echec total pas de dégat
-            case 3:
-                return hpFoe - 25; //attaque critique
-            case 5:
-                return initAttck(foe, player); // dans le cas d'un élément neutre on envoie les dégats classique
-            default:
-                return initAttck(foe, player); // sinon il est pas content
-        }
-
-    }
 
 
 
@@ -401,29 +599,8 @@ public class StartGameActivity extends AppCompatActivity {
             Log.e("DEBUG", "ouch");
             return hpPlayer - 1;
         }
-
     }
 
 
-    //le joueur initie l'attaque
-    private int initAttck(Foe foe, Player player) {
 
-        Log.i("DEBUG", "je lui casse la machoire");
-
-        int hpFoe       = foe.getHp();
-        int attckPlayer = player.getAttk();
-        int defFoe      = foe.getDef();
-        if (hpFoe <=0){
-            return hpFoe;
-        }
-        if(defFoe < attckPlayer ) {
-
-            Log.i("DEBUG", "il est en mousse");
-            return hpFoe - (attckPlayer - defFoe);
-        }else{
-            Log.i("DEBUG", "il est keuss l'autre tarba");
-            return hpFoe - 1;
-        }
-
-    }
 }

@@ -15,6 +15,10 @@ public class Entity implements Serializable {
      private int hp;
      private int def;
      private int attk;
+     private int intell;   //attaque magique
+
+
+    private int sagesse; //défense magique
 
     public Entity() {
     }
@@ -49,5 +53,22 @@ public class Entity implements Serializable {
 
     public void setAttk(int attk) {
         this.attk = attk;
+    }
+
+
+    public int getIntell() {
+        return intell;
+    }
+
+    public void setIntell(int intell) {
+        this.intell = intell;
+    }
+
+    public int getSagesse() {
+        return sagesse;
+    }
+
+    public void setSagesse(int sagesse) {
+        this.sagesse = sagesse;
     }
 }

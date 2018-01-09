@@ -20,11 +20,23 @@ public class Player extends Entity implements Serializable {
     private int wallet ; //représente la somme en Or que le joueur possède
     private boolean alive;
 
+
+
+    private int id; //sert à représenter l'avatar lors du changement d'intent!
+
     /*
     *
     *Setters & Getters
     *
     */
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public boolean isAlive() {
         return alive;
@@ -101,6 +113,26 @@ public class Player extends Entity implements Serializable {
 
     public Player() {
         super();
+    }
+
+    @Override
+    public int getIntell() {
+        return super.getIntell();
+    }
+
+    @Override
+    public void setIntell(int intell) {
+        super.setIntell(intell);
+    }
+
+    @Override
+    public int getSagesse() {
+        return super.getSagesse();
+    }
+
+    @Override
+    public void setSagesse(int sagesse) {
+        super.setSagesse(sagesse);
     }
 
 }

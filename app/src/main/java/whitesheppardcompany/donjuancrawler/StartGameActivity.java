@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -55,11 +56,19 @@ public class StartGameActivity extends AppCompatActivity {
         TextView hpFoeText    = (TextView) findViewById(R.id.foeLife);
         ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
         ImageButton goUp      = (ImageButton) findViewById(R.id.goUp);
-        //je désactive le bouton qui me fait changer d'intent et donc de salle InGame
-        goUp.setClickable(false);
-        Toast.makeText(context, "Oh shit a monster appear! The prof says to don't walk into the tall grass!",Toast.LENGTH_SHORT).show();
+        ImageButton goLeft    = (ImageButton) findViewById(R.id.goLeft);
+        ImageButton goRight   = (ImageButton) findViewById(R.id.goRight);
 
+        //je désactive les boutons qui me fait changer d'intent et donc de salle InGame
+
+        goUp.setClickable(false);
+        goLeft.setClickable(false);
+        goRight.setClickable(false);
+
+        Toast.makeText(context, "Oh shit a monster appear! The prof says to don't walk into the tall grass!",Toast.LENGTH_SHORT).show();
+        //petit effet
         fadeInImg(imgFoe);
+
         //on s'assure que le joueur possede le statut 'vivant'
         player = (Player)getIntent().getSerializableExtra("player");
         player.setAlive(true);
@@ -88,6 +97,7 @@ public class StartGameActivity extends AppCompatActivity {
 
         hpFoeText.setVisibility(View.VISIBLE);
         hpPlayerText.setVisibility(View.VISIBLE);
+        Log.i("DEBUG","en quete!");
 
         //méthode de combat initié
 
@@ -105,27 +115,98 @@ public class StartGameActivity extends AppCompatActivity {
     private void fight(final Player player, final Foe firstFoe) {
         Log.i("DEBUG"," !baston!");
 
+
         //on initialise les boutons de l'interfaces
         final ImageButton attack         = (ImageButton) findViewById(R.id.swo);
         final ImageButton fireSpell      = (ImageButton) findViewById(R.id.fireSpell);
         final ImageButton waterSpell     = (ImageButton) findViewById(R.id.waterSpell);
         final ImageButton lightningSpell = (ImageButton) findViewById(R.id.lightningSpell);
+        final ImageButton shortcutQuest  = (ImageButton) findViewById(R.id.questShortcut);
+        final ImageButton avatarInfo     = (ImageButton) findViewById(R.id.avatarInfo);
+        final ImageView perso            = (ImageView)   findViewById(R.id.infoPerso);
 
         final MediaPlayer mp = MediaPlayer.create(context,R.raw.main);
         mp.start();
         mp.setLooping(true);
+
+        //je mets les cliquers en route!
+        shortcutQuest.setClickable(true);
         fireSpell.setClickable(true);
         waterSpell.setClickable(true);
         lightningSpell.setClickable(true);
         attack.setClickable(true);
+        avatarInfo.setClickable(true);
 
-        this.player     = player;
-        this.firstFoe   = firstFoe;
+        //je set l'avatar correspondant au joueur en faisant correspondre l'id à l'image
+        switch(player.getId()){
+
+            case 2:
+                avatarInfo.setImageResource(R.drawable.ava3);
+                perso.setImageResource(R.drawable.bgcam);
+                break;
+            case 3:
+                avatarInfo.setImageResource(R.drawable.ava2);
+                perso.setImageResource(R.drawable.bgtoto);
+                break;
+            default:
+                avatarInfo.setImageResource(R.drawable.ava);
+                perso.setImageResource(R.drawable.bgcoco);
+        }
+        /***************************************************************
+        *
+        * Bouton listener avatar
+        *
+        *
+        *
+        *
+        *****************************************************************/
+
+        avatarInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (perso.getVisibility() == View.GONE){
+                    perso.setVisibility( View.VISIBLE );
+                } else {
+                    perso.setVisibility(View.GONE);
+                }
+
+
+            }
+        });
 
 
         Log.i("DEBUG"," kiké plus fort?");
         ImageView bim =(ImageView)findViewById(R.id.bim);
         bim.setVisibility(View.INVISIBLE);
+        /*******************************************************************
+        *
+        *
+        *
+        *   Listenner quete log
+        *
+        *
+        ********************************************************************/
+        shortcutQuest.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                final ImageButton log   = (ImageButton)findViewById(R.id.questDisplay);
+                final TextView txtQuest = (TextView) findViewById(R.id.questText);
+                Log.i("DEBUG","dans le listener quete");
+                log.setVisibility(View.VISIBLE);
+                txtQuest.setVisibility(View.VISIBLE);
+                log.setClickable(true);
+                log.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.i("DEBUG","dans le deuxieme listenner uéééééééééé");
+                        log.setVisibility(GONE);
+                        log.setClickable(false);
+                        txtQuest.setVisibility(GONE);
+                    }
+                });
+            }
+        });
 
         /**********************************************************************
          *
@@ -202,9 +283,13 @@ public class StartGameActivity extends AppCompatActivity {
 
                         mp.stop();
                         mp.release();
-
                         MediaPlayer mpGameover = MediaPlayer.create(context, R.raw.gameover);
                         mpGameover.start();
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         player.setAlive(false);
                         //forcément si on meurt on ne peut attaquer
                         attack.setClickable(false);

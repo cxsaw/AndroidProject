@@ -82,15 +82,15 @@ public class GameplayMethod {
 
         if (intelPlayer >= sagesseFoe) {
             switch (elmt) {
-                case 1:
+                case 1://fire
                     Log.i("DEBUG", "1");
                     //echec total pas de dégat
                     break;
-                case 2:
+                case 2://eleck
                     Log.i("DEBUG", "2");
                     hpFoe =- 5;    //normale attaque
                     break;
-                case 3:
+                case 3://eau
                     Log.i("DEBUG", "3");
                     hpFoe =- 25; //attaque critique
                     break;
@@ -101,15 +101,16 @@ public class GameplayMethod {
             }
         } else {
             switch (elmt) {
-                case 1:
+                case 1://feu
                     Log.i("DEBUG", "1");
-                    hpFoe =- 10; //attaque critique
-                    break;
-                case 2:
-                    Log.i("DEBUG", "2");
                     //echec total pas de dégat
                     break;
-                case 3:
+                case 2://eleck
+                    Log.i("DEBUG", "2");
+                    hpFoe =- 10; //attaque critique
+
+                    break;
+                case 3://eau
                     Log.i("DEBUG", "3");
                     hpFoe =- 2;    //normale attaque
                     break;
@@ -135,17 +136,17 @@ public class GameplayMethod {
 
         if (intelPlayer >= sagesseFoe) {
             switch (elmt) {
-                case 1:
+                case 1://feu
                     Log.i("DEBUG", "1");
 
                     hpFoe =- 25; //attaque critique
                     break;
 
-                case 2:
+                case 2://eleck
                     Log.i("DEBUG", "2");
                     //echec total pas de dégat
                     break;
-                case 3:
+                case 3://eau
                     Log.i("DEBUG", "3");
                     hpFoe =- 5;    //normale attaque
                     break;
@@ -156,19 +157,19 @@ public class GameplayMethod {
             }
         } else {
             switch (elmt) {
-                case 1:
+                case 1://feu
                     Log.i("DEBUG", "1");
                     hpFoe =- 10; //attaque critique
                     break;
-                case 2:
+                case 2://eleck
                     Log.i("DEBUG", "2");
                     //echec total pas de dégat
                     break;
-                case 3:
+                case 3://eau
                     Log.i("DEBUG", "3");
                     hpFoe =- 2;    //normale attaque
                     break;
-                case 5:
+                case 5://eau
                     Log.i("DEBUG", "5");
                     initAttck(foe, player); // dans le cas d'un élément neutre on envoie les dégats classique
                     break;
@@ -190,17 +191,18 @@ public class GameplayMethod {
 
         if (intelPlayer >= sagesseFoe) {
             switch (elmt) {
-                case 1:
+                case 1://feu
                     Log.i("DEBUG", "1");
                     hpFoe =- 5;    //normale attaque
+
                     break;
-                case 2:
+                case 2://eleck
                     Log.i("DEBUG", "2");
-                    //echec total pas de dégat
-                    break;
-                case 3:
-                    Log.i("DEBUG", "3");
                     hpFoe =- 25; //attaque critique
+                    break;
+                case 3://eau
+                    Log.i("DEBUG", "3");
+                    //nothing echec total
                     break;
                 case 5:
                     Log.i("DEBUG", "5");
@@ -209,16 +211,17 @@ public class GameplayMethod {
             }
         } else {
             switch (elmt) {
-                case 1:
+                case 1://feu
                     Log.i("DEBUG", "1");
                     hpFoe =- 2;    //normale attaque
                     break;
-                case 2:
+                case 2://eleck
+                    hpFoe =- 10; //attaque critique
                     Log.i("DEBUG", "2");
                     break;
-                case 3:
+                case 3://eau
                     Log.i("DEBUG", "3");
-                    hpFoe =- 10; //attaque critique
+                    //echec
                     break;
                 case 5:
                     Log.i("DEBUG", "5");

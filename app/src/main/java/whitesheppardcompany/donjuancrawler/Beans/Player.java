@@ -19,6 +19,7 @@ public class Player extends Entity implements Serializable {
     private List <Weapon> weapons = new Vector<Weapon>();
     private int wallet ; //représente la somme en Or que le joueur possède
     private boolean alive;
+    private int level;
 
 
 
@@ -69,7 +70,13 @@ public class Player extends Entity implements Serializable {
         this.wallet = wallet;
     }
 
+    public int getLevel() {
+        return level;
+    }
 
+    public void setLevel(int level) {
+        this.level = level;
+    }
     //override méthode depuis la classe mère;
     @Override
     public String getName() {

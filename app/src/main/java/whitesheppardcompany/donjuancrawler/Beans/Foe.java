@@ -20,7 +20,7 @@ public class Foe extends Entity implements Serializable {
     private static long serialVersionUID = 5524L;
 
     boolean alive;
-
+    int idFoe;
     int element;
 
     public boolean isAlive() {
@@ -42,6 +42,22 @@ public class Foe extends Entity implements Serializable {
     */
 
     public Foe() {
+    }
+
+    public Foe(boolean alive, int idFoe, int element) {
+        super();
+        this.alive = alive;
+        this.idFoe = idFoe;
+        this.element = element;
+
+    }
+
+    public int getIdFoe() {
+        return idFoe;
+    }
+
+    public void setIdFoe(int idFoe) {
+        this.idFoe = idFoe;
     }
 
     public int getElement() {

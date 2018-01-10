@@ -124,6 +124,25 @@ public class GameplayMethod {
         return hpFoe;
     }
 
+    //méthode de random pour les event
+
+    public  static int randomize(){
+        /*
+        *
+        * le but ci est de retourner une nombre compris entre 1 et 100
+        * 0-70 mob pop
+        * 71-91 npc pop
+        * 91-96 nothing
+        * 96-100 treasure
+        */
+
+        int rand;
+          rand = ( int )( Math.random() * (100 - 1));
+          Log.e("DEBUG", "réandom <<<<<<<" +rand);
+        return rand;
+
+    }
+
     //méthode du cast de l'eau
     public static int initWater(Foe foe, Player player) {
         Log.i("DEBUG", "Alors, tu mouilles?");

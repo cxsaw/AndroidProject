@@ -18,11 +18,11 @@ import whitesheppardcompany.donjuancrawler.Beans.Player;
 public class ChoosePlayerActivity extends AppCompatActivity implements Serializable {
 
 
-    Context context = ChoosePlayerActivity.this;
+    Context context   = ChoosePlayerActivity.this;
     String name;
-    Player player = new Player();
+    Player player     = new Player();
     Player playerToto = new Player();
-    Player playerCam = new Player();
+    Player playerCam  = new Player();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
 
         //on reçoit l'intent
         Bundle bundle = getIntent().getExtras();
-        name= bundle.getString("avatarName");
+        name = bundle.getString("avatarName");
 
         Log.i("DEBUG","gggg "+name);
 
@@ -64,7 +64,7 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
                 Intent intentCoco = new Intent(ChoosePlayerActivity.this , StartGameActivity.class);
                 intentCoco.putExtra("player", (Serializable) player);
                 context.startActivity(intentCoco);
-                //finish();
+                finish();
             }
         });
 
@@ -88,7 +88,7 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
                 Intent intentCam = new Intent(ChoosePlayerActivity.this , StartGameActivity.class);
                 intentCam.putExtra("player", (Serializable) player);
                 context.startActivity(intentCam);
-                //finish();
+                finish();
             }
         });
 
@@ -112,7 +112,7 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
                 Intent intentToto = new Intent(getApplicationContext(),StartGameActivity.class);
                 intentToto.putExtra("player",(Serializable) player);
                 context.startActivity(intentToto);
-                //finish();
+                finish();
             }
         });
     }

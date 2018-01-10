@@ -31,7 +31,12 @@
         <activity
             android:name=".ChoosePlayerActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".StartGameActivity"></activity>
+        <activity
+            android:name=".StartGameActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Room2Activity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

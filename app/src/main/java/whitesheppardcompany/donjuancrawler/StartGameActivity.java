@@ -41,6 +41,7 @@ public class StartGameActivity extends AppCompatActivity {
     // je mets 9999 pour ne pas que le jeu declare le mob mort des le debut de la phase
     private int hpFoe = 9999;
     private boolean canPressBackButton = false;
+    MediaPlayer mp;
 
 
     @Override
@@ -89,6 +90,7 @@ public class StartGameActivity extends AppCompatActivity {
         firstFoe.setSagesse(10);
         firstFoe.setIntell(10);
         firstFoe.setElement(3);//élément eau
+        firstFoe.setIdFoe(1);
 
 
         Log.i("DEBUG","wwwww "+firstFoe.getName()); //vérif de dev
@@ -117,40 +119,42 @@ public class StartGameActivity extends AppCompatActivity {
 
 
         //on initialise les boutons de l'interfaces
-        final ImageButton attack         = (ImageButton) findViewById(R.id.swo);
-        final ImageButton fireSpell      = (ImageButton) findViewById(R.id.fireSpell);
-        final ImageButton waterSpell     = (ImageButton) findViewById(R.id.waterSpell);
-        final ImageButton lightningSpell = (ImageButton) findViewById(R.id.lightningSpell);
-        final ImageButton shortcutQuest  = (ImageButton) findViewById(R.id.questShortcut);
-        final ImageButton avatarInfo     = (ImageButton) findViewById(R.id.avatarInfo);
-        final ImageView perso            = (ImageView)   findViewById(R.id.infoPerso);
+        final ImageButton attackBtn         = (ImageButton) findViewById(R.id.swo);
+        final ImageButton fireSpellBtn      = (ImageButton) findViewById(R.id.fireSpell);
+        final ImageButton waterSpellBtn     = (ImageButton) findViewById(R.id.waterSpell);
+        final ImageButton lightningSpellBtn = (ImageButton) findViewById(R.id.lightningSpell);
+        final ImageButton shortcutQuestBtn  = (ImageButton) findViewById(R.id.questShortcut);
+        final ImageButton avatarInfoBtn     = (ImageButton) findViewById(R.id.avatarInfo);
+        final ImageView   avatarImg         = (ImageView)   findViewById(R.id.infoPerso);
 
-        final MediaPlayer mp = MediaPlayer.create(context,R.raw.main);
+
+
+        mp = MediaPlayer.create(context,R.raw.main);
         mp.start();
         mp.setLooping(true);
 
         //je mets les cliquers en route!
-        shortcutQuest.setClickable(true);
-        fireSpell.setClickable(true);
-        waterSpell.setClickable(true);
-        lightningSpell.setClickable(true);
-        attack.setClickable(true);
-        avatarInfo.setClickable(true);
+        shortcutQuestBtn.setClickable(true);
+        fireSpellBtn.setClickable(true);
+        waterSpellBtn.setClickable(true);
+        lightningSpellBtn.setClickable(true);
+        attackBtn.setClickable(true);
+        avatarInfoBtn.setClickable(true);
 
         //je set l'avatar correspondant au joueur en faisant correspondre l'id à l'image
         switch(player.getId()){
 
             case 2:
-                avatarInfo.setImageResource(R.drawable.ava3);
-                perso.setImageResource(R.drawable.bgcam);
+                avatarInfoBtn.setImageResource(R.drawable.ava3);
+                avatarImg.setImageResource(R.drawable.bgcam);
                 break;
             case 3:
-                avatarInfo.setImageResource(R.drawable.ava2);
-                perso.setImageResource(R.drawable.bgtoto);
+                avatarInfoBtn.setImageResource(R.drawable.ava2);
+                avatarImg.setImageResource(R.drawable.bgtoto);
                 break;
             default:
-                avatarInfo.setImageResource(R.drawable.ava);
-                perso.setImageResource(R.drawable.bgcoco);
+                avatarInfoBtn.setImageResource(R.drawable.ava);
+                avatarImg.setImageResource(R.drawable.bgcoco);
         }
         /***************************************************************
         *
@@ -161,15 +165,14 @@ public class StartGameActivity extends AppCompatActivity {
         *
         *****************************************************************/
 
-        avatarInfo.setOnClickListener(new View.OnClickListener() {
+        avatarInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (perso.getVisibility() == View.GONE){
-                    perso.setVisibility( View.VISIBLE );
+                if (avatarImg.getVisibility() == View.GONE){
+                    avatarImg.setVisibility( View.VISIBLE );
                 } else {
-                    perso.setVisibility(View.GONE);
+                    avatarImg.setVisibility(View.GONE);
                 }
-
 
             }
         });
@@ -178,6 +181,7 @@ public class StartGameActivity extends AppCompatActivity {
         Log.i("DEBUG"," kiké plus fort?");
         ImageView bim =(ImageView)findViewById(R.id.bim);
         bim.setVisibility(View.INVISIBLE);
+
         /*******************************************************************
         *
         *
@@ -186,10 +190,13 @@ public class StartGameActivity extends AppCompatActivity {
         *
         *
         ********************************************************************/
-        shortcutQuest.setOnClickListener(new View.OnClickListener() {
+
+        shortcutQuestBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
+
+
                 final ImageButton log   = (ImageButton)findViewById(R.id.questDisplay);
                 final TextView txtQuest = (TextView) findViewById(R.id.questText);
                 Log.i("DEBUG","dans le listener quete");
@@ -211,7 +218,7 @@ public class StartGameActivity extends AppCompatActivity {
         /**********************************************************************
          *
          *
-         *                              attack listener
+         *                              attackBtn listener
          *
          *
          *      [O\\\\\[========================-
@@ -219,14 +226,16 @@ public class StartGameActivity extends AppCompatActivity {
          * ************************************************************************/
 
         // tout le listener gère la phase d'attaque aux armes lors du clique sur le bouton épée
-        attack.setOnClickListener(new View.OnClickListener() {
+        attackBtn.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View view) {
-                    TextView hpPlayerText = (TextView) findViewById(R.id.playerLife);
-                    TextView hpFoeText    = (TextView) findViewById(R.id.foeLife);
-                    ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
-                    ImageView bim         = (ImageView) findViewById(R.id.bim);
+
+                    ImageButton goUpBtn = (ImageButton) findViewById(R.id.goUp);
+                    TextView hpPlayerText     = (TextView) findViewById(R.id.playerLife);
+                    TextView hpFoeText        = (TextView) findViewById(R.id.foeLife);
+                    ImageView imgFoe          = (ImageView) findViewById(R.id.foe);
+                    ImageView bim             = (ImageView) findViewById(R.id.bim);
 
 
                     hpFoe    = firstFoe.getHp();
@@ -269,10 +278,10 @@ public class StartGameActivity extends AppCompatActivity {
                                 Log.e("DEBUG","room1 over");
                             }
                         });
-                        attack.setClickable(false);
-                        fireSpell.setClickable(false);
-                        waterSpell.setClickable(false);
-                        lightningSpell.setClickable(false);
+                        attackBtn.setClickable(false);
+                        fireSpellBtn.setClickable(false);
+                        waterSpellBtn.setClickable(false);
+                        lightningSpellBtn.setClickable(false);
                         //et il disparait
 
                         fadeOutImg(imgFoe);
@@ -286,16 +295,17 @@ public class StartGameActivity extends AppCompatActivity {
                         MediaPlayer mpGameover = MediaPlayer.create(context, R.raw.gameover);
                         mpGameover.start();
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(2000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                         player.setAlive(false);
                         //forcément si on meurt on ne peut attaquer
-                        attack.setClickable(false);
-                        fireSpell.setClickable(false);
-                        waterSpell.setClickable(false);
-                        lightningSpell.setClickable(false);
+                        attackBtn.setClickable(false);
+                        fireSpellBtn.setClickable(false);
+                        waterSpellBtn.setClickable(false);
+                        lightningSpellBtn.setClickable(false);
+
                         //on lance le GameOver
                         ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
                         gameOver.setVisibility(View.VISIBLE);
@@ -304,6 +314,22 @@ public class StartGameActivity extends AppCompatActivity {
 
                     if (firstFoe.getHp() <= 0){
                         loot();
+                        //je permets l'accés à la salle suivante
+                        goUpBtn.setVisibility(View.VISIBLE);
+                        goUpBtn.setClickable(true);
+                        player.setLevel(2);
+
+                        goUpBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(context,Room2Activity.class);
+                                intent.putExtra("player",(Serializable) player);
+                                context.startActivity(intent);
+                                finish();
+                            }
+                        });
+
+
                     }
                 }
             });
@@ -313,27 +339,27 @@ public class StartGameActivity extends AppCompatActivity {
         *       Bouton de spell FEU
         *
         *
-        *                           (  .      )
-        *                        )           (              )
-        *                            .  '   .   '  .  '  .
-        *                    (    , )       (.   )  (   ',    )
-        *                  .' ) ( . )    ,  ( ,     )   ( .
-        *                 ). , ( .   (  ) ( , ')  .' (  ,    )
-        *                (_,) . ), ) _) _,')  (, ) '. )  ,. (' )
+        *                            (  .      )
+        *                         )           (              )
+        *                             .  '   .   '  .  '  .
+        *                     (    , )       (.   )  (   ',    )
+        *                   .' ) ( . )    ,  ( ,     )   ( .
+        *                  ). , ( .   (  ) ( , ')  .' (  ,    )
+        *                 (_,) . ), ) _) _,')  (, ) '. )  ,. (' )
         *     FUER FREII^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^BANG BANG!
         *
         *
         ********************************************************************************************/
 
 
-        fireSpell.setOnClickListener(new View.OnClickListener() {
+        fireSpellBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
                 ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
                 ImageView bim         = (ImageView) findViewById(R.id.bim);
-
+                ImageButton goUpBtn = (ImageButton) findViewById(R.id.goUp);
 
                 hpFoe    = firstFoe.getHp();
 
@@ -372,10 +398,10 @@ public class StartGameActivity extends AppCompatActivity {
                             Log.e("DEBUG","room1 over");
                         }
                     });
-                    attack.setClickable(false);
-                    fireSpell.setClickable(false);
-                    waterSpell.setClickable(false);
-                    lightningSpell.setClickable(false);
+                    attackBtn.setClickable(false);
+                    fireSpellBtn.setClickable(false);
+                    waterSpellBtn.setClickable(false);
+                    lightningSpellBtn.setClickable(false);
                     //et il disparait
 
                     fadeOutImg(imgFoe);
@@ -391,10 +417,10 @@ public class StartGameActivity extends AppCompatActivity {
                     mpGameover.start();
                     player.setAlive(false);
                     //forcément si on meurt on ne peut attaquer
-                    attack.setClickable(false);
-                    fireSpell.setClickable(false);
-                    waterSpell.setClickable(false);
-                    lightningSpell.setClickable(false);
+                    attackBtn.setClickable(false);
+                    fireSpellBtn.setClickable(false);
+                    waterSpellBtn.setClickable(false);
+                    lightningSpellBtn.setClickable(false);
                     //on lance le GameOver
                     ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
                     gameOver.setVisibility(View.VISIBLE);
@@ -403,6 +429,26 @@ public class StartGameActivity extends AppCompatActivity {
 
                 if (firstFoe.getHp() <= 0){
                     loot();
+                    goUpBtn.setVisibility(View.VISIBLE);
+                    goUpBtn.setClickable(true);
+                    //allez go pex!
+                    player.setLevel(2);
+
+                    goUpBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getApplicationContext(),Room2Activity.class);
+                            intent.putExtra("player",(Serializable) player);
+                            if (mp.isPlaying()){
+                                mp.stop();
+                                mp.release();
+                            }
+
+                            context.startActivity(intent);
+
+                            finish();
+                        }
+                    });
                 }
             }
         });
@@ -450,14 +496,14 @@ public class StartGameActivity extends AppCompatActivity {
          *                           _______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
          *                           ____________¶¶¶¶¶¶¶¶¶¶¶¶¶¶
          *************************************************************************************/
-        waterSpell.setOnClickListener(new View.OnClickListener() {
+        waterSpellBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
                 ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
                 ImageView bim         = (ImageView) findViewById(R.id.bim);
-
+                ImageButton goUpBtn = (ImageButton) findViewById(R.id.goUp);
 
                 hpFoe    = firstFoe.getHp();
 
@@ -494,11 +540,11 @@ public class StartGameActivity extends AppCompatActivity {
                             Log.e("DEBUG","room1 over");
                         }
                     });
-                    attack.setClickable(false);
-                    attack.setClickable(false);
-                    fireSpell.setClickable(false);
-                    waterSpell.setClickable(false);
-                    lightningSpell.setClickable(false);
+                    attackBtn.setClickable(false);
+                    attackBtn.setClickable(false);
+                    fireSpellBtn.setClickable(false);
+                    waterSpellBtn.setClickable(false);
+                    lightningSpellBtn.setClickable(false);
                     //et il disparait
 
                     fadeOutImg(imgFoe);
@@ -514,10 +560,10 @@ public class StartGameActivity extends AppCompatActivity {
                     mpGameover.start();
                     player.setAlive(false);
                     //forcément si on meurt on ne peut attaquer
-                    attack.setClickable(false);
-                    fireSpell.setClickable(false);
-                    waterSpell.setClickable(false);
-                    lightningSpell.setClickable(false);
+                    attackBtn.setClickable(false);
+                    fireSpellBtn.setClickable(false);
+                    waterSpellBtn.setClickable(false);
+                    lightningSpellBtn.setClickable(false);
 
                     //on lance le GameOver
                     ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
@@ -527,6 +573,19 @@ public class StartGameActivity extends AppCompatActivity {
 
                 if (firstFoe.getHp() <= 0){
                     loot();
+                    goUpBtn.setVisibility(View.VISIBLE);
+                    goUpBtn.setClickable(true);
+                    player.setLevel(2);
+
+                    goUpBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getApplicationContext(),Room2Activity.class);
+                            intent.putExtra("player",(Serializable) player);
+                            context.startActivity(intent);
+                            finish();
+                        }
+                    });
                 }
             }
         });
@@ -547,14 +606,14 @@ public class StartGameActivity extends AppCompatActivity {
      *                                                                                *
      *                                                                                *
      **********************************************************************************/
-        lightningSpell.setOnClickListener(new View.OnClickListener() {
+        lightningSpellBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
                 ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
                 ImageView bim         = (ImageView) findViewById(R.id.bim);
-
+                ImageButton goUpBtn = (ImageButton) findViewById(R.id.goUp);
 
                 hpFoe    = firstFoe.getHp();
 
@@ -591,11 +650,11 @@ public class StartGameActivity extends AppCompatActivity {
                             Log.e("DEBUG","room1 over");
                         }
                     });
-                    attack.setClickable(false);
-                    attack.setClickable(false);
-                    fireSpell.setClickable(false);
-                    waterSpell.setClickable(false);
-                    lightningSpell.setClickable(false);
+                    attackBtn.setClickable(false);
+                    attackBtn.setClickable(false);
+                    fireSpellBtn.setClickable(false);
+                    waterSpellBtn.setClickable(false);
+                    lightningSpellBtn.setClickable(false);
                     //et il disparait
 
                     fadeOutImg(imgFoe);
@@ -611,10 +670,10 @@ public class StartGameActivity extends AppCompatActivity {
                     mpGameover.start();
                     player.setAlive(false);
                     //forcément si on meurt on ne peut attaquer
-                    attack.setClickable(false);
-                    fireSpell.setClickable(false);
-                    waterSpell.setClickable(false);
-                    lightningSpell.setClickable(false);
+                    attackBtn.setClickable(false);
+                    fireSpellBtn.setClickable(false);
+                    waterSpellBtn.setClickable(false);
+                    lightningSpellBtn.setClickable(false);
                     //on lance le GameOver
                     ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
                     gameOver.setVisibility(View.VISIBLE);
@@ -623,9 +682,23 @@ public class StartGameActivity extends AppCompatActivity {
 
                 if (firstFoe.getHp() <= 0){
                     loot();
+                    goUpBtn.setVisibility(View.VISIBLE);
+                    goUpBtn.setClickable(true);
+                    player.setLevel(2);
+
+                    goUpBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getApplicationContext(),Room2Activity.class);
+                            intent.putExtra("player",(Serializable) player);
+                            context.startActivity(intent);
+                            finish();
+                        }
+                    });
                 }
             }
         });
+
 
     }
 
@@ -648,7 +721,12 @@ public class StartGameActivity extends AppCompatActivity {
         Log.i("DEBUG","on loot");
     }
 
-
+    @Override
+    public  void onDestroy(){
+        mp.stop();
+        mp.release();
+        super.onDestroy();
+    }
 
 
 

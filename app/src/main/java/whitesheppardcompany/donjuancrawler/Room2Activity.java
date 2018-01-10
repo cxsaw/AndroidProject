@@ -280,9 +280,7 @@ public class Room2Activity extends AppCompatActivity {
         */
 
         if ( dice <= 91 && dice >= 71) {
-            upBtn.setClickable(true);
-            leftBtn.setClickable(true);
-            rightBtn.setClickable(true);
+            wayResolver();
         }
 
         //dans ces cas on pop RIEN
@@ -312,13 +310,17 @@ public class Room2Activity extends AppCompatActivity {
     *
     */
     private void  wayResolver(){
-        if (resolved == true){
+
             int rand = ( int )( Math.random() * (3 - 1));
+
             switch (rand){
                 case 1:
                     upBtn.setClickable(true);
+                    upBtn.setVisibility(View.VISIBLE);
                     leftBtn.setClickable(true);
+                    leftBtn.setVisibility(View.VISIBLE);
                     rightBtn.setClickable(true);
+                    rightBtn.setVisibility(View.VISIBLE);
                     break;
 
                 case 2:
@@ -340,7 +342,7 @@ public class Room2Activity extends AppCompatActivity {
                     rightBtn.setClickable(true);
                     break;
             }
-        }
+
 
     }
 
@@ -439,7 +441,7 @@ public class Room2Activity extends AppCompatActivity {
                     //le handler sert à timer le coup pour qu'il s'affiche ponctuellement
 
                 }else {
-
+                    loot();
                     wayResolver();
                     attackBtn.setClickable(false);
                     fireSpellBtn.setClickable(false);
@@ -451,7 +453,7 @@ public class Room2Activity extends AppCompatActivity {
                     bim.setVisibility(GONE);
                 }
                 //si le joueur est mort on affiche un game over
-                if(player.getHp() <= 0){
+                if(player.getHp() <= 0) {
 
                     mp.stop();
                     mp.release();
@@ -470,21 +472,10 @@ public class Room2Activity extends AppCompatActivity {
                     lightningSpellBtn.setClickable(false);
 
                     //on lance le GameOver
-                    ImageView gameOver =(ImageView)findViewById(R.id.gameOver);
+                    ImageView gameOver = (ImageView) findViewById(R.id.gameOver);
                     gameOver.setVisibility(View.VISIBLE);
-
                 }
 
-                if (firstFoe.getHp() <= 0){
-                    loot();
-                    //je permets l'accés à la salle suivante
-
-                    wayResolver();
-
-
-
-
-                }
             }
         });
 
@@ -541,6 +532,7 @@ public class Room2Activity extends AppCompatActivity {
                     //le handler sert à timer le coup pour qu'il s'affiche ponctuellement
 
                 }else {
+                    loot();
                     wayResolver();
                     attackBtn.setClickable(false);
                     fireSpellBtn.setClickable(false);
@@ -571,10 +563,6 @@ public class Room2Activity extends AppCompatActivity {
 
                 }
 
-                if (firstFoe.getHp() <= 0){
-                    loot();
-                    wayResolver();
-                }
             }
         });
 
@@ -654,6 +642,7 @@ public class Room2Activity extends AppCompatActivity {
 
                 }else {
                     wayResolver();
+                    loot();
                     attackBtn.setClickable(false);
                     attackBtn.setClickable(false);
                     fireSpellBtn.setClickable(false);
@@ -685,10 +674,6 @@ public class Room2Activity extends AppCompatActivity {
 
                 }
 
-                if (firstFoe.getHp() <= 0){
-                    loot();
-                    wayResolver();
-                }
             }
         });
         /**********************************************************************************
@@ -741,7 +726,7 @@ public class Room2Activity extends AppCompatActivity {
 
                 }else {
                     wayResolver();
-
+                    loot();
                     attackBtn.setClickable(false);
                     attackBtn.setClickable(false);
                     fireSpellBtn.setClickable(false);
@@ -772,10 +757,6 @@ public class Room2Activity extends AppCompatActivity {
 
                 }
 
-                if (firstFoe.getHp() <= 0){
-                    loot();
-                    wayResolver();
-                }
             }
         });
 

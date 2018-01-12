@@ -14,7 +14,7 @@ import android.view.WindowManager;
 public class Splash extends AppCompatActivity {
 
     private Context context = Splash.this;
-
+    private MediaPlayer mMediaPlayer;
 
 
     private int SLEEP_TIMER = 3;
@@ -36,7 +36,7 @@ public class Splash extends AppCompatActivity {
         Log.i("DEBUG","On débute");
         try {
             sleep(550 * SLEEP_TIMER);
-            MediaPlayer mMediaPlayer = MediaPlayer.create(context, R.raw.sf_chien);
+            mMediaPlayer = MediaPlayer.create(context, R.raw.sf_chien);
             mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mMediaPlayer.setLooping(false);
             mMediaPlayer.start();
@@ -50,5 +50,13 @@ public class Splash extends AppCompatActivity {
             Log.i("DEBUG","On est passé par là");
         }
 
+    }
+    @Override
+    public void onDestroy() {
+
+        super.onDestroy();
+        mMediaPlayer.stop();
+        mMediaPlayer.release();
+        System.gc();
     }
 }

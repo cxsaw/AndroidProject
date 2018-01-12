@@ -2,9 +2,11 @@ package whitesheppardcompany.donjuancrawler;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +39,7 @@ public class Room2Activity extends AppCompatActivity {
     Player player;
     int dice;
     Foe foe;
+    MediaPlayer mp;
     boolean resolved; // me sert à verifier si l'event en cours est terminé!
     private int hpFoe = 9999;
     private boolean canPressBackButton = false;
@@ -45,7 +48,6 @@ public class Room2Activity extends AppCompatActivity {
     ImageButton leftBtn;
     ImageButton rightBtn;
 
-    MediaPlayer mp;
     ImageButton shortcutQuestBtn;
     ImageButton avatarInfoBtn;
     ImageView   avatarImg;
@@ -78,9 +80,9 @@ public class Room2Activity extends AppCompatActivity {
         foeImg.setVisibility(View.INVISIBLE);
         player = (Player)getIntent().getSerializableExtra("player");
 
-        upBtn.setVisibility(GONE);
-        leftBtn.setVisibility(GONE);
-        rightBtn.setVisibility(GONE);
+        upBtn.setVisibility(View.INVISIBLE);
+        leftBtn.setVisibility(View.INVISIBLE);
+        rightBtn.setVisibility(View.INVISIBLE);
 
         upBtn.setClickable(false);
         leftBtn.setClickable(false);
@@ -91,9 +93,6 @@ public class Room2Activity extends AppCompatActivity {
 
         dice = randomize();
 
-        mp = MediaPlayer.create(context,R.raw.main);
-        mp.start();
-        mp.setLooping(true);
 
 
         //je set l'avatar correspondant au joueur en faisant correspondre l'id à l'image
@@ -292,7 +291,23 @@ public class Room2Activity extends AppCompatActivity {
         //dans ces cas on pop un trésor!
         if (dice >= 97 && dice <= 100){
             resolved = loot();
-            wayResolver();
+                ImageView ggImg = (ImageView) findViewById(R.id.gg);
+                stopMP();
+                ggImg.setVisibility(View.VISIBLE);
+
+                try {
+                    Thread.sleep(1000);
+                    ggImg.setVisibility(View.VISIBLE);
+                    MediaPlayer mMediaPlayer = MediaPlayer.create(context, R.raw.ff);
+                    mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                    mMediaPlayer.setLooping(false);
+                    mMediaPlayer.start();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
 
         }
 
@@ -455,8 +470,8 @@ public class Room2Activity extends AppCompatActivity {
                 //si le joueur est mort on affiche un game over
                 if(player.getHp() <= 0) {
 
-                    mp.stop();
-                    mp.release();
+                    stopMP();
+
                     MediaPlayer mpGameover = MediaPlayer.create(context, R.raw.gameover);
                     mpGameover.start();
                     try {
@@ -546,8 +561,7 @@ public class Room2Activity extends AppCompatActivity {
                 //si le joueur est mort on affiche un game over
                 if(player.getHp() <= 0){
 
-                    mp.stop();
-                    mp.release();
+                    stopMP();
 
                     MediaPlayer mpGameover = MediaPlayer.create(context, R.raw.gameover);
                     mpGameover.start();
@@ -655,9 +669,8 @@ public class Room2Activity extends AppCompatActivity {
                 }
                 //si le joueur est mort on affiche un game over
                 if(player.getHp() <= 0){
+                    stopMP();
 
-                    mp.stop();
-                    mp.release();
 
                     MediaPlayer mpGameover = MediaPlayer.create(context, R.raw.gameover);
                     mpGameover.start();
@@ -740,8 +753,7 @@ public class Room2Activity extends AppCompatActivity {
                 //si le joueur est mort on affiche un game over
                 if(player.getHp() <= 0){
 
-                    mp.stop();
-                    mp.release();
+                    stopMP();
 
                     MediaPlayer mpGameover = MediaPlayer.create(context, R.raw.gameover);
                     mpGameover.start();
@@ -763,6 +775,11 @@ public class Room2Activity extends AppCompatActivity {
 
     }
 
+    private void stopMP() {
+        mp.stop();
+        mp.release();
+    }
+
 
     //représaille de l'ennemi
     private int retribution(Foe foe, Player player) {
@@ -775,17 +792,20 @@ public class Room2Activity extends AppCompatActivity {
         Handler clawHandler = new Handler();
         clawHandler.postDelayed(new Runnable() {
             ImageView bim = (ImageView) findViewById(R.id.bim);
+            MediaPlayer mpSound;
+
 
             @Override
             public void run() {
 
                 bim.setVisibility(GONE);
-                MediaPlayer mpSound = MediaPlayer.create(context, R.raw.fight1);
+                mpSound = MediaPlayer.create(context, R.raw.fight1);
                 mpSound.start();
             }
         }, 200);
 
         bim.setVisibility(View.VISIBLE);
+
 
         if(defPlayer < attckFoe ) {
             Log.e("DEBUG", "EZ2");
@@ -800,8 +820,8 @@ public class Room2Activity extends AppCompatActivity {
 
     @Override
     public  void onDestroy(){
-        mp.stop();
-        mp.release();
+        System.gc();
+        finish();
         super.onDestroy();
     }
 

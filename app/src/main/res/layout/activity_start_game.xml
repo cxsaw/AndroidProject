@@ -1,324 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/rocky"
-    tools:context="whitesheppardcompany.donjuancrawler.StartGameActivity">
+    android:background="@drawable/bgpixel"
+    tools:context="whitesheppardcompany.donjuancrawler.Room2Activity">
 
-    <ImageView
-        android:id="@+id/locateView"
-        android:layout_width="0dp"
-        android:layout_height="209dp"
-        android:background="@color/colorAccent"
-        android:cropToPadding="true"
-        android:scaleType="center"
-        app:layout_constraintBottom_toTopOf="@+id/backHud"
-        app:layout_constraintStart_toStartOf="@+id/gameOver"
-        app:layout_constraintTop_toTopOf="@+id/gameOver"
-        app:srcCompat="@drawable/bg" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/locateView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:background="@color/colorAccent"
+            android:cropToPadding="true"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/backHud"
 
-    <ImageView
-        android:id="@+id/backHud"
-        android:layout_width="wrap_content"
-        android:layout_height="136dp"
-        android:layout_marginEnd="8dp"
-        android:scaleType="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/rocky" />
+            app:srcCompat="@drawable/bg" />
 
-    <ImageButton
-        android:id="@+id/goUp"
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="@+id/locateView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/locateView"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/up_arrow" />
+        <ImageView
+            android:id="@+id/backHud"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/locateView"
+            android:scaleType="center"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/rocky" />
 
-    <ImageView
-        android:id="@+id/foe"
-        android:layout_width="wrap_content"
-        android:layout_height="162dp"
-        android:layout_marginEnd="20dp"
-        android:adjustViewBounds="true"
-        android:background="@color/colorAccent"
-        android:scaleType="fitCenter"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/hudBar"
-        app:layout_constraintEnd_toStartOf="@+id/goRight"
-        app:layout_constraintTop_toTopOf="@+id/gameOver"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/foe" />
+        <ImageView
+            android:id="@+id/hudBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginVertical="110dp"
+            android:scaleType="center"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
 
-    <ProgressBar
-        android:id="@+id/foeHp"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="69dp"
-        android:layout_height="15dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/holo_red_light"
-        app:layout_constraintBottom_toTopOf="@+id/hudBar"
-        app:layout_constraintEnd_toStartOf="@+id/foe"
-        app:layout_constraintTop_toBottomOf="@+id/goUp" />
+            app:layout_constraintVertical_bias="0.593"
+            app:srcCompat="@drawable/expbar" />
 
-    <ImageButton
-        android:id="@+id/swo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="75dp"
-        android:layout_marginStart="208dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/gameOver"
-        app:layout_constraintTop_toTopOf="@+id/backHud"
-        app:layout_constraintVertical_bias="0.444"
-        app:srcCompat="@drawable/fight"
-        tools:clickable="false" />
+        <ImageButton
+            android:id="@+id/goUp"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
 
-    <ImageButton
-        android:id="@+id/waterSpell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="75dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.118"
-        app:layout_constraintStart_toEndOf="@+id/lightningSpell"
-        app:layout_constraintTop_toTopOf="@+id/backHud"
-        app:layout_constraintVertical_bias="0.444"
-        app:srcCompat="@drawable/water"
-        tools:clickable="false" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="8dp"
+            android:background="@color/colorAccent"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/locateView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/locateView"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/up_arrow" />
 
-    <ImageButton
-        android:id="@+id/fireSpell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="75dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/swo"
-        app:layout_constraintTop_toTopOf="@+id/backHud"
-        app:srcCompat="@drawable/fire"
-        tools:clickable="false" />
+        <ImageButton
+            android:id="@+id/goLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/goUp"
+            android:layout_marginHorizontal="8dp"
 
-    <ImageButton
-        android:id="@+id/goRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="@+id/gameOver"
-        app:layout_constraintHorizontal_bias="0.93"
-        app:layout_constraintStart_toEndOf="@+id/goUp"
-        app:layout_constraintTop_toBottomOf="@+id/goUp"
-        app:srcCompat="@drawable/right_arrow" />
+            android:background="@color/colorAccent"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/goUp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/locateView"
+            app:layout_constraintTop_toBottomOf="@+id/goUp"
+            app:srcCompat="@drawable/left_arrow" />
 
-    <ImageButton
-        android:id="@+id/goLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintEnd_toStartOf="@+id/goUp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/locateView"
-        app:layout_constraintTop_toBottomOf="@+id/goUp"
-        app:srcCompat="@drawable/left_arrow" />
+        <ImageButton
+            android:id="@+id/goRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/hudBar"
+            android:layout_alignTop="@+id/goLeft"
+            android:layout_marginEnd="13dp"
+            android:background="@color/colorAccent"
+            android:visibility="visible"
 
-    <ImageButton
-        android:id="@+id/lightningSpell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="75dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/lightning"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fireSpell"
-        app:layout_constraintTop_toTopOf="@+id/backHud"
-        app:srcCompat="@drawable/lightning"
-        tools:clickable="false" />
+            app:layout_constraintHorizontal_bias="0.93"
+            app:layout_constraintStart_toEndOf="@+id/goUp"
+            app:layout_constraintTop_toBottomOf="@+id/goUp"
+            app:srcCompat="@drawable/right_arrow" />
 
-    <TextView
-        android:id="@+id/playerLife"
-        android:layout_width="wrap_content"
-        android:layout_height="39dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="28dp"
-        android:textColor="@android:color/black"
-        android:textColorHighlight="@android:color/background_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/backHud"
-        app:layout_constraintTop_toTopOf="@+id/backHud"
-        app:layout_constraintVertical_bias="0.0" />
+        <ImageView
+            android:id="@+id/foe"
+            android:layout_width="wrap_content"
+            android:layout_height="162dp"
+            android:layout_below="@+id/goUp"
+            android:layout_marginLeft="250dp"
+            android:adjustViewBounds="true"
+            android:background="@color/colorAccent"
+            android:scaleType="centerInside"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/hudBar"
 
-    <TextView
-        android:id="@+id/foeLife"
-        android:layout_width="wrap_content"
-        android:layout_height="17dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/backHud"
-        app:layout_constraintEnd_toEndOf="@+id/locateView"
-        app:layout_constraintHorizontal_bias="0.997"
-        app:layout_constraintStart_toStartOf="@+id/locateView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.913" />
+            app:layout_constraintEnd_toStartOf="@+id/goRight"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/foe" />
 
-    <ImageView
-        android:id="@+id/bim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="212dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="fitCenter"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/hudBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bim" />
+        <TextView
+            android:id="@+id/playerLife"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="28dp"
+            android:textColor="@android:color/black"
+            android:textColorHighlight="@android:color/background_light"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/backHud"
+            app:layout_constraintTop_toTopOf="@+id/backHud"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <ImageButton
-        android:id="@+id/questShortcut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="@+id/gameOver"
-        app:layout_constraintEnd_toEndOf="@+id/backHud"
-        app:layout_constraintHorizontal_bias="0.966"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/backHud"
-        app:layout_constraintTop_toTopOf="@+id/backHud"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/quest_min" />
+        <TextView
+            android:id="@+id/foeLife"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="44dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/black"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/backHud"
+            app:layout_constraintEnd_toEndOf="@+id/locateView"
+            app:layout_constraintHorizontal_bias="0.997"
+            app:layout_constraintStart_toStartOf="@+id/locateView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.913" />
 
-    <ImageView
-        android:id="@+id/hudBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/gameOver"
-        app:layout_constraintTop_toTopOf="@+id/gameOver"
-        app:layout_constraintVertical_bias="0.593"
-        app:srcCompat="@drawable/expbar" />
+        <ImageView
+            android:id="@+id/bim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/goUp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitCenter"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/hudBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bim" />
 
-    <ImageButton
-        android:id="@+id/questDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.563"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.691"
-        app:srcCompat="@drawable/quest_log" />
+        <ImageButton
+            android:id="@+id/questShortcut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/goRight"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/backHud"
+            android:layout_alignTop="@+id/backHud"
+            android:background="@color/colorAccent"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/backHud"
+            app:layout_constraintHorizontal_bias="0.966"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/backHud"
+            app:layout_constraintTop_toTopOf="@+id/backHud"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/quest_min" />
 
-    <TextView
-        android:id="@+id/questText"
-        android:layout_width="320dp"
-        android:layout_height="69dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="68dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/questDisplay"
-        app:layout_constraintEnd_toEndOf="@+id/questDisplay"
-        app:layout_constraintHorizontal_bias="0.459"
-        app:layout_constraintStart_toStartOf="@+id/questDisplay"
-        app:layout_constraintTop_toTopOf="@+id/questDisplay"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="     Lorem ispum et varris draconis" />
+        <ImageButton
+            android:id="@+id/questDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/backHud"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorAccent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.563"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.691"
+            app:srcCompat="@drawable/quest_log" />
 
-    <ImageView
-        android:id="@+id/infoPerso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:srcCompat="@drawable/bgcoco" />
+        <TextView
+            android:id="@+id/questText"
+            android:layout_width="320dp"
+            android:layout_height="69dp"
+            android:layout_below="@+id/goRight"
+            android:layout_centerHorizontal="true"
+            android:text="     Lorem ispum et varris draconis"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/questDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/questDisplay"
+            app:layout_constraintHorizontal_bias="0.459"
+            app:layout_constraintStart_toStartOf="@+id/questDisplay"
+            app:layout_constraintTop_toTopOf="@+id/questDisplay"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="     Lorem ispum et varris draconis" />
 
-    <ImageButton
-        android:id="@+id/avatarInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="440dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:background="@color/colorAccent"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.181"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/hudBar"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ava" />
+        <ImageButton
+            android:id="@+id/avatarInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/backHud"
+            android:layout_alignTop="@+id/backHud"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorAccent"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.181"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/hudBar"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/ava" />
 
-    <ImageView
-        android:id="@+id/gameOver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/background_dark"
-        android:clickable="false"
-        android:cropToPadding="false"
-        android:scaleType="fitXY"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gameover" />
 
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/waterSpell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fireSpell"
+            android:layout_marginStart="48dp"
+            android:layout_toEndOf="@+id/fireSpell"
+            android:background="@color/colorAccent"
+            android:visibility="visible"
+            app:srcCompat="@drawable/water"
+            tools:clickable="false"
+            tools:layout_editor_absoluteX="398dp"
+            tools:layout_editor_absoluteY="234dp" />
+
+        <ImageButton
+            android:id="@+id/fireSpell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/swo"
+            android:layout_marginStart="48dp"
+            android:layout_toEndOf="@+id/swo"
+            android:background="@color/colorAccent"
+            android:visibility="visible"
+            app:srcCompat="@drawable/fire"
+            tools:clickable="false"
+            tools:layout_editor_absoluteX="222dp"
+            tools:layout_editor_absoluteY="234dp" />
+
+        <ImageButton
+            android:id="@+id/swo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="60dp"
+            android:layout_marginStart="120dp"
+            android:background="@color/colorAccent"
+            android:visibility="visible"
+            app:srcCompat="@drawable/fight"
+            tools:clickable="false"
+            tools:layout_editor_absoluteX="140dp"
+            tools:layout_editor_absoluteY="234dp" />
+
+        <ImageButton
+            android:id="@+id/lightningSpell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/waterSpell"
+            android:layout_marginStart="48dp"
+            android:layout_toEndOf="@+id/waterSpell"
+            android:background="@drawable/lightning"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:srcCompat="@drawable/lightning"
+            tools:clickable="false"
+            tools:layout_editor_absoluteX="340dp" />
+
+        <ImageView
+            android:id="@+id/infoPerso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:srcCompat="@drawable/bgcoco" />
+
+        <ImageView
+            android:id="@+id/gameOver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/background_dark"
+            android:clickable="false"
+            android:cropToPadding="false"
+            android:scaleType="fitXY"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/gameover" />
+
+        <ImageView
+            android:id="@+id/gg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:srcCompat="@drawable/gg" />
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

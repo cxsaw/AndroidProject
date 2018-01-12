@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.media.MediaExtractor;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -61,7 +62,9 @@ public class StartGameActivity extends AppCompatActivity {
         ImageButton goRight   = (ImageButton) findViewById(R.id.goRight);
 
         //je désactive les boutons qui me fait changer d'intent et donc de salle InGame
-
+        goUp.setVisibility(View.INVISIBLE);
+        goRight.setVisibility(View.INVISIBLE);
+        goLeft.setVisibility(View.INVISIBLE);
         goUp.setClickable(false);
         goLeft.setClickable(false);
         goRight.setClickable(false);
@@ -114,7 +117,7 @@ public class StartGameActivity extends AppCompatActivity {
 
 
 
-    private void fight(final Player player, final Foe firstFoe) {
+    public void  fight(final Player player, final Foe firstFoe) {
         Log.i("DEBUG"," !baston!");
 
 
@@ -126,6 +129,7 @@ public class StartGameActivity extends AppCompatActivity {
         final ImageButton shortcutQuestBtn  = (ImageButton) findViewById(R.id.questShortcut);
         final ImageButton avatarInfoBtn     = (ImageButton) findViewById(R.id.avatarInfo);
         final ImageView   avatarImg         = (ImageView)   findViewById(R.id.infoPerso);
+
 
 
 
@@ -196,19 +200,31 @@ public class StartGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                /*
+                *
+                * si on clique sur le parchemin à droite, on à la quete affiché
+                * on ferme en cliquant sur la quete OU sur le shortcut
+                *
+                */
+                final ImageButton queteImg   = (ImageButton)findViewById(R.id.questDisplay);
+                final TextView txtQuest      = (TextView) findViewById(R.id.questText);
 
-                final ImageButton log   = (ImageButton)findViewById(R.id.questDisplay);
-                final TextView txtQuest = (TextView) findViewById(R.id.questText);
                 Log.i("DEBUG","dans le listener quete");
-                log.setVisibility(View.VISIBLE);
-                txtQuest.setVisibility(View.VISIBLE);
-                log.setClickable(true);
-                log.setOnClickListener(new View.OnClickListener() {
+
+                if (queteImg.getVisibility()==View.VISIBLE){
+                    queteImg.setVisibility(View.GONE);
+                    txtQuest.setVisibility(View.INVISIBLE);
+                }else{
+                    txtQuest.setVisibility(View.VISIBLE);
+                    queteImg.setVisibility(View.VISIBLE);
+                }
+                queteImg.setClickable(true);
+                queteImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Log.i("DEBUG","dans le deuxieme listenner uéééééééééé");
-                        log.setVisibility(GONE);
-                        log.setClickable(false);
+                        queteImg.setVisibility(GONE);
+                        queteImg.setClickable(false);
                         txtQuest.setVisibility(GONE);
                     }
                 });
@@ -454,16 +470,16 @@ public class StartGameActivity extends AppCompatActivity {
         });
 
         /************************************************************************************
-         *                           ____________________¶¶
+         *                           ____________________¶
          *                           ___________________¶¶¶
-         *                           __________________¶¶_¶¶
-         *                           __________________¶¶__¶
-         *                           _________________¶¶¶__¶¶
-         *                           ________________¶¶¶___¶¶
-         *                           ________________¶¶¶___¶¶
-         *                           _______________¶¶¶_____¶¶
-         *                           ______________¶¶¶_______¶¶
-         *                           _____________¶¶¶¶_______¶¶
+         *                           ___________________¶¶¶
+         *                           __________________¶¶¶¶
+         *                           _________________¶¶¶_¶
+         *                           ________________¶¶¶__¶
+         *                           ________________¶¶¶__¶¶
+         *                           _______________¶¶¶____¶¶
+         *                           ______________¶¶¶______¶¶
+         *                           _____________¶¶¶________¶¶
          *        Water spell        _____________¶¶¶_________¶¶
          *                           ____________¶¶¶___________¶¶
          *                           ___________¶¶¶_____________¶¶
@@ -492,7 +508,7 @@ public class StartGameActivity extends AppCompatActivity {
          *                           ___¶¶¶__________________________¶¶¶
          *                           ____¶¶¶________________________¶¶¶
          *                           _____¶¶¶¶¶___________________¶¶¶¶
-         *                            ______¶¶¶¶¶¶¶¶____________¶¶¶¶¶
+         *                           ______¶¶¶¶¶¶¶¶____________¶¶¶¶¶
          *                           _______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
          *                           ____________¶¶¶¶¶¶¶¶¶¶¶¶¶¶
          *************************************************************************************/

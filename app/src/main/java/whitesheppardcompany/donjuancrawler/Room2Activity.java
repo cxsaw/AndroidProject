@@ -146,18 +146,31 @@ public class Room2Activity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                final ImageButton log   = (ImageButton)findViewById(R.id.questDisplay);
-                final TextView txtQuest = (TextView) findViewById(R.id.questText);
-                Log.i("DEBUG","dans le listener quete2");
-                log.setVisibility(View.VISIBLE);
-                txtQuest.setVisibility(View.VISIBLE);
-                log.setClickable(true);
-                log.setOnClickListener(new View.OnClickListener() {
+ /*
+                *
+                * si on clique sur le parchemin à droite, on à la quete affiché
+                * on ferme en cliquant sur la quete OU sur le shortcut
+                *
+                */
+                final ImageButton queteImg   = (ImageButton)findViewById(R.id.questDisplay);
+                final TextView txtQuest      = (TextView) findViewById(R.id.questText);
+
+                Log.i("DEBUG","dans le listener quete");
+
+                if (queteImg.getVisibility()==View.VISIBLE){
+                    queteImg.setVisibility(View.GONE);
+                    txtQuest.setVisibility(View.INVISIBLE);
+                }else{
+                    txtQuest.setVisibility(View.VISIBLE);
+                    queteImg.setVisibility(View.VISIBLE);
+                }
+                queteImg.setClickable(true);
+                queteImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.i("DEBUG","dans le deuxieme listenner uéééééééééé2");
-                        log.setVisibility(GONE);
-                        log.setClickable(false);
+                        Log.i("DEBUG","dans le deuxieme listenner uéééééééééé");
+                        queteImg.setVisibility(GONE);
+                        queteImg.setClickable(false);
                         txtQuest.setVisibility(GONE);
                     }
                 });
@@ -206,6 +219,12 @@ public class Room2Activity extends AppCompatActivity {
             //pour donner de l'aléatoire un peu je cherche un nombre entre un et 10 qui me donnera un monstre
 
             int futurId = (int)(randomize() / 10) ;
+            /*
+            *
+            *
+            *  ici j'associe le foe à l'image correspondante
+            *
+            * */
             switch (futurId){
                 case 1:
 
@@ -220,17 +239,17 @@ public class Room2Activity extends AppCompatActivity {
                     break;
 
                 case 3:
-                    foeImg.setImageResource(R.drawable.defaultcard);
+                    foeImg.setImageResource(R.drawable.foe11);
                     fadeInImg(foeImg);
                     break;
 
                 case 4:
-                    foeImg.setImageResource(R.drawable.defaultcard);
+                    foeImg.setImageResource(R.drawable.foe9);
                     fadeInImg(foeImg);
                     break;
 
                 case 5:
-                    foeImg.setImageResource(R.drawable.defaultcard);
+                    foeImg.setImageResource(R.drawable.foe10);
                     fadeInImg(foeImg);
                     break;
 
@@ -247,13 +266,14 @@ public class Room2Activity extends AppCompatActivity {
                     break;
 
                 case 8:
-                    foeImg.setImageResource(R.drawable.defaultcard);
+
                     foeImg.setImageResource(R.drawable.foe6);
                     fadeInImg(foeImg);
                     break;
 
                 case 9:
-                    foeImg.setImageResource(R.drawable.defaultcard);
+
+                    foeImg.setImageResource(R.drawable.foe8);
                     fadeInImg(foeImg);
                     break;
                 case 10:
@@ -263,7 +283,7 @@ public class Room2Activity extends AppCompatActivity {
                     break;
 
                 default:
-                    foeImg.setImageResource(R.drawable.defaultcard);
+                    foeImg.setImageResource(R.drawable.foe7);
                     fadeInImg(foeImg);
 
             }
@@ -619,7 +639,7 @@ public class Room2Activity extends AppCompatActivity {
          *                           ___¶¶¶__________________________¶¶¶
          *                           ____¶¶¶________________________¶¶¶
          *                           _____¶¶¶¶¶___________________¶¶¶¶
-         *                            ______¶¶¶¶¶¶¶¶____________¶¶¶¶¶
+         *                           ______¶¶¶¶¶¶¶__________-__¶¶¶¶¶
          *                           _______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
          *                           ____________¶¶¶¶¶¶¶¶¶¶¶¶¶¶
          *************************************************************************************/

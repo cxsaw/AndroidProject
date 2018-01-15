@@ -8,8 +8,10 @@
     tools:context="whitesheppardcompany.donjuancrawler.Room2Activity">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/locateView"
             android:layout_width="match_parent"
@@ -22,38 +24,6 @@
             app:layout_constraintBottom_toTopOf="@+id/backHud"
 
             app:srcCompat="@drawable/bg" />
-
-        <ImageView
-            android:id="@+id/backHud"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@+id/locateView"
-            android:scaleType="center"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/rocky" />
-
-        <ImageView
-            android:id="@+id/hudBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginVertical="110dp"
-            android:scaleType="center"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-
-            app:layout_constraintVertical_bias="0.593"
-            app:srcCompat="@drawable/expbar" />
 
         <ImageButton
             android:id="@+id/goUp"
@@ -114,7 +84,7 @@
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/hudBar"
 
-            app:layout_constraintEnd_toStartOf="@+id/goRight"
+            app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/foe" />
 
@@ -165,65 +135,106 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/bim" />
 
-        <ImageButton
-            android:id="@+id/questShortcut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/goRight"
+        <ImageView
+            android:id="@+id/backHud"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/backHud"
-            android:layout_alignTop="@+id/backHud"
-            android:background="@color/colorAccent"
+            android:layout_toEndOf="@+id/locateView"
+            android:scaleType="center"
             android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="@+id/backHud"
-            app:layout_constraintHorizontal_bias="0.966"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/backHud"
-            app:layout_constraintTop_toTopOf="@+id/backHud"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/quest_min" />
-
-        <ImageButton
-            android:id="@+id/questDisplay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/backHud"
-            android:layout_centerHorizontal="true"
-            android:background="@color/colorAccent"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.563"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.691"
-            app:srcCompat="@drawable/quest_log" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/rocky" />
 
-        <TextView
-            android:id="@+id/questText"
-            android:layout_width="320dp"
-            android:layout_height="69dp"
-            android:layout_below="@+id/goRight"
+        <ImageView
+            android:id="@+id/hudBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginVertical="110dp"
+            android:scaleType="center"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            app:layout_constraintVertical_bias="0.593"
+            app:srcCompat="@drawable/expbar" />
+
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="170dp"
+            android:layout_alignBottom="@+id/bim"
             android:layout_centerHorizontal="true"
-            android:text="     Lorem ispum et varris draconis"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/questDisplay"
-            app:layout_constraintEnd_toEndOf="@+id/questDisplay"
-            app:layout_constraintHorizontal_bias="0.459"
-            app:layout_constraintStart_toStartOf="@+id/questDisplay"
-            app:layout_constraintTop_toTopOf="@+id/questDisplay"
-            app:layout_constraintVertical_bias="0.0"
-            tools:text="     Lorem ispum et varris draconis" />
+            android:visibility="visible">
+
+            <ImageButton
+                android:id="@+id/questDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@color/colorAccent"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.563"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.691"
+                app:srcCompat="@drawable/quest_log" />
+
+            <TextView
+                android:id="@+id/questText"
+                android:layout_width="310dp"
+                android:layout_height="75dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="29dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="50dp"
+                android:text="     Lorem ispum et varris draconis"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/questDisplay"
+                app:layout_constraintEnd_toEndOf="@+id/questDisplay"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="@+id/questDisplay"
+                app:layout_constraintTop_toTopOf="@+id/questDisplay"
+                app:layout_constraintVertical_bias="0.704"
+                tools:text="     Lorem ispum et varris draconis" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="606dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="270dp"
+        android:paddingLeft="30dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout2">
 
         <ImageButton
             android:id="@+id/avatarInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/backHud"
-            android:layout_alignTop="@+id/backHud"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="false"
+            android:layout_marginTop="2dp"
             android:background="@color/colorAccent"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -231,40 +242,22 @@
             app:layout_constraintHorizontal_bias="0.181"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/hudBar"
             app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/ava" />
-
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageButton
-            android:id="@+id/waterSpell"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/fireSpell"
-            android:layout_marginStart="48dp"
-            android:layout_toEndOf="@+id/fireSpell"
-            android:background="@color/colorAccent"
-            android:visibility="visible"
-            app:srcCompat="@drawable/water"
-            tools:clickable="false"
-            tools:layout_editor_absoluteX="398dp"
-            tools:layout_editor_absoluteY="234dp" />
 
         <ImageButton
             android:id="@+id/fireSpell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/swo"
-            android:layout_marginStart="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
             android:layout_toEndOf="@+id/swo"
             android:background="@color/colorAccent"
+            android:elevation="0dp"
+            android:scaleType="centerInside"
             android:visibility="visible"
             app:srcCompat="@drawable/fire"
             tools:clickable="false"
@@ -276,8 +269,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="60dp"
-            android:layout_marginStart="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@+id/avatarInfo"
             android:background="@color/colorAccent"
             android:visibility="visible"
             app:srcCompat="@drawable/fight"
@@ -289,8 +286,11 @@
             android:id="@+id/lightningSpell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/waterSpell"
-            android:layout_marginStart="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
             android:layout_toEndOf="@+id/waterSpell"
             android:background="@drawable/lightning"
             android:visibility="visible"
@@ -299,32 +299,64 @@
             tools:clickable="false"
             tools:layout_editor_absoluteX="340dp" />
 
-        <ImageView
-            android:id="@+id/infoPerso"
+        <ImageButton
+            android:id="@+id/waterSpell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:srcCompat="@drawable/bgcoco" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_toEndOf="@+id/fireSpell"
+            android:background="@color/colorAccent"
+            android:visibility="visible"
+            app:srcCompat="@drawable/water"
+            tools:clickable="false"
+            tools:layout_editor_absoluteX="398dp"
+            tools:layout_editor_absoluteY="234dp" />
 
-        <ImageView
-            android:id="@+id/gameOver"
+        <ImageButton
+            android:id="@+id/questShortcut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/background_dark"
-            android:clickable="false"
-            android:cropToPadding="false"
-            android:scaleType="fitXY"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/gameover" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/avatarInfo"
+            android:layout_marginEnd="18dp"
+            android:background="@color/colorAccent"
+            android:visibility="visible"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/quest_min" />
 
-        <ImageView
-            android:id="@+id/gg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            app:srcCompat="@drawable/gg" />
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/infoPerso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:srcCompat="@drawable/bgcoco" />
+
+    <ImageView
+        android:id="@+id/gg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:srcCompat="@drawable/gg" />
+
+    <ImageView
+        android:id="@+id/gameOver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_dark"
+        android:clickable="false"
+        android:cropToPadding="false"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/gameover" />
+
 </android.support.constraint.ConstraintLayout>

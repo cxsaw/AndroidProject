@@ -30,6 +30,9 @@ public class LvlActivity extends AppCompatActivity {
         Toast.makeText(LvlActivity.this, "...",Toast.LENGTH_SHORT).show();
         Toast.makeText(LvlActivity.this, "Wake-up!",Toast.LENGTH_SHORT).show();
         Toast.makeText(LvlActivity.this, "Oh crap! Finally you awake! It was close, those damned orcs almost kill you!",Toast.LENGTH_LONG).show();
+        Toast.makeText(LvlActivity.this, "My name is Valyria stellforged, mother of the fallen angels, queen of the last stone guard, queen of the losts kingdoms, god of no-one, daughter of Someone the best and I'm also the one who saved you!",Toast.LENGTH_LONG).show();
+        Toast.makeText(LvlActivity.this, "but you should call me Random bonasse!",Toast.LENGTH_SHORT).show();
+
         Toast.makeText(LvlActivity.this, "Tell me, what's your name?",Toast.LENGTH_SHORT).show();
 
         ImageButton btn1 = (ImageButton) findViewById(R.id.btn1);
@@ -45,7 +48,7 @@ public class LvlActivity extends AppCompatActivity {
                     btn1.setVisibility(View.VISIBLE);
                 }
 
-            }, 13000);
+            }, 15000);
 
 
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -55,14 +58,23 @@ public class LvlActivity extends AppCompatActivity {
 
                 EditText et = (EditText) findViewById(R.id.name);
                 avatarName = et.getEditableText().toString();
+                Toast.makeText(LvlActivity.this, "Nice to meet you "+avatarName,Toast.LENGTH_SHORT).show();
+                setDelay.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        Log.i("DEBUG", ":" + avatarName);
+                        Intent i = new Intent(LvlActivity.this, ChoosePlayerActivity.class);
+                        i.putExtra("avatarName", avatarName);
+                        startActivity(i);
+                        Log.i("DEBUG", ":" + avatarName);
+                        finish();
+                    }
+
+                }, 3000);
 
 
-                Log.i("DEBUG", ":" + avatarName);
-                Intent i = new Intent(LvlActivity.this, ChoosePlayerActivity.class);
-                i.putExtra("avatarName", avatarName);
-                startActivity(i);
-                Log.i("DEBUG", ":" + avatarName);
-                finish();
             }
         });
     }

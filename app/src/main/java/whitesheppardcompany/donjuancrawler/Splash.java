@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -18,19 +19,21 @@ public class Splash extends AppCompatActivity {
 
     private Context context = Splash.this;
     private MediaPlayer mMediaPlayer;
-    private ImageView splash ;
+    private ImageView splashImg;
 
-
-    private int SLEEP_TIMER = 3;
+    private int SLEEP_TIMER = 2  ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("DEBUG","Ravi de vous voir ici");
-        //supprime le taskbar
-
         setContentView(R.layout.activity_splash);
+        //supprime le taskbar
+        splashImg = (ImageView) findViewById(R.id.splashImg);
+        fadeInImg(splashImg);
         LogoLauncher lgLauncher = new LogoLauncher();
         lgLauncher.start();
+
+
         Log.i("DEBUG","fini on create");
     }
 
@@ -39,13 +42,14 @@ public class Splash extends AppCompatActivity {
         public void run() {
         Log.i("DEBUG","On débute");
         try {
-            sleep(550 * SLEEP_TIMER);
-            splash = (ImageView) findViewById(R.id.splash);
-            fadeInImg(splash);
+            sleep(750 * SLEEP_TIMER);
+
             mMediaPlayer = MediaPlayer.create(context, R.raw.sf_chien);
             mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mMediaPlayer.setLooping(false);
             mMediaPlayer.start();
+
+
         } catch (InterruptedException e){
             e.printStackTrace();
         }

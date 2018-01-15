@@ -43,7 +43,9 @@ public class StartGameActivity extends AppCompatActivity {
     private int hpFoe = 9999;
     private boolean canPressBackButton = false;
     MediaPlayer mp;
-
+    Handler setDelay;
+    Runnable startDelay;
+    ImageView imgFoe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +58,12 @@ public class StartGameActivity extends AppCompatActivity {
 
         TextView hpPlayerText = (TextView) findViewById(R.id.playerLife);
         TextView hpFoeText    = (TextView) findViewById(R.id.foeLife);
-        ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
+                 imgFoe       = (ImageView) findViewById(R.id.foe);
         ImageButton goUp      = (ImageButton) findViewById(R.id.goUp);
         ImageButton goLeft    = (ImageButton) findViewById(R.id.goLeft);
         ImageButton goRight   = (ImageButton) findViewById(R.id.goRight);
+
+        setDelay = new Handler();
 
         //je désactive les boutons qui me fait changer d'intent et donc de salle InGame
         goUp.setVisibility(View.INVISIBLE);
@@ -69,9 +73,15 @@ public class StartGameActivity extends AppCompatActivity {
         goLeft.setClickable(false);
         goRight.setClickable(false);
 
-        Toast.makeText(context, "Oh shit a monster appear! The prof says to don't walk into the tall grass!",Toast.LENGTH_SHORT).show();
+
+
+        Toast.makeText(context, "Oh shit a monster appear! DON'T WALK INTO THE GRASS!",Toast.LENGTH_SHORT).show();
         //petit effet
-        fadeInImg(imgFoe);
+
+
+                fadeInImg(imgFoe);
+            
+
 
         //on s'assure que le joueur possede le statut 'vivant'
         player = (Player)getIntent().getSerializableExtra("player");

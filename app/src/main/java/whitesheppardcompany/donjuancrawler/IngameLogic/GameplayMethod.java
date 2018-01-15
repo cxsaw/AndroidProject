@@ -26,7 +26,7 @@ public class GameplayMethod {
     *
     *
     * */
-    public static void fadeInImg(ImageView imageView) {
+    public static void fadeInImg(ImageView imageView)  {
 
         imageView.setVisibility(View.VISIBLE);
 //Animation fade in

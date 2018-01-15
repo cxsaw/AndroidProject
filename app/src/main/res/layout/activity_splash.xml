@@ -2,17 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="visible"
     tools:context="whitesheppardcompany.donjuancrawler.Splash">
 
     <ImageView
-        android:id="@+id/splash"
+        android:id="@+id/splashImg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:scaleType="fitXY"
         android:visibility="invisible"
         app:srcCompat="@drawable/splash" />
 </RelativeLayout>

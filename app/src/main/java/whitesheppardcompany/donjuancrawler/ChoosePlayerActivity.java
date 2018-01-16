@@ -106,7 +106,7 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
                 player.setAttk(15);
                 player.setIntell(8);
                 player.setSagesse(19);
-
+                player.setWallet(10);
 
                 Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu toto" );
                 Intent intentToto = new Intent(getApplicationContext(),StartGameActivity.class);

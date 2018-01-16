@@ -10,9 +10,11 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 
@@ -44,6 +46,7 @@ public class Room2Activity extends AppCompatActivity {
     private int hpFoe = 9999;
     private boolean canPressBackButton = false;
 
+    ImageView   imgLoot;
     ImageButton upBtn;
     ImageButton leftBtn;
     ImageButton rightBtn;
@@ -52,6 +55,8 @@ public class Room2Activity extends AppCompatActivity {
     ImageButton avatarInfoBtn;
     ImageView   avatarImg;
 
+    EditText    nameTxt;
+    EditText    moneyTxt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("DEBUG", "Ici c'est bon!");
@@ -63,6 +68,10 @@ public class Room2Activity extends AppCompatActivity {
         upBtn        = (ImageButton) findViewById(R.id.goUp);
         leftBtn      = (ImageButton) findViewById(R.id.goLeft);
         rightBtn     = (ImageButton) findViewById(R.id.goRight);
+
+        imgLoot      = (ImageView)   findViewById(R.id.lootImg);
+        nameTxt      = (EditText)  findViewById(R.id.name);
+        moneyTxt     = (EditText)  findViewById(R.id.money);
 
         shortcutQuestBtn  = (ImageButton) findViewById(R.id.questShortcut);
         avatarInfoBtn     = (ImageButton) findViewById(R.id.avatarInfo);
@@ -84,9 +93,21 @@ public class Room2Activity extends AppCompatActivity {
         leftBtn.setVisibility(View.INVISIBLE);
         rightBtn.setVisibility(View.INVISIBLE);
 
+
         upBtn.setClickable(false);
         leftBtn.setClickable(false);
         rightBtn.setClickable(false);
+
+        avatarImg.setVisibility(GONE);
+
+        int argent = player.getWallet();
+        String thune = String.valueOf(argent);
+
+        nameTxt.setText(player.getName());
+        nameTxt.setVisibility(GONE);
+        moneyTxt.setText(thune);
+        moneyTxt.setVisibility(GONE);
+
 
         avatarInfoBtn.setClickable(true);
         shortcutQuestBtn.setClickable(true);
@@ -114,23 +135,26 @@ public class Room2Activity extends AppCompatActivity {
          *
          * Bouton listener avatar
          *
-         *
+         * qui affiche la liste détaillé du perso
          *
          *
          *****************************************************************/
-
+        //rappel avatarImg == infoperso
         avatarInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (avatarImg.getVisibility() == View.GONE){
                     avatarImg.setVisibility( View.VISIBLE );
+                    nameTxt.setVisibility(View.VISIBLE);
+                    moneyTxt.setVisibility(View.VISIBLE);
                 } else {
                     avatarImg.setVisibility(View.GONE);
+                    nameTxt.setVisibility(GONE);
+                    moneyTxt.setVisibility(GONE);
                 }
 
             }
         });
-
         /*******************************************************************
          *
          *
@@ -310,7 +334,7 @@ public class Room2Activity extends AppCompatActivity {
 
         //dans ces cas on pop un trésor!
         if (dice >= 97 && dice <= 100){
-            resolved = loot();
+
                 ImageView ggImg = (ImageView) findViewById(R.id.gg);
                 stopMP();
                 ggImg.setVisibility(View.VISIBLE);
@@ -383,9 +407,6 @@ public class Room2Activity extends AppCompatActivity {
 
 
 
-    private boolean loot() {
-        return true;
-    }
 
 
     /*
@@ -476,7 +497,7 @@ public class Room2Activity extends AppCompatActivity {
                     //le handler sert à timer le coup pour qu'il s'affiche ponctuellement
 
                 }else {
-                    loot();
+                    loot(player);
                     wayResolver();
                     attackBtn.setClickable(false);
                     fireSpellBtn.setClickable(false);
@@ -567,7 +588,7 @@ public class Room2Activity extends AppCompatActivity {
                     //le handler sert à timer le coup pour qu'il s'affiche ponctuellement
 
                 }else {
-                    loot();
+                    loot(player);
                     wayResolver();
                     attackBtn.setClickable(false);
                     fireSpellBtn.setClickable(false);
@@ -676,7 +697,7 @@ public class Room2Activity extends AppCompatActivity {
 
                 }else {
                     wayResolver();
-                    loot();
+                    loot(player);
                     attackBtn.setClickable(false);
                     attackBtn.setClickable(false);
                     fireSpellBtn.setClickable(false);
@@ -759,7 +780,7 @@ public class Room2Activity extends AppCompatActivity {
 
                 }else {
                     wayResolver();
-                    loot();
+                    loot(player);
                     attackBtn.setClickable(false);
                     attackBtn.setClickable(false);
                     fireSpellBtn.setClickable(false);
@@ -837,6 +858,72 @@ public class Room2Activity extends AppCompatActivity {
         }
     }
 
+
+
+    //phase de loot
+    private void loot(final Player player) {
+        Log.i("DEBUG","on loot");
+        final int lootValue = randomize();
+        if ( lootValue <= 20 && lootValue > 0){
+
+            imgLoot.setImageResource(R.drawable.loot1);
+            imgLoot.setClickable(true);
+            imgLoot.setVisibility(View.VISIBLE);
+        }
+        if ( lootValue <= 40 && lootValue > 20){
+
+            imgLoot.setImageResource(R.drawable.loot2);
+            imgLoot.setClickable(true);
+            imgLoot.setVisibility(View.VISIBLE);
+
+        }
+        if ( lootValue <= 60 && lootValue > 40){
+
+            imgLoot.setImageResource(R.drawable.loot3);
+            imgLoot.setClickable(true);
+            imgLoot.setVisibility(View.VISIBLE);
+
+        }
+        if ( lootValue <= 80 && lootValue > 60){
+
+            imgLoot.setImageResource(R.drawable.loot4);
+            imgLoot.setClickable(true);
+            imgLoot.setVisibility(View.VISIBLE);
+
+        }
+        if ( lootValue <= 92 && lootValue > 80){
+
+            imgLoot.setImageResource(R.drawable.loot5);
+            imgLoot.setClickable(true);
+            imgLoot.setVisibility(View.VISIBLE);
+
+        }
+        if ( lootValue <= 99 && lootValue > 80){
+
+            imgLoot.setImageResource(R.drawable.loot6);
+            imgLoot.setClickable(true);
+            imgLoot.setVisibility(View.VISIBLE);
+
+        }
+
+
+
+        imgLoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int money = player.getWallet();
+                player.setWallet((money + lootValue));
+                if(lootValue > 1 && lootValue != 0) {
+                    Toast.makeText(context, "Valyria: Oh, tu viens de rammasser " + lootValue + "pièces d'or", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, "Valyria: Quel radin ...",Toast.LENGTH_SHORT).show();
+
+                }
+                imgLoot.setVisibility(GONE);
+                Log.e("DEBUG", "argent "+ player.getWallet());
+            }
+        });
+    }
 
     @Override
     public  void onDestroy(){

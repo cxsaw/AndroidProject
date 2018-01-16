@@ -30,8 +30,8 @@ public class LvlActivity extends AppCompatActivity {
         Toast.makeText(LvlActivity.this, "...",Toast.LENGTH_SHORT).show();
         Toast.makeText(LvlActivity.this, "Wake-up!",Toast.LENGTH_SHORT).show();
         Toast.makeText(LvlActivity.this, "Oh crap! Finally you awake! It was close, those damned orcs almost kill you!",Toast.LENGTH_LONG).show();
-        Toast.makeText(LvlActivity.this, "My name is Valyria stellforged, mother of the fallen angels, queen of the last stone guard, queen of the losts kingdoms, god of no-one, daughter of Someone the best and I'm also the one who saved you!",Toast.LENGTH_LONG).show();
-        Toast.makeText(LvlActivity.this, "but you should call me Random bonasse!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(LvlActivity.this, "My name is Valyria Stellforged of Chapeltown, mother of the fallen angels, queen of the last stone guard, queen of the losts kingdoms, god of no-one, daughter of Someone the best and I'm also the one who saved you!",Toast.LENGTH_LONG).show();
+        Toast.makeText(LvlActivity.this, "but you should call me Random Bonasse!",Toast.LENGTH_SHORT).show();
 
         Toast.makeText(LvlActivity.this, "Tell me, what's your name?",Toast.LENGTH_SHORT).show();
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -31,6 +31,7 @@
             android:layout_height="27dp"
 
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
             android:layout_marginVertical="8dp"
             android:background="@color/colorAccent"
             android:visibility="visible"
@@ -45,7 +46,7 @@
             android:id="@+id/goLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/goUp"
+            android:layout_below="@+id/locateView"
             android:layout_marginHorizontal="8dp"
 
             android:background="@color/colorAccent"
@@ -63,30 +64,48 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/hudBar"
             android:layout_alignTop="@+id/goLeft"
+            android:layout_below="@+id/locateView"
             android:layout_marginEnd="13dp"
             android:background="@color/colorAccent"
-            android:visibility="visible"
 
+            android:visibility="visible"
             app:layout_constraintHorizontal_bias="0.93"
             app:layout_constraintStart_toEndOf="@+id/goUp"
             app:layout_constraintTop_toBottomOf="@+id/goUp"
             app:srcCompat="@drawable/right_arrow" />
 
-        <ImageView
-            android:id="@+id/foe"
-            android:layout_width="wrap_content"
-            android:layout_height="162dp"
-            android:layout_below="@+id/goUp"
-            android:layout_marginLeft="250dp"
-            android:adjustViewBounds="true"
-            android:background="@color/colorAccent"
-            android:scaleType="centerInside"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/hudBar"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/foe" />
+            <ImageView
+                android:id="@+id/lootImg"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignBottom="@+id/foe"
+                android:layout_marginEnd="46dp"
+                android:layout_toStartOf="@+id/foe"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/loot1" />
+
+            <ImageView
+                android:id="@+id/foe"
+                android:layout_width="wrap_content"
+                android:layout_height="162dp"
+                android:layout_alignParentEnd="true"
+
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="92dp"
+                android:layout_marginTop="42dp"
+                android:adjustViewBounds="true"
+                android:background="@color/colorAccent"
+                android:scaleType="centerInside"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/foe" />
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/playerLife"
@@ -208,6 +227,7 @@
                 app:layout_constraintTop_toTopOf="@+id/questDisplay"
                 app:layout_constraintVertical_bias="0.704"
                 tools:text="     Lorem ispum et varris draconis" />
+
         </RelativeLayout>
 
 
@@ -219,7 +239,7 @@
         android:layout_height="120dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="220dp"
         android:paddingLeft="30dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -331,12 +351,38 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/infoPerso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:srcCompat="@drawable/bgcoco" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/infoPerso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/bgcoco" />
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="108dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="17dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Money" />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/gg"

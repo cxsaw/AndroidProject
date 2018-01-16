@@ -33,6 +33,7 @@ import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.fad
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initAttck;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initFire;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initWater;
+import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.randomize;
 
 public class StartGameActivity extends AppCompatActivity {
 
@@ -46,6 +47,9 @@ public class StartGameActivity extends AppCompatActivity {
     Handler setDelay;
     Runnable startDelay;
     ImageView imgFoe;
+    ImageView imgLoot;
+    EditText nameTxt;
+    EditText moneyTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +60,20 @@ public class StartGameActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_start_game);
 
-        TextView hpPlayerText = (TextView) findViewById(R.id.playerLife);
-        TextView hpFoeText    = (TextView) findViewById(R.id.foeLife);
-                 imgFoe       = (ImageView) findViewById(R.id.foe);
+        TextView hpPlayerText = (TextView)  findViewById(R.id.playerLife);
+        TextView hpFoeText    = (TextView)  findViewById(R.id.foeLife);
+
         ImageButton goUp      = (ImageButton) findViewById(R.id.goUp);
         ImageButton goLeft    = (ImageButton) findViewById(R.id.goLeft);
         ImageButton goRight   = (ImageButton) findViewById(R.id.goRight);
+
+                 imgFoe       = (ImageView) findViewById(R.id.foe);
+                 imgLoot      = (ImageView) findViewById(R.id.lootImg);
+                 nameTxt      = (EditText)  findViewById(R.id.name);
+                 moneyTxt     = (EditText)  findViewById(R.id.money);
+
+
+        final ImageView   avatarImg         = (ImageView)   findViewById(R.id.infoPerso);
 
         setDelay = new Handler();
 
@@ -74,13 +86,12 @@ public class StartGameActivity extends AppCompatActivity {
         goRight.setClickable(false);
 
 
-
+        avatarImg.setVisibility(GONE);
         Toast.makeText(context, "Oh shit a monster appear! DON'T WALK INTO THE GRASS!",Toast.LENGTH_SHORT).show();
         //petit effet
 
 
                 fadeInImg(imgFoe);
-            
 
 
         //on s'assure que le joueur possede le statut 'vivant'
@@ -90,8 +101,6 @@ public class StartGameActivity extends AppCompatActivity {
 
         Log.i("DEBUG","mmmmm "+player.getName());
         Log.i("DEBUG","wwwww "+player.getHp());
-
-        Toast.makeText(context, "Oh shit a monster appear! The prof says to don't walk into the tall grass!",Toast.LENGTH_SHORT).show();
 
         //génération du méchant
 
@@ -104,8 +113,14 @@ public class StartGameActivity extends AppCompatActivity {
         firstFoe.setIntell(10);
         firstFoe.setElement(3);//élément eau
         firstFoe.setIdFoe(1);
+        
+        int argent = player.getWallet();
+        String Thune = argent;
 
-
+        nameTxt.setText(player.getName());
+        nameTxt.setVisibility(GONE);
+        moneyTxt.setText(thune);
+        moneyTxt.setVisibility(GONE);
         Log.i("DEBUG","wwwww "+firstFoe.getName()); //vérif de dev
 
         //affichage précaire des HP
@@ -121,7 +136,7 @@ public class StartGameActivity extends AppCompatActivity {
         if (firstFoe.isAlive() == false){
             Log.i("DEBUG","C'est le gg bro");
             imgFoe.setVisibility(GONE);
-            loot();
+            loot(player);
         }
     }
 
@@ -174,18 +189,22 @@ public class StartGameActivity extends AppCompatActivity {
         *
         * Bouton listener avatar
         *
-        *
+        * qui affiche la liste détaillé du perso
         *
         *
         *****************************************************************/
-
+        //rappel avatarImg == infoperso
         avatarInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (avatarImg.getVisibility() == View.GONE){
                     avatarImg.setVisibility( View.VISIBLE );
+                    nameTxt.setVisibility(View.VISIBLE);
+                    moneyTxt.setVisibility(View.VISIBLE);
                 } else {
                     avatarImg.setVisibility(View.GONE);
+                    nameTxt.setVisibility(GONE);
+                    moneyTxt.setVisibility(GONE);
                 }
 
             }
@@ -266,11 +285,7 @@ public class StartGameActivity extends AppCompatActivity {
 
                     hpFoe    = firstFoe.getHp();
 
-                    //hpFoeText.setVisibility(View.VISIBLE);
-                    //hpPlayerText.setVisibility(View.VISIBLE);
-                    //set les var dans le textView
-                    //hpFoeText.setText(vieFoe);
-                    //hpPlayerText.setText(viePlayer);
+
                     Log.i("DEBUG", "Non le prob n'est pôas là");
 
                     //phase attaque joueur
@@ -339,7 +354,7 @@ public class StartGameActivity extends AppCompatActivity {
                     }
 
                     if (firstFoe.getHp() <= 0){
-                        loot();
+                        loot(player);
                         //je permets l'accés à la salle suivante
                         goUpBtn.setVisibility(View.VISIBLE);
                         goUpBtn.setClickable(true);
@@ -454,7 +469,7 @@ public class StartGameActivity extends AppCompatActivity {
                 }
 
                 if (firstFoe.getHp() <= 0){
-                    loot();
+                    loot(player);
                     goUpBtn.setVisibility(View.VISIBLE);
                     goUpBtn.setClickable(true);
                     //allez go pex!
@@ -519,7 +534,7 @@ public class StartGameActivity extends AppCompatActivity {
          *                           ____¶¶¶________________________¶¶¶
          *                           _____¶¶¶¶¶___________________¶¶¶¶
          *                           ______¶¶¶¶¶¶¶¶____________¶¶¶¶¶
-         *                           _______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+         *                           ________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
          *                           ____________¶¶¶¶¶¶¶¶¶¶¶¶¶¶
          *************************************************************************************/
         waterSpellBtn.setOnClickListener(new View.OnClickListener() {
@@ -598,7 +613,7 @@ public class StartGameActivity extends AppCompatActivity {
                 }
 
                 if (firstFoe.getHp() <= 0){
-                    loot();
+                    loot(player);
                     goUpBtn.setVisibility(View.VISIBLE);
                     goUpBtn.setClickable(true);
                     player.setLevel(2);
@@ -707,7 +722,7 @@ public class StartGameActivity extends AppCompatActivity {
                 }
 
                 if (firstFoe.getHp() <= 0){
-                    loot();
+                    loot(player);
                     goUpBtn.setVisibility(View.VISIBLE);
                     goUpBtn.setClickable(true);
                     player.setLevel(2);
@@ -743,14 +758,73 @@ public class StartGameActivity extends AppCompatActivity {
 
 
     //phase de loot
-    private void loot() {
+    private void loot(final Player player) {
         Log.i("DEBUG","on loot");
+        final int lootValue = randomize();
+        if ( lootValue <= 20 && lootValue > 0){
+
+            imgLoot.setImageResource(R.drawable.loot1);
+            imgLoot.setClickable(true);
+            imgLoot.setVisibility(View.VISIBLE);
+        }
+        if ( lootValue <= 40 && lootValue > 20){
+
+            imgLoot.setImageResource(R.drawable.loot2);
+            imgLoot.setClickable(true);
+            imgLoot.setVisibility(View.VISIBLE);
+
+        }
+        if ( lootValue <= 60 && lootValue > 40){
+
+            imgLoot.setImageResource(R.drawable.loot3);
+            imgLoot.setClickable(true);
+            imgLoot.setVisibility(View.VISIBLE);
+
+        }
+        if ( lootValue <= 80 && lootValue > 60){
+
+            imgLoot.setImageResource(R.drawable.loot4);
+            imgLoot.setClickable(true);
+            imgLoot.setVisibility(View.VISIBLE);
+
+        }
+        if ( lootValue <= 92 && lootValue > 80){
+
+            imgLoot.setImageResource(R.drawable.loot5);
+            imgLoot.setClickable(true);
+            imgLoot.setVisibility(View.VISIBLE);
+
+        }
+        if ( lootValue <= 99 && lootValue > 80){
+
+            imgLoot.setImageResource(R.drawable.loot6);
+            imgLoot.setClickable(true);
+            imgLoot.setVisibility(View.VISIBLE);
+
+        }
+
+        imgLoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int money = player.getWallet();
+                player.setWallet((money + lootValue));
+                if(lootValue > 1 && lootValue != 0) {
+                    Toast.makeText(context, "Valyria: Oh, tu viens de rammasser " + lootValue + "pièces d'or", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, "Valyria: Quel radin ...",Toast.LENGTH_SHORT).show();
+
+                }
+                imgLoot.setVisibility(GONE);
+                Log.e("DEBUG", "argent "+ player.getWallet());
+            }
+        });
     }
 
     @Override
     public  void onDestroy(){
         mp.stop();
         mp.release();
+
         super.onDestroy();
     }
 

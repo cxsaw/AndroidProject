@@ -14,6 +14,8 @@
         android:duration="100"/>
     <item android:drawable="@drawable/fire_6"
         android:duration="100"/>
+    <item android:drawable="@drawable/bim_25"
+        android:duration="100"/>
 
 
 </animation-list>

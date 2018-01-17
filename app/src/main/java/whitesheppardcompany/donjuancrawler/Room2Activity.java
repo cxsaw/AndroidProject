@@ -536,7 +536,6 @@ public class Room2Activity extends AppCompatActivity {
 
             }
         });
-
         /****************************************************************************************
          *
          *       Bouton de spell FEU
@@ -562,11 +561,12 @@ public class Room2Activity extends AppCompatActivity {
 
                 ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
                 ImageView bim         = (ImageView) findViewById(R.id.bim);
-
+                ImageButton goUpBtn   = (ImageButton) findViewById(R.id.goUp);
+                final ImageView   fireSheet = (ImageView) findViewById(R.id.fireAnim);
 
                 hpFoe    = firstFoe.getHp();
 
-                Log.i("DEBUG", "Non le prob n'est pôas là2");
+                Log.i("DEBUG", "Non le prob n'est pôas là");
 
                 //phase attaque joueur
                 //initie l'attaque
@@ -578,20 +578,56 @@ public class Room2Activity extends AppCompatActivity {
                     firstFoe.setAlive(false);
                 }
 
-                Log.e("DEBUG", "vie mechant apres combat2<<<<"+firstFoe.getHp());
+                fireSheet.setVisibility(View.VISIBLE);
+                fireSheet.setImageResource(R.drawable.fireanim);//fire fait reference à fireanim.xml
+
+                AnimationDrawable feu = (AnimationDrawable)fireSheet.getDrawable();
+                feu.start();
+                Handler fireHandler = new Handler();
+                fireHandler.postDelayed(new Runnable() {
+
+
+                    @Override
+                    public void run() {
+
+
+                        MediaPlayer mpSound = MediaPlayer.create(context, R.raw.fight1);
+                        mpSound.start();
+                    }
+                }, 1000);
+                fireSheet.setVisibility(View.VISIBLE);
+
+                Log.e("DEBUG", "vie mechant apres combat<<<<"+firstFoe.getHp());
 
                 //si le mechant est vivant, il riposte
                 if(firstFoe.isAlive() == true){
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
-                    player.setHp(retribution(firstFoe, player));
-                    Log.e("DEBUG", "vie joueur apres combat2<<<<"+player.getHp());
+                            player.setHp(retribution(firstFoe, player));
+
+                        }
+                    }, 1000);
+
+                    Log.e("DEBUG", "vie joueur apres combat<<<<"+player.getHp());
 
                     //image de griffure pour visuellement verifier si il y a dégâts
                     //le handler sert à timer le coup pour qu'il s'affiche ponctuellement
 
                 }else {
-                    loot(player);
-                    wayResolver();
+
+                    ImageButton goUp = (ImageButton) findViewById(R.id.goUp);
+                    goUp.setClickable(true);
+                    goUp.setVisibility(View.VISIBLE);
+                    goUp.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+                            Log.e("DEBUG","room1 over");
+                        }
+                    });
                     attackBtn.setClickable(false);
                     fireSpellBtn.setClickable(false);
                     waterSpellBtn.setClickable(false);
@@ -606,7 +642,8 @@ public class Room2Activity extends AppCompatActivity {
                 //si le joueur est mort on affiche un game over
                 if(player.getHp() <= 0){
 
-                    stopMP();
+                    mp.stop();
+                    mp.release();
 
                     MediaPlayer mpGameover = MediaPlayer.create(context, R.raw.gameover);
                     mpGameover.start();
@@ -622,6 +659,29 @@ public class Room2Activity extends AppCompatActivity {
 
                 }
 
+                if (firstFoe.getHp() <= 0){
+                    loot(player);
+                    goUpBtn.setVisibility(View.VISIBLE);
+                    goUpBtn.setClickable(true);
+                    //allez go pex!
+                    player.setLevel(2);
+
+                    goUpBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getApplicationContext(),Room2Activity.class);
+                            intent.putExtra("player",(Serializable) player);
+                            if (mp.isPlaying()){
+                                mp.stop();
+                                mp.release();
+                            }
+
+                            context.startActivity(intent);
+
+                            finish();
+                        }
+                    });
+                }
             }
         });
 

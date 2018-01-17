@@ -449,18 +449,21 @@ public class StartGameActivity extends AppCompatActivity {
                     }
                 }, 1000);
                 fireSheet.setVisibility(View.VISIBLE);
-                fireSheet.setVisibility(View.GONE);
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
                 Log.e("DEBUG", "vie mechant apres combat<<<<"+firstFoe.getHp());
 
                 //si le mechant est vivant, il riposte
                 if(firstFoe.isAlive() == true){
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-                    player.setHp(retribution(firstFoe, player));
+                        player.setHp(retribution(firstFoe, player));
+
+                    }
+                }, 1000);
+
                     Log.e("DEBUG", "vie joueur apres combat<<<<"+player.getHp());
 
                     //image de griffure pour visuellement verifier si il y a dégâts

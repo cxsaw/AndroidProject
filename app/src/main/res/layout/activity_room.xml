@@ -74,6 +74,19 @@
             app:layout_constraintTop_toBottomOf="@+id/goUp"
             app:srcCompat="@drawable/right_arrow" />
 
+        <ImageView
+            android:id="@+id/fireAnim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/goRight"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="27dp"
+            android:adjustViewBounds="true"
+            android:background="@color/colorAccent"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/fire_1" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

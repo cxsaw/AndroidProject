@@ -74,6 +74,19 @@
             app:layout_constraintTop_toBottomOf="@+id/goUp"
             app:srcCompat="@drawable/right_arrow" />
 
+        <ImageView
+            android:id="@+id/fireAnim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/goRight"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="27dp"
+            android:adjustViewBounds="true"
+            android:background="@color/colorAccent"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/fire_1" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -139,20 +152,26 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.913" />
 
-        <ImageView
-            android:id="@+id/bim"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/goUp"
-            android:layout_centerHorizontal="true"
-            android:scaleType="fitCenter"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/hudBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/bim" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/bim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="51dp"
+                android:background="@color/colorAccent"
+                android:scaleType="center"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bim_2" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/backHud"
@@ -189,7 +208,6 @@
         <RelativeLayout
             android:layout_width="400dp"
             android:layout_height="170dp"
-            android:layout_alignBottom="@+id/bim"
             android:layout_centerHorizontal="true"
             android:visibility="visible">
 
@@ -359,6 +377,7 @@
             android:id="@+id/infoPerso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             app:srcCompat="@drawable/bgcoco" />
 
         <TextView
@@ -370,7 +389,8 @@
             android:layout_marginTop="107dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="Name"
+            android:visibility="invisible" />
     </RelativeLayout>
 
     <ImageView

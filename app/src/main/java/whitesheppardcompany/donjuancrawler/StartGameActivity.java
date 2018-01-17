@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.Image;
 import android.media.MediaExtractor;
 import android.media.MediaPlayer;
@@ -50,7 +51,9 @@ public class StartGameActivity extends AppCompatActivity {
     Runnable startDelay;
     ImageView imgFoe;
     ImageView imgLoot;
+
     TextView nameTxt;
+
 
 
     @Override
@@ -411,7 +414,8 @@ public class StartGameActivity extends AppCompatActivity {
 
                 ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
                 ImageView bim         = (ImageView) findViewById(R.id.bim);
-                ImageButton goUpBtn = (ImageButton) findViewById(R.id.goUp);
+                ImageButton goUpBtn   = (ImageButton) findViewById(R.id.goUp);
+                final ImageView   fireSheet = (ImageView) findViewById(R.id.fireAnim);
 
                 hpFoe    = firstFoe.getHp();
 
@@ -427,6 +431,30 @@ public class StartGameActivity extends AppCompatActivity {
                     firstFoe.setAlive(false);
                 }
 
+                fireSheet.setVisibility(View.VISIBLE);
+                fireSheet.setImageResource(R.drawable.fireanim);//fire fait reference à fireanim.xml
+
+                AnimationDrawable feu = (AnimationDrawable)fireSheet.getDrawable();
+                feu.start();
+                Handler fireHandler = new Handler();
+                fireHandler.postDelayed(new Runnable() {
+
+
+                    @Override
+                    public void run() {
+
+
+                        MediaPlayer mpSound = MediaPlayer.create(context, R.raw.fight1);
+                        mpSound.start();
+                    }
+                }, 1000);
+                fireSheet.setVisibility(View.VISIBLE);
+                fireSheet.setVisibility(View.GONE);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Log.e("DEBUG", "vie mechant apres combat<<<<"+firstFoe.getHp());
 
                 //si le mechant est vivant, il riposte
@@ -862,20 +890,29 @@ public class StartGameActivity extends AppCompatActivity {
         int hpPlayer    = player.getHp();
         int attckFoe    = foe.getAttk();
         int defPlayer   = player.getDef();
-        ImageView bim   = (ImageView) findViewById(R.id.bim);
+        final ImageView bim   = (ImageView) findViewById(R.id.bim);
+            /*
+            *
+            *   animation griffe
+            */
+        bim.setVisibility(View.VISIBLE);
+        bim.setImageResource(R.drawable.bim);//bim fait reference à bim.xml
 
+        AnimationDrawable claw = (AnimationDrawable)bim.getDrawable();
+        claw.start();
+        bim.setVisibility(GONE);
         Handler clawHandler = new Handler();
         clawHandler.postDelayed(new Runnable() {
-            ImageView bim = (ImageView) findViewById(R.id.bim);
+
 
             @Override
             public void run() {
+                ImageView bim   = (ImageView) findViewById(R.id.bim);
 
-                bim.setVisibility(GONE);
                 MediaPlayer mpSound = MediaPlayer.create(context, R.raw.fight1);
                 mpSound.start();
             }
-        }, 200);
+        }, 100);
 
         bim.setVisibility(View.VISIBLE);
 

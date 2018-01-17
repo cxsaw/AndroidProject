@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+
+    <item android:drawable="@drawable/bim_2"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_3"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_4"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_5"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_6"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_7"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_8"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_9"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_10"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_11"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_12"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_14"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_15"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_16"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_17"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_18"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_19"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_20"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_21"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_22"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_23"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_24"
+        android:duration="100"/>
+    <item android:drawable="@drawable/bim_25"
+        android:duration="100"/>
+
+</animation-list>

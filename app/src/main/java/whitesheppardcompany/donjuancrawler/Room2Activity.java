@@ -2,6 +2,7 @@ package whitesheppardcompany.donjuancrawler;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -831,36 +832,42 @@ public class Room2Activity extends AppCompatActivity {
 
     //représaille de l'ennemi
     private int retribution(Foe foe, Player player) {
-        Log.e("DEBUG", "MOI PAS CONTENT2");
+        Log.e("DEBUG", "MOI PAS CONTENT");
         int hpPlayer    = player.getHp();
         int attckFoe    = foe.getAttk();
         int defPlayer   = player.getDef();
-        ImageView bim = (ImageView) findViewById(R.id.bim);
+        final ImageView bim   = (ImageView) findViewById(R.id.bim);
+            /*
+            *
+            *   animation griffe
+            */
+        bim.setVisibility(View.VISIBLE);
+        bim.setImageResource(R.drawable.bim);//bim fait reference à bim.xml
 
+        AnimationDrawable claw = (AnimationDrawable)bim.getDrawable();
+        claw.start();
+        bim.setVisibility(GONE);
         Handler clawHandler = new Handler();
         clawHandler.postDelayed(new Runnable() {
-            ImageView bim = (ImageView) findViewById(R.id.bim);
-            MediaPlayer mpSound;
 
 
             @Override
             public void run() {
+                ImageView bim   = (ImageView) findViewById(R.id.bim);
 
-                bim.setVisibility(GONE);
-                mpSound = MediaPlayer.create(context, R.raw.fight1);
+                MediaPlayer mpSound = MediaPlayer.create(context, R.raw.fight1);
                 mpSound.start();
             }
-        }, 200);
+        }, 100);
 
         bim.setVisibility(View.VISIBLE);
 
-
         if(defPlayer < attckFoe ) {
-            Log.e("DEBUG", "EZ2");
+            Log.e("DEBUG", "EZ");
             return hpPlayer - (attckFoe - defPlayer);
 
         }else{
-            Log.e("DEBUG", "ouch2");
+            Log.e("DEBUG", "ouch");
             return hpPlayer - 1;
         }
     }

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.hitomi.cmlibrary.CircleMenu;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
                         "Quitter",
                         "Option",
                         "Crédits"};
-
+    ImageView title;
 
 
     @Override
@@ -32,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        title = (ImageView) findViewById(R.id.title);
+
+        randomTitle(title);
+
         Log.i("DEBUG", "On arrive à l'init du cercle");
             /* Pour le menu en forme de cercle */
         CircleMenu circleMenu = (CircleMenu)findViewById(R.id.circle_menu);
@@ -106,5 +112,37 @@ public class MainActivity extends AppCompatActivity {
 
                 });
         //initialize();
+    }
+    //#JeKiffTropLesSwitch
+    private void randomTitle(ImageView imgview) {
+        int rand = ( int )(1 + Math.random() * (8 - 1));
+        switch (rand){
+            case 1:
+                imgview.setImageResource(R.drawable.title1);
+                break;
+            case 2:
+                imgview.setImageResource(R.drawable.title2);
+                break;
+            case 3:
+                imgview.setImageResource(R.drawable.title4);
+                break;
+            case 4:
+                imgview.setImageResource(R.drawable.title5);
+                break;
+            case 5:
+                imgview.setImageResource(R.drawable.title6);
+                break;
+            case 6:
+                imgview.setImageResource(R.drawable.title7);
+                break;
+            case 7:
+                imgview.setImageResource(R.drawable.title8);
+                break;
+            default:
+                imgview.setImageResource(R.drawable.title3);
+                break;
+
+        }
+
     }
 }

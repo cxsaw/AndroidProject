@@ -20,6 +20,7 @@ public class Player extends Entity implements Serializable {
     private int wallet ; //représente la somme en Or que le joueur possède
     private boolean alive;
     private int level;
+    private int lvlQuantity;// représente la progression de la barre d'expérience
 
 
 
@@ -62,6 +63,14 @@ public class Player extends Entity implements Serializable {
         this.weapons = weapons;
     }
 
+    public int getLvlQuantity() {
+        return lvlQuantity;
+    }
+
+    public void setLvlQuantity(int lvlQuantity) {
+        this.lvlQuantity = lvlQuantity;
+    }
+
     public int getWallet() {
         return wallet;
     }
@@ -77,6 +86,13 @@ public class Player extends Entity implements Serializable {
     public void setLevel(int level) {
         this.level = level;
     }
+
+    @Override
+    public String toString() {
+
+        return    " Name: "+getName()+"\n Point de vie: "+getHp()+"\n Niveau: "+getLevel()+ "\n Attaque: "+ getAttk() + "\n Defense: "+getDef()+"\n Intelligence: "+getIntell()+"\n Sagesse: "+getSagesse()+" \n Argent: "+getWallet()+" gold coins";
+    }
+
     //override méthode depuis la classe mère;
     @Override
     public String getName() {

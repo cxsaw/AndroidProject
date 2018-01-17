@@ -60,6 +60,9 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
                 player.setAttk(13);
                 player.setIntell(15);
                 player.setWallet(100);
+                player.setLvlQuantity(0);
+                player.setLevel(1);
+
                 Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu coco" );
                 Intent intentCoco = new Intent(ChoosePlayerActivity.this , StartGameActivity.class);
                 intentCoco.putExtra("player", (Serializable) player);
@@ -83,6 +86,8 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
                 player.setIntell(25);
                 player.setSagesse(18);
                 player.setWallet(100000*100000); //petit troll ;)
+                player.setLvlQuantity(0);
+                player.setLevel(1);
 
                 Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu cam" );
                 Intent intentCam = new Intent(ChoosePlayerActivity.this , StartGameActivity.class);
@@ -107,6 +112,8 @@ public class ChoosePlayerActivity extends AppCompatActivity implements Serializa
                 player.setIntell(8);
                 player.setSagesse(19);
                 player.setWallet(10);
+                player.setLvlQuantity(0);
+                player.setLevel(1);
 
                 Log.i("DEBUG", ":  on commence enfin le jeuuuuuuuuu toto" );
                 Intent intentToto = new Intent(getApplicationContext(),StartGameActivity.class);

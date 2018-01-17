@@ -47,6 +47,38 @@ public class GameplayMethod {
         fadeOutAnimator.start();
     }
 
+    /********************************************************
+    *                                                       *
+    *                                                       *
+    *       Méthode de génération d'expérience qui dépend   *
+    *       du niveau du joueur                             *
+    *                                                       *
+    ********************************************************/
+
+    public static Player generateExp(Player player, Foe foe){
+        int currentLvl         = player.getLevel();
+        int currentProgression = player.getLvlQuantity();
+        int quantityExpNeeded  =(int) (1000 + ((1000*0.1) * currentLvl)); //augmente de 10% * niveau du joueur
+
+        int expBase            = 100;
+
+        if(foe.isAlive() == false){
+            int expGot = expBase * foe.getDifficulty();
+            player.setLvlQuantity((currentProgression+expGot)); //ajout de l'exp reçu à l'xp actuel
+
+            // ce while gère le passage de niveau
+            // j'ai préféré le while au if pour gérer le passage de plusieurs niveau d'un coup
+            while(currentProgression >= quantityExpNeeded){
+                currentProgression = currentProgression - quantityExpNeeded;
+                player.setLvlQuantity(currentProgression); //ajout de la progression de la barre d'exp
+                currentLvl ++; //
+                player.setLevel(currentLvl);
+            }
+
+        }
+       return player;
+    }
+
 
     //le joueur initie l'attaque
     public static int initAttck(Foe foe, Player player) {

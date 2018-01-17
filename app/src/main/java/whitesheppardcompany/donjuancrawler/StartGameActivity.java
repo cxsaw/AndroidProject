@@ -10,6 +10,7 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -30,6 +31,7 @@ import whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod;
 import static android.view.View.GONE;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.fadeInImg;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.fadeOutImg;
+import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.generateExp;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initAttck;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initFire;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initWater;
@@ -48,8 +50,8 @@ public class StartGameActivity extends AppCompatActivity {
     Runnable startDelay;
     ImageView imgFoe;
     ImageView imgLoot;
-    EditText nameTxt;
-    EditText moneyTxt;
+    TextView nameTxt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,20 +62,27 @@ public class StartGameActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_start_game);
 
-        TextView hpPlayerText = (TextView)  findViewById(R.id.playerLife);
-        TextView hpFoeText    = (TextView)  findViewById(R.id.foeLife);
+        /************************************************
+         *                                               *
+         * Association des variables aux id des layouts  *
+         *                                               *
+         ************************************************/
 
-        ImageButton goUp      = (ImageButton) findViewById(R.id.goUp);
-        ImageButton goLeft    = (ImageButton) findViewById(R.id.goLeft);
-        ImageButton goRight   = (ImageButton) findViewById(R.id.goRight);
+        //TextView hpPlayerText = (TextView)  findViewById(R.id.playerLife);
+       // TextView hpFoeText    = (TextView)  findViewById(R.id.foeLife);
+
+        final ImageButton goUp      = (ImageButton) findViewById(R.id.goUp);
+        final ImageButton goLeft    = (ImageButton) findViewById(R.id.goLeft);
+        final ImageButton goRight   = (ImageButton) findViewById(R.id.goRight);
+        final ImageView   avatarImg         = (ImageView)   findViewById(R.id.infoPerso);
 
                  imgFoe       = (ImageView) findViewById(R.id.foe);
                  imgLoot      = (ImageView) findViewById(R.id.lootImg);
-                 nameTxt      = (EditText)  findViewById(R.id.name);
-                 moneyTxt     = (EditText)  findViewById(R.id.money);
+                 nameTxt      = (TextView)  findViewById(R.id.name);
 
 
-        final ImageView   avatarImg         = (ImageView)   findViewById(R.id.infoPerso);
+
+
 
         setDelay = new Handler();
 
@@ -113,20 +122,18 @@ public class StartGameActivity extends AppCompatActivity {
         firstFoe.setIntell(10);
         firstFoe.setElement(3);//élément eau
         firstFoe.setIdFoe(1);
-        
-        int argent = player.getWallet();
-        String Thune = argent;
 
-        nameTxt.setText(player.getName());
+        //prépare la fiche du personnage
         nameTxt.setVisibility(GONE);
-        moneyTxt.setText(thune);
-        moneyTxt.setVisibility(GONE);
+        nameTxt.setInputType(nameTxt.getInputType()| InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+
+
         Log.i("DEBUG","wwwww "+firstFoe.getName()); //vérif de dev
 
         //affichage précaire des HP
 
-        hpFoeText.setVisibility(View.VISIBLE);
-        hpPlayerText.setVisibility(View.VISIBLE);
+        //hpFoeText.setVisibility(View.VISIBLE);
+        //hpPlayerText.setVisibility(View.VISIBLE);
         Log.i("DEBUG","en quete!");
 
         //méthode de combat initié
@@ -198,13 +205,14 @@ public class StartGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (avatarImg.getVisibility() == View.GONE){
+                    nameTxt.setText(player.toString());
                     avatarImg.setVisibility( View.VISIBLE );
                     nameTxt.setVisibility(View.VISIBLE);
-                    moneyTxt.setVisibility(View.VISIBLE);
+
                 } else {
                     avatarImg.setVisibility(View.GONE);
                     nameTxt.setVisibility(GONE);
-                    moneyTxt.setVisibility(GONE);
+
                 }
 
             }
@@ -241,6 +249,7 @@ public class StartGameActivity extends AppCompatActivity {
                 Log.i("DEBUG","dans le listener quete");
 
                 if (queteImg.getVisibility()==View.VISIBLE){
+
                     queteImg.setVisibility(View.GONE);
                     txtQuest.setVisibility(View.INVISIBLE);
                 }else{
@@ -276,7 +285,7 @@ public class StartGameActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    ImageButton goUpBtn = (ImageButton) findViewById(R.id.goUp);
+                    ImageButton goUpBtn       = (ImageButton) findViewById(R.id.goUp);
                     TextView hpPlayerText     = (TextView) findViewById(R.id.playerLife);
                     TextView hpFoeText        = (TextView) findViewById(R.id.foeLife);
                     ImageView imgFoe          = (ImageView) findViewById(R.id.foe);
@@ -327,6 +336,8 @@ public class StartGameActivity extends AppCompatActivity {
 
                         fadeOutImg(imgFoe);
                         bim.setVisibility(GONE);
+                        generateExp(player,firstFoe);
+                        Log.e("DEBUG","EXP progression<< ---- "+player.getLvlQuantity());
                     }
                     //si le joueur est mort on affiche un game over
                     if(player.getHp() <= 0){
@@ -447,6 +458,8 @@ public class StartGameActivity extends AppCompatActivity {
 
                     fadeOutImg(imgFoe);
                     bim.setVisibility(GONE);
+                    generateExp(player,firstFoe);
+                    Log.e("DEBUG","EXP progression<< ---- "+player.getLvlQuantity());
                 }
                 //si le joueur est mort on affiche un game over
                 if(player.getHp() <= 0){
@@ -590,6 +603,8 @@ public class StartGameActivity extends AppCompatActivity {
 
                     fadeOutImg(imgFoe);
                     bim.setVisibility(GONE);
+                    generateExp(player,firstFoe);
+                    Log.e("DEBUG","EXP progression<< ---- "+player.getLvlQuantity());
                 }
                 //si le joueur est mort on affiche un game over
                 if(player.getHp() <= 0){
@@ -700,6 +715,9 @@ public class StartGameActivity extends AppCompatActivity {
 
                     fadeOutImg(imgFoe);
                     bim.setVisibility(GONE);
+                    generateExp(player,firstFoe);
+                    Log.e("DEBUG","EXP progression<< ---- "+player.getLvlQuantity());
+
                 }
                 //si le joueur est mort on affiche un game over
                 if(player.getHp() <= 0){
@@ -766,12 +784,14 @@ public class StartGameActivity extends AppCompatActivity {
             imgLoot.setImageResource(R.drawable.loot1);
             imgLoot.setClickable(true);
             imgLoot.setVisibility(View.VISIBLE);
+            fadeInImg(imgLoot);
         }
         if ( lootValue <= 40 && lootValue > 20){
 
             imgLoot.setImageResource(R.drawable.loot2);
             imgLoot.setClickable(true);
             imgLoot.setVisibility(View.VISIBLE);
+            fadeInImg(imgLoot);
 
         }
         if ( lootValue <= 60 && lootValue > 40){
@@ -779,6 +799,7 @@ public class StartGameActivity extends AppCompatActivity {
             imgLoot.setImageResource(R.drawable.loot3);
             imgLoot.setClickable(true);
             imgLoot.setVisibility(View.VISIBLE);
+            fadeInImg(imgLoot);
 
         }
         if ( lootValue <= 80 && lootValue > 60){
@@ -786,6 +807,7 @@ public class StartGameActivity extends AppCompatActivity {
             imgLoot.setImageResource(R.drawable.loot4);
             imgLoot.setClickable(true);
             imgLoot.setVisibility(View.VISIBLE);
+            fadeInImg(imgLoot);
 
         }
         if ( lootValue <= 92 && lootValue > 80){
@@ -793,6 +815,7 @@ public class StartGameActivity extends AppCompatActivity {
             imgLoot.setImageResource(R.drawable.loot5);
             imgLoot.setClickable(true);
             imgLoot.setVisibility(View.VISIBLE);
+            fadeInImg(imgLoot);
 
         }
         if ( lootValue <= 99 && lootValue > 80){
@@ -800,6 +823,7 @@ public class StartGameActivity extends AppCompatActivity {
             imgLoot.setImageResource(R.drawable.loot6);
             imgLoot.setClickable(true);
             imgLoot.setVisibility(View.VISIBLE);
+            fadeInImg(imgLoot);
 
         }
 
@@ -814,6 +838,7 @@ public class StartGameActivity extends AppCompatActivity {
                     Toast.makeText(context, "Valyria: Quel radin ...",Toast.LENGTH_SHORT).show();
 
                 }
+                fadeOutImg(imgLoot);
                 imgLoot.setVisibility(GONE);
                 Log.e("DEBUG", "argent "+ player.getWallet());
             }
@@ -837,7 +862,7 @@ public class StartGameActivity extends AppCompatActivity {
         int hpPlayer    = player.getHp();
         int attckFoe    = foe.getAttk();
         int defPlayer   = player.getDef();
-        ImageView bim = (ImageView) findViewById(R.id.bim);
+        ImageView bim   = (ImageView) findViewById(R.id.bim);
 
         Handler clawHandler = new Handler();
         clawHandler.postDelayed(new Runnable() {

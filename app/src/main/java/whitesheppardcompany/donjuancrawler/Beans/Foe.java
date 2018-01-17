@@ -22,6 +22,7 @@ public class Foe extends Entity implements Serializable {
     boolean alive;
     int idFoe;
     int element;
+    int difficulty;
 
     public boolean isAlive() {
         return alive;
@@ -59,6 +60,16 @@ public class Foe extends Entity implements Serializable {
     public void setIdFoe(int idFoe) {
         this.idFoe = idFoe;
     }
+
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
 
     public int getElement() {
         return element;

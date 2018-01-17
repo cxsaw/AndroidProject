@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ import whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod;
 import static android.view.View.GONE;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.fadeInImg;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.fadeOutImg;
+import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.generateExp;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initAttck;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initFire;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initWater;
@@ -55,36 +57,44 @@ public class Room2Activity extends AppCompatActivity {
     ImageButton avatarInfoBtn;
     ImageView   avatarImg;
 
-    EditText    nameTxt;
-    EditText    moneyTxt;
+    TextView nameTxt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("DEBUG", "Ici c'est bon!");
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_room);
-        ImageView   foeImg       = (ImageView)   findViewById(R.id.foe);
+
+        /************************************************
+        *                                               *
+        * Association des variables aux id des layouts  *
+        *                                               *
+        ************************************************/
+
 
         upBtn        = (ImageButton) findViewById(R.id.goUp);
         leftBtn      = (ImageButton) findViewById(R.id.goLeft);
         rightBtn     = (ImageButton) findViewById(R.id.goRight);
 
         imgLoot      = (ImageView)   findViewById(R.id.lootImg);
-        nameTxt      = (EditText)  findViewById(R.id.name);
-        moneyTxt     = (EditText)  findViewById(R.id.money);
+        nameTxt      = (TextView)  findViewById(R.id.name);
+
 
         shortcutQuestBtn  = (ImageButton) findViewById(R.id.questShortcut);
         avatarInfoBtn     = (ImageButton) findViewById(R.id.avatarInfo);
         avatarImg         = (ImageView)   findViewById(R.id.infoPerso);
 
-        ImageView   gameOverImg  = (ImageView)   findViewById(R.id.gameOver);
-        ImageView   locateoImg   = (ImageView)   findViewById(R.id.locateView);
-        ImageButton avatarBtn    = (ImageButton) findViewById(R.id.avatarInfo);
+        final ImageView   foeImg       = (ImageView)   findViewById(R.id.foe);
 
-        ImageButton attkBtn      = (ImageButton) findViewById(R.id.swo);
-        ImageButton fireBtn      = (ImageButton) findViewById(R.id.fireSpell);
-        ImageButton waterBtn     = (ImageButton) findViewById(R.id.waterSpell);
-        ImageButton lightningBtn = (ImageButton) findViewById(R.id.lightningSpell);
+        final ImageView   gameOverImg  = (ImageView)   findViewById(R.id.gameOver);
+        final ImageView   locateoImg   = (ImageView)   findViewById(R.id.locateView);
+        final ImageButton avatarBtn    = (ImageButton) findViewById(R.id.avatarInfo);
+
+        final ImageButton attkBtn      = (ImageButton) findViewById(R.id.swo);
+        final ImageButton fireBtn      = (ImageButton) findViewById(R.id.fireSpell);
+        final ImageButton waterBtn     = (ImageButton) findViewById(R.id.waterSpell);
+        final ImageButton lightningBtn = (ImageButton) findViewById(R.id.lightningSpell);
 
         foeImg.setVisibility(View.INVISIBLE);
         player = (Player)getIntent().getSerializableExtra("player");
@@ -100,13 +110,10 @@ public class Room2Activity extends AppCompatActivity {
 
         avatarImg.setVisibility(GONE);
 
-        int argent = player.getWallet();
-        String thune = String.valueOf(argent);
 
-        nameTxt.setText(player.getName());
+        //prépare la fiche du personnage
         nameTxt.setVisibility(GONE);
-        moneyTxt.setText(thune);
-        moneyTxt.setVisibility(GONE);
+        nameTxt.setInputType(nameTxt.getInputType()| InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
 
         avatarInfoBtn.setClickable(true);
@@ -131,26 +138,18 @@ public class Room2Activity extends AppCompatActivity {
                 avatarInfoBtn.setImageResource(R.drawable.ava);
                 avatarImg.setImageResource(R.drawable.bgcoco);
         }
-        /***************************************************************
-         *
-         * Bouton listener avatar
-         *
-         * qui affiche la liste détaillé du perso
-         *
-         *
-         *****************************************************************/
-        //rappel avatarImg == infoperso
         avatarInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (avatarImg.getVisibility() == View.GONE){
+                    nameTxt.setText(player.toString());
                     avatarImg.setVisibility( View.VISIBLE );
                     nameTxt.setVisibility(View.VISIBLE);
-                    moneyTxt.setVisibility(View.VISIBLE);
+
                 } else {
                     avatarImg.setVisibility(View.GONE);
                     nameTxt.setVisibility(GONE);
-                    moneyTxt.setVisibility(GONE);
+
                 }
 
             }
@@ -507,6 +506,8 @@ public class Room2Activity extends AppCompatActivity {
 
                     fadeOutImg(imgFoe);
                     bim.setVisibility(GONE);
+                    generateExp(player,firstFoe);
+                    Log.e("DEBUG","EXP progression<< ---- "+player.getLvlQuantity());
                 }
                 //si le joueur est mort on affiche un game over
                 if(player.getHp() <= 0) {
@@ -598,6 +599,8 @@ public class Room2Activity extends AppCompatActivity {
 
                     fadeOutImg(imgFoe);
                     bim.setVisibility(GONE);
+                    generateExp(player,firstFoe);
+                    Log.e("DEBUG","EXP progression<< ---- "+player.getLvlQuantity());
                 }
                 //si le joueur est mort on affiche un game over
                 if(player.getHp() <= 0){
@@ -707,6 +710,8 @@ public class Room2Activity extends AppCompatActivity {
 
                     fadeOutImg(imgFoe);
                     bim.setVisibility(GONE);
+                    generateExp(player,firstFoe);
+                    Log.e("DEBUG","EXP progression<< ---- "+player.getLvlQuantity());
                 }
                 //si le joueur est mort on affiche un game over
                 if(player.getHp() <= 0){
@@ -790,6 +795,8 @@ public class Room2Activity extends AppCompatActivity {
 
                     fadeOutImg(imgFoe);
                     bim.setVisibility(GONE);
+                    generateExp(player,firstFoe);
+                    Log.e("DEBUG","EXP progression<< ---- "+player.getLvlQuantity());
                 }
                 //si le joueur est mort on affiche un game over
                 if(player.getHp() <= 0){
@@ -869,40 +876,42 @@ public class Room2Activity extends AppCompatActivity {
             imgLoot.setImageResource(R.drawable.loot1);
             imgLoot.setClickable(true);
             imgLoot.setVisibility(View.VISIBLE);
+            fadeInImg(imgLoot);
         }
         if ( lootValue <= 40 && lootValue > 20){
 
             imgLoot.setImageResource(R.drawable.loot2);
             imgLoot.setClickable(true);
             imgLoot.setVisibility(View.VISIBLE);
-
+            fadeInImg(imgLoot);
         }
         if ( lootValue <= 60 && lootValue > 40){
 
             imgLoot.setImageResource(R.drawable.loot3);
             imgLoot.setClickable(true);
             imgLoot.setVisibility(View.VISIBLE);
-
+            fadeInImg(imgLoot);
         }
         if ( lootValue <= 80 && lootValue > 60){
 
             imgLoot.setImageResource(R.drawable.loot4);
             imgLoot.setClickable(true);
             imgLoot.setVisibility(View.VISIBLE);
-
+            fadeInImg(imgLoot);
         }
         if ( lootValue <= 92 && lootValue > 80){
 
             imgLoot.setImageResource(R.drawable.loot5);
             imgLoot.setClickable(true);
             imgLoot.setVisibility(View.VISIBLE);
-
+            fadeInImg(imgLoot);
         }
         if ( lootValue <= 99 && lootValue > 80){
 
             imgLoot.setImageResource(R.drawable.loot6);
             imgLoot.setClickable(true);
             imgLoot.setVisibility(View.VISIBLE);
+            fadeInImg(imgLoot);
 
         }
 
@@ -919,6 +928,7 @@ public class Room2Activity extends AppCompatActivity {
                     Toast.makeText(context, "Valyria: Quel radin ...",Toast.LENGTH_SHORT).show();
 
                 }
+                fadeOutImg(imgLoot);
                 imgLoot.setVisibility(GONE);
                 Log.e("DEBUG", "argent "+ player.getWallet());
             }

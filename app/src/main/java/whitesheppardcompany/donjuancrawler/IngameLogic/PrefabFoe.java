@@ -21,6 +21,7 @@ public class PrefabFoe {
                 foe.setHp(38 + playerLevel + 1);
                 foe.setDef(12+playerLevel - 2);
                 foe.setAttk(34+playerLevel - 1);
+                foe.setDifficulty(2);
                 foe.setName("Esprit du Feu");
                 break;
             case 2:
@@ -31,6 +32,7 @@ public class PrefabFoe {
                 foe.setHp(42 + (playerLevel + 3));
                 foe.setDef(16+playerLevel - 2);
                 foe.setAttk(23+playerLevel - 1);
+                foe.setDifficulty(3);
                 foe.setName("Wyrm de Feu");
                 break;
             case 3:
@@ -41,6 +43,7 @@ public class PrefabFoe {
                 foe.setHp(42 + (playerLevel + 3));
                 foe.setDef(16+playerLevel - 2);
                 foe.setAttk(23+playerLevel - 1);
+                foe.setDifficulty(1);
                 foe.setName("Coureur Ardent");
                 break;
             case 4:
@@ -51,6 +54,7 @@ public class PrefabFoe {
                 foe.setHp(90 + playerLevel + 3);
                 foe.setDef(45+(playerLevel - 2));
                 foe.setAttk(52+(playerLevel - 1));
+                foe.setDifficulty(2);
                 foe.setName("Furie Bleue");
 
                 break;
@@ -62,6 +66,7 @@ public class PrefabFoe {
                 foe.setHp(40 + playerLevel);
                 foe.setDef(20+playerLevel );
                 foe.setAttk(52+(playerLevel - 1));
+                foe.setDifficulty(1);
                 foe.setName("Tempête Agile");
             case 6:
 
@@ -71,6 +76,7 @@ public class PrefabFoe {
                 foe.setHp(56 + playerLevel + 3);
                 foe.setDef(32+playerLevel - 2);
                 foe.setAttk(37+playerLevel - 1);
+                foe.setDifficulty(3);
                 foe.setName("Dragon de Jade Jaune");
 
                 break;
@@ -82,6 +88,7 @@ public class PrefabFoe {
                 foe.setHp(26 + (playerLevel + 3));
                 foe.setDef(12+(playerLevel - 2));
                 foe.setAttk(11+(playerLevel - 1));
+                foe.setDifficulty(1);
                 foe.setName("Ondine");
                 break;
             case 8:
@@ -92,6 +99,7 @@ public class PrefabFoe {
                 foe.setHp(33 + (playerLevel + 3));
                 foe.setDef(12+(playerLevel - 2));
                 foe.setAttk(13+(playerLevel - 1));
+                foe.setDifficulty(2);
                 foe.setName("Mermaid hell");
                 break;
             case 9:
@@ -102,6 +110,7 @@ public class PrefabFoe {
                 foe.setHp(33 + (playerLevel + 2));
                 foe.setDef(12+(playerLevel + 5));
                 foe.setAttk(13+(playerLevel +6));
+                foe.setDifficulty(3);
                 foe.setName("The Son of the God Sea");
                 break;
 
@@ -113,6 +122,7 @@ public class PrefabFoe {
                 foe.setHp(10 + (playerLevel + 3));
                 foe.setDef(60 + (playerLevel - 2));
                 foe.setAttk(1 + (playerLevel - 1));
+                foe.setDifficulty(2);
                 foe.setName("Brown Snow");
                 break;
             default:
@@ -122,6 +132,7 @@ public class PrefabFoe {
                 foe.setHp(10 + (playerLevel + 3 ));
                 foe.setDef(60 + (playerLevel - 2 ));
                 foe.setAttk(25 + (playerLevel - 1 ));
+                foe.setDifficulty(2);
                 foe.setName("Wild Fang");
                 break;
         }

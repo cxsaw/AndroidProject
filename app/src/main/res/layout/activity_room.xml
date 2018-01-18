@@ -1,4 +1,3 @@
-
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -74,19 +73,6 @@
             app:layout_constraintTop_toBottomOf="@+id/goUp"
             app:srcCompat="@drawable/right_arrow" />
 
-        <ImageView
-            android:id="@+id/fireAnim"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/goRight"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="27dp"
-            android:adjustViewBounds="true"
-            android:background="@color/colorAccent"
-            android:visibility="invisible"
-            app:srcCompat="@drawable/fire_1" />
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -117,6 +103,23 @@
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/foe" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/fireAnim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="300dp"
+                    android:layout_marginTop="30dp"
+                    android:adjustViewBounds="true"
+                    android:background="@color/colorAccent"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/fire_1" />
+            </RelativeLayout>
 
         </RelativeLayout>
 

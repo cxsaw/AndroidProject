@@ -35,6 +35,7 @@ import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.fad
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.generateExp;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initAttck;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initFire;
+import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initLight;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.initWater;
 import static whitesheppardcompany.donjuancrawler.IngameLogic.GameplayMethod.randomize;
 
@@ -412,29 +413,31 @@ public class StartGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
-                ImageView bim         = (ImageView) findViewById(R.id.bim);
-                ImageButton goUpBtn   = (ImageButton) findViewById(R.id.goUp);
-                final ImageView   fireSheet = (ImageView) findViewById(R.id.fireAnim);
+                ImageView imgFoe             = (ImageView) findViewById(R.id.foe);
+                ImageView bim                = (ImageView) findViewById(R.id.bim);
+                ImageButton goUpBtn          = (ImageButton) findViewById(R.id.goUp);
+                final ImageView   spellSheet = (ImageView) findViewById(R.id.fireAnim);
 
-                hpFoe    = firstFoe.getHp();
 
                 Log.i("DEBUG", "Non le prob n'est pôas là");
 
-                //phase attaque joueur
-                //initie l'attaque
-
-                hpFoe = initFire(firstFoe, player);
-                firstFoe.setHp(hpFoe);
+                hpFoe    = firstFoe.getHp();
 
                 if (firstFoe.getHp() <= 0){
                     firstFoe.setAlive(false);
+                }else{
+                    //phase attaque joueur
+                    //initie l'attaque
+
+                    hpFoe = initFire(firstFoe, player);
+                    firstFoe.setHp(hpFoe);
                 }
 
-                fireSheet.setVisibility(View.VISIBLE);
-                fireSheet.setImageResource(R.drawable.fireanim);//fire fait reference à fireanim.xml
 
-                AnimationDrawable feu = (AnimationDrawable)fireSheet.getDrawable();
+                spellSheet.setVisibility(View.VISIBLE);
+                spellSheet.setImageResource(R.drawable.fireanim);//fire fait reference à fireanim.xml
+
+                AnimationDrawable feu = (AnimationDrawable)spellSheet.getDrawable();
                 feu.start();
                 Handler fireHandler = new Handler();
                 fireHandler.postDelayed(new Runnable() {
@@ -448,7 +451,7 @@ public class StartGameActivity extends AppCompatActivity {
                         mpSound.start();
                     }
                 }, 1000);
-                fireSheet.setVisibility(View.VISIBLE);
+                spellSheet.setVisibility(View.VISIBLE);
 
                 Log.e("DEBUG", "vie mechant apres combat<<<<"+firstFoe.getHp());
 
@@ -589,31 +592,65 @@ public class StartGameActivity extends AppCompatActivity {
                 ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
                 ImageView bim         = (ImageView) findViewById(R.id.bim);
                 ImageButton goUpBtn = (ImageButton) findViewById(R.id.goUp);
+                final ImageView   spellSheet = (ImageView) findViewById(R.id.fireAnim);
 
-                hpFoe    = firstFoe.getHp();
 
                 Log.i("DEBUG", "Non le prob n'est pôas là");
 
-                //phase attaque joueur
-                //initie l'attaque
+                hpFoe    = firstFoe.getHp();
 
-                hpFoe = initWater(firstFoe, player);
-                firstFoe.setHp(hpFoe);
                 if (firstFoe.getHp() <= 0){
                     firstFoe.setAlive(false);
+                }else{
+                    //phase attaque joueur
+                    //initie l'attaque
+
+                    hpFoe = initWater(firstFoe, player);
+                    firstFoe.setHp(hpFoe);
                 }
+
+
+
+                spellSheet.setVisibility(View.VISIBLE);
+                spellSheet.setImageResource(R.drawable.eauanim);//fire fait reference à fireanim.xml
+
+                AnimationDrawable eauAnim = (AnimationDrawable)spellSheet.getDrawable();
+                eauAnim.start();
+                Handler waterHandler = new Handler();
+                waterHandler.postDelayed(new Runnable() {
+
+
+                    @Override
+                    public void run() {
+
+
+                        MediaPlayer mpSound = MediaPlayer.create(context, R.raw.fight1);
+                        mpSound.start();
+                    }
+                }, 1000);
+                spellSheet.setVisibility(View.VISIBLE);
+
                 Log.e("DEBUG", "vie mechant apres combat<<<<"+firstFoe.getHp());
 
                 //si le mechant est vivant, il riposte
+                //si le mechant est vivant, il riposte
                 if(firstFoe.isAlive() == true){
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
-                    player.setHp(retribution(firstFoe, player));
+                            player.setHp(retribution(firstFoe, player));
+
+                        }
+                    }, 1000);
+
                     Log.e("DEBUG", "vie joueur apres combat<<<<"+player.getHp());
 
                     //image de griffure pour visuellement verifier si il y a dégâts
                     //le handler sert à timer le coup pour qu'il s'affiche ponctuellement
 
-                }else {
+                }else  {
 
                     ImageButton goUp = (ImageButton) findViewById(R.id.goUp);
                     goUp.setClickable(true);
@@ -676,23 +713,23 @@ public class StartGameActivity extends AppCompatActivity {
                 }
             }
         });
-    /**********************************************************************************
-     *              ___(                        )                                     *
-     *             (                          _)                                      *
-     *            (_                       __))                                       *
-     *              ((                _____)                                          *
-     *                (_________)----'                                                *
-     *                   _/  /                                                        *
-     *                  /  _/                                                         *
-     *                _/  /                                                           *
-     *               / __/                                                            *
-     *             _/ /                                                               *
-     *            /__/                                                                *
-     *           //                                                                   *
-     *          /'    Lightning spell                                                 *
-     *                                                                                *
-     *                                                                                *
-     **********************************************************************************/
+        /**********************************************************************************
+         *              ___(                        )                                     *
+         *             (                          _)                                      *
+         *            (_                       __))                                       *
+         *              ((                _____)                                          *
+         *                (_________)----'                                                *
+         *                   _/  /                                                        *
+         *                  /  _/                                                         *
+         *                _/  /                                                           *
+         *               / __/                                                            *
+         *             _/ /                                                               *
+         *            /__/                                                                *
+         *           //                                                                   *
+         *          /'    Lightning spell                                                 *
+         *                                                                                *
+         *                                                                                *
+         **********************************************************************************/
         lightningSpellBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -701,31 +738,60 @@ public class StartGameActivity extends AppCompatActivity {
                 ImageView imgFoe      = (ImageView) findViewById(R.id.foe);
                 ImageView bim         = (ImageView) findViewById(R.id.bim);
                 ImageButton goUpBtn = (ImageButton) findViewById(R.id.goUp);
+                final ImageView   spellSheet = (ImageView) findViewById(R.id.fireAnim);
 
-                hpFoe    = firstFoe.getHp();
 
                 Log.i("DEBUG", "Non le prob n'est pôas là");
 
-                //phase attaque joueur
-                //initie l'attaque
+                hpFoe    = firstFoe.getHp();
 
-                hpFoe = GameplayMethod.initLight(firstFoe, player);
-                firstFoe.setHp(hpFoe);
+                if (firstFoe.getHp() <= 0){
+                    firstFoe.setAlive(false);
+                }else{
+                    //phase attaque joueur
+                    //initie l'attaque
+
+                    hpFoe = initLight(firstFoe, player);
+                    firstFoe.setHp(hpFoe);
+                }
+
                 if (firstFoe.getHp() <= 0){
                     firstFoe.setAlive(false);
                 }
+
+                spellSheet.setVisibility(View.VISIBLE);
+                spellSheet.setImageResource(R.drawable.elecanim);//fire fait reference à fireanim.xml
+
+                AnimationDrawable elecAnim = (AnimationDrawable)spellSheet.getDrawable();
+                elecAnim.start();
+                Handler lightningHandler = new Handler();
+                lightningHandler.postDelayed(new Runnable() {
+
+
+                    @Override
+                    public void run() {
+
+
+                        MediaPlayer mpSound = MediaPlayer.create(context, R.raw.fight1);
+                        mpSound.start();
+                    }
+                }, 1000);
+                spellSheet.setVisibility(View.VISIBLE);
+
                 Log.e("DEBUG", "vie mechant apres combat<<<<"+firstFoe.getHp());
 
                 //si le mechant est vivant, il riposte
                 if(firstFoe.isAlive() == true){
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
 
-                    player.setHp(retribution(firstFoe, player));
-                    Log.e("DEBUG", "vie joueur apres combat<<<<"+player.getHp());
+                                                player.setHp(retribution(firstFoe, player));
 
-                    //image de griffure pour visuellement verifier si il y a dégâts
-                    //le handler sert à timer le coup pour qu'il s'affiche ponctuellement
-
-                }else {
+                                            }
+                                        }, 1000
+                    );}else {
 
                     ImageButton goUp = (ImageButton) findViewById(R.id.goUp);
                     goUp.setClickable(true);
